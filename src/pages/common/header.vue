@@ -13,8 +13,8 @@
     </div>
     <img src="static/img/logo.png" alt="">
     <div class="headerRight">
-      <router-link to='/personal'>个人中心</router-link>
       <i class='iconfont icon-person'></i>
+      <router-link to='/personal'>个人中心</router-link>
     </div>
   </div>
 </template>
@@ -45,6 +45,8 @@ export default {
       a,span
         color: $login;
         font-size: .12rem;
+        margin-left: 0.04rem;
+        margin-top: 0.02rem;
       i
         line-height:.38rem
         color: $loginIcon

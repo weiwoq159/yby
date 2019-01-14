@@ -67,14 +67,14 @@ export default {
 <style scoped lang='stylus'>
   @import "~@/assets/index.styl"
   .active1
-    color:#f00
+    color:#c40000
     .line
-      background: #f00;
+      background: #c40000;
       display : block
   .line
     display none
   .router-link-active
-    color:red
+    color:#c40000
     .line
       display block
   ul
@@ -87,7 +87,7 @@ export default {
       font-size: .13rem;
       position relative
       .line
-        background: red;
+        background: #c40000;
         width .3rem;
         height 4px;
         margin : 0 auto;

@@ -113,10 +113,10 @@ export default {
 
 <style scoped lang='stylus'>
 .selection{
-  background: #eee;
-  padding 0 10px;
-  border-top-left-radius 30px;
-  border-top-right-radius 30px;
+  background: #f8f8f8;
+  padding 0 3.5vw;
+  border-top-left-radius 15px;
+  border-top-right-radius 15px;
   padding-bottom: 10px;
 }
 .active

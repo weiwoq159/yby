@@ -100,8 +100,10 @@ export default {
       height:.25rem
       border-radius 40px;
       padding-right:30px;
-      font-size: 14px;
-      line-height 1.5
+      padding-left:7px;
+      font-size: 12px;
+      line-height 1.5;
+      border 1px solid #aaa;
     button
       height:.25rem
       padding:0px;
