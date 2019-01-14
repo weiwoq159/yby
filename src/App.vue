@@ -1,5 +1,6 @@
 <template>
   <keep-alive exclude="Selection">
+    <router-view v-wechat-title="$route.meta.title"></router-view>
     <router-view></router-view>
   </keep-alive>
 </template>

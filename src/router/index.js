@@ -23,6 +23,9 @@ export default new Router({
   routes: [{
     path: '/',
     name: 'homePage',
+    meta: {
+      title: '首页'
+    },
     component: HomePage
   },
   {
@@ -32,31 +35,49 @@ export default new Router({
     children: [{
       path: '/tabGroup/social',
       name: 'Social',
+      meta: {
+        title: '社会保障'
+      },
       component: Social
     },
     {
       path: '/tabGroup/HR',
       name: 'HumanResources',
+      meta: {
+        title: '人力资源'
+      },
       component: HumanResources
     },
     {
       path: '/tabGroup/taxation',
       name: 'Taxation',
+      meta: {
+        title: '账务税收'
+      },
       component: Taxation
     },
     {
       path: '/tabGroup/funed',
       name: 'Funed',
+      meta: {
+        title: '公积金'
+      },
       component: Funed
     },
     {
       path: '/tabGroup/Selection',
       name: 'Selection',
+      meta: {
+        title: '燚精选'
+      },
       component: Selection
     },
     {
       path: '/tabGroup/HrList',
       name: 'HrList',
+      meta: {
+        title: '列表'
+      },
       component: HrList
     }
     ]
@@ -64,36 +85,57 @@ export default new Router({
   {
     path: '/SearchResults',
     name: 'SearchResults',
+    meta: {
+      title: '搜索结果'
+    },
     component: SearchResults
   },
   {
     path: '/reply',
     name: 'Reply',
+    meta: {
+      title: '我的回复'
+    },
     component: Reply
   },
   {
     path: '/tabGroup/Selection/news/:bookId',
     name: 'News',
+    meta: {
+      title: '新闻详情'
+    },
     component: News
   },
   {
     path: '/personal',
     name: 'Personal',
+    meta: {
+      title: '个人中心'
+    },
     component: Personal
   },
   {
     path: '/personal/mypublish',
     name: 'MyPublish',
+    meta: {
+      title: '我发布的'
+    },
     component: MyPublish
   },
   {
     path: '/personal/myreply',
     name: 'MyReply',
+    meta: {
+      title: '我的回复'
+    },
     component: MyReply
   },
   {
     path: '/personal/PublishedArticles',
     name: 'PublishedArticles',
+    meta: {
+      title: '发布精选'
+    },
     component: PublishedArticles
   },
   {
