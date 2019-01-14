@@ -10,7 +10,6 @@ import '@/assets/reset.css'
 import '@/assets/iconfont.css'
 import filter from './filter'
 import store from '@/store'
-
 import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 

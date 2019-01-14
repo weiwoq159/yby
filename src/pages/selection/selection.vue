@@ -48,7 +48,7 @@ export default {
         name: '被赞最多',
         id: 2
       }, {
-        name: '评论最多',
+        name: '回复最多',
         id: 3
       }],
       highLight: 0,

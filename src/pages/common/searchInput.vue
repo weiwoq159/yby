@@ -44,9 +44,6 @@ export default {
       }, {
         id: '4',
         name: '公积金'
-      }, {
-        id: '5',
-        name: '燚️精选'
       }],
       id: '',
       input: '',

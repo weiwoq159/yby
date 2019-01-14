@@ -6,7 +6,7 @@ Vue.filter('changeTitle', function (value) {
     if (value.length <= 20) {
       return value
     } else {
-      return value.substring(0, 10) + '...'
+      return value.substring(0, 20) + '...'
     }
   }
 })
@@ -35,8 +35,8 @@ Vue.filter('changeContent', function (value) {
   value = value.replace(/\n[\s| | ]*\r/g, '\n')
   value = value.replace(/&nbsp;/ig, '')
   value = value.replace(/\s+/ig, '')
-
-  return value.substring(0, 80) + '...'
+  value = value.replace(/[a-zA-Z]/, '')
+  return value.substring(0, 50) + '...'
 })
 Vue.filter('changeSource', function (value) {
   if (value.length > 7) {
@@ -80,7 +80,7 @@ Vue.filter('dateShow', function (time) {
 
 Vue.filter('dateFilter', function (time) {
   var date = new Date(time)
-  return date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDay()
+  return date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate()
 })
 
 Vue.filter('num', function (value) {

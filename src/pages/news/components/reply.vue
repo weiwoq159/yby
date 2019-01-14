@@ -38,14 +38,14 @@
                 <span>{{item.replyNum}}</span>
               </div>
               <div
-                :class="item.status === 1 ? 'starActive' : 'star'"
+                :class="item.status == 1 ? 'starActive' : 'star'"
                 @click='changeColor(item)'>
                 <i class='iconfont icon-heart'></i>
                 <span>{{item.goodUp}}</span>
               </div>
             </div>
           </div>
-          <div class='messageReply'>
+          <div class='messageReply' v-if='item.relpy.length'>
             <ul>
               <li
                 v-for="(reply, inde) in item.relpy"
@@ -84,7 +84,7 @@ import api from '@/api/api'
 
 export default {
   name: 'reply',
-  props: ['bookId'],
+  props: ['bookId', 'newReply'],
   data () {
     return {
       showOrDis: false,
@@ -92,7 +92,7 @@ export default {
         name: '被赞最多',
         id: 2
       }, {
-        name: '评论最多',
+        name: '回复最多',
         id: 3
       }, {
         name: '时间正序',
@@ -102,10 +102,18 @@ export default {
         id: 1
       }],
       highLight: 0,
-      reply: {},
-      replyContent: '123123123',
+      reply: [],
+      replyContent: '',
       replyCon: '',
       selectItem: ''
+    }
+  },
+  watch: {
+    newReply (newVal, oldVal) {
+      this.reply.push(newVal)
+    },
+    bookId (newVal, oldVal) {
+      this.axios.post('/book/web/api/comment/commentShow', {bookId: this.bookId, pageNum: '1', pageSize: '10'}).then(this.changeReply)
     }
   },
   methods: {
@@ -142,7 +150,7 @@ export default {
     },
     changeReply (res) {
       console.log(res)
-      this.reply = res.data.data.sort(api.time)
+      this.reply = res.data.data.comment.sort(api.time)
     },
     replyOK (res) {
       this.selectItem.relpy.push({
@@ -150,6 +158,7 @@ export default {
         createTimes: (new Date()).getTime(),
         replyUname: this.$store.state.userInfo.name
       })
+      console.log(this.selectItem.relpy)
     },
     repeat (item) {
       this.replyCon = item
@@ -162,14 +171,11 @@ export default {
         {
           commentId: this.replyCon.id,
           replyId: this.replyCon.fromUid,
-          replyType: 1,
+          replyType: 2,
           content: this.replyContent
 
         }).then(this.replyOK())
     }
-  },
-  mounted () {
-    this.axios.post('/book/web/api/comment/commentShow', {bookId: this.bookId}).then(this.changeReply)
   }
 }
 </script>

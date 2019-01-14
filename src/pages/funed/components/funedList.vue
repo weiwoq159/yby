@@ -17,7 +17,7 @@
           <p class="titleText">{{content.title | changeTitle}}</p>
         </div>
         <div class="content">
-          <p>{{content.content | changeContent}}</p>
+          <p>{{content.intro | changeContent}}</p>
         </div>
         <div class="bottom">
           <span class='tag'>{{content.classify}}</span>
@@ -51,6 +51,7 @@ export default {
     changeColor (item) {
       console.log(item)
       this.axios.post('/book/web/api/praise/add', {typeId: item.id, type: 2}).then(res => {
+        console.log(res)
         if (item.isLiked === 0) {
           item.isLiked = 1
           item.liked++

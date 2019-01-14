@@ -11,9 +11,12 @@
     <Navigation ref='navigation'></Navigation>
     <NewDetail
       :list='list'
-      :bookId='bookId'
+      @changeList='changeList'
     ></NewDetail>
-    <Reply :bookId='bookId'></Reply>
+    <Reply
+      :bookId='bookId'
+      :newReply='newReply'
+    ></Reply>
   </div>
 </template>
 
@@ -33,7 +36,13 @@ export default {
   data () {
     return {
       list: '',
-      bookId: ''
+      bookId: '',
+      newReply: ''
+    }
+  },
+  methods: {
+    changeList (changeList) {
+      this.newReply = changeList
     }
   },
   activated () {
@@ -45,7 +54,6 @@ export default {
     }
   },
   beforeRouteLeave (to, from, next) {
-    console.log(to)
     next()
   }
 }

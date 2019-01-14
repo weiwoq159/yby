@@ -56,7 +56,7 @@ export default {
   },
   mounted () {
     console.log('------公积金模块加载中-------')
-    this.axios.post('/book/web/api/fund/fundHomeNews', {category: this.category}).then(this.fundHomeNews)
+    this.axios.post('/book/web/api/book/searchHome', {category: this.category}).then(this.fundHomeNews)
     this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '4', category: this.category})
       .then(this.fundHomeDate)
   },

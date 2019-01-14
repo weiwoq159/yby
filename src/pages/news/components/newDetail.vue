@@ -12,23 +12,37 @@
       <p class="title">{{list.title}}</p>
       <div class="detail">
         <p>来源:{{list.source}}</p>
+        <p class='clickNum'>点击量:{{list.clicks}}</p>
         <p>更新时间:{{list.ceateTime | dateShow}}</p>
       </div>
       <div class="text">
         <p v-html='list.content'></p>
       </div>
       <div class="bottom">
-        <p class='clickNum'>点击量:{{list.clicks}}</p>
         <div class="newsBottom">
-          <div class="message">
+          <div class="message" @click='repeat(list)'>
             <i class='iconfont icon-liuyan'></i>
-            <span>{{list.commentNum}}</span>
+            <span>{{list.replyNum}}</span>
           </div>
-          <div :class="list.isStar ? 'starActive' : 'star'" @click='changeColor(list)'>
+          <div :class="list.isLiked == 1 ? 'starActive' : 'star'" @click='changeColor(list)'>
             <i class='iconfont icon-heart1'></i>
             <span>{{list.liked}}</span>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class='replyInput'
+      @touchmove.prevent
+      @click='displayReply($event)'
+      v-if='showOrDis'
+    >
+      <div class="inputt">
+        <input type="text" v-model='replyContent' @click.stop>
+        <i
+          class='iconfont icon-tijiao'
+          @click.stop='displayReply($event)'
+        ></i>
       </div>
     </div>
   </div>
@@ -39,8 +53,9 @@ export default {
   name: 'news',
   data () {
     return {
-      showOrDis: true,
-      arr: [1, 2, 3, 3]
+      showOrDis: false,
+      arr: [1, 2, 3, 3],
+      replyContent: ''
     }
   },
   props: ['list', 'bookId'],
@@ -52,28 +67,81 @@ export default {
   },
   methods: {
     changeColor (item) {
-      console.log('-----item-----')
       console.log(item)
-      console.log('-----item-----')
-      item.isStar = !item.isStar
-      if (item.isStar) {
-        item.liked++
-      } else {
-        item.liked--
-        if (item.liked === 0) {
-          item.liked = null
+      this.axios.post('/book/web/api/praise/add', {typeId: item.id, type: 2}).then(res => {
+        console.log(res)
+        if (!item.isLiked) {
+          item.isLiked = 1
+          item.liked++
+        } else {
+          item.isLiked = 0
+          item.liked--
         }
+      })
+    },
+    replyOK (res) {
+      console.log(res)
+      let lis = {
+        content: this.replyContent,
+        createTimes: (new Date()).getTime(),
+        replyUname: this.$store.state.userInfo.name,
+        relpy: {}
       }
+      this.list.replyNum++
+      this.$emit('changeList', lis)
+    },
+    repeat (item) {
+      this.replyCon = item
+      this.showOrDis = true
+      this.selectItem = item
+    },
+    displayReply () {
+      this.showOrDis = false
+      this.axios.post('/book/web/api/reply/replyAdd',
+        {
+          commentId: this.replyCon.id,
+          replyId: this.replyCon.fromUid,
+          replyType: 1,
+          content: this.replyContent
+
+        }).then(this.replyOK)
     }
-  },
-  mounted () {
-    console.log('--------------------')
-    console.log(this.list)
   }
 }
 </script>
 
 <style scoped lang='stylus'>
+.replyInput{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  background: rgba(0,0,0,.3);
+  z-index: 999999;
+}
+.inputt{
+  background: #000;
+  width: 100%;
+  height:.6rem;
+  padding:10px;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.inputt input {
+  width: 100%;
+  height: 100%;
+}
+.icon-tijiao{
+  font-size: 28px;
+  color: #c40000;
+  margin-left: 10px;
+}
 .newDetail
   padding: .3rem .15rem
   width 100%
@@ -99,6 +167,7 @@ export default {
   .bottom
     display: flex
     justify-content space-between
+    flex-direction row-reverse
     align-items center
     .clickNum
       margin-top 7px;

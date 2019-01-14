@@ -35,7 +35,11 @@
       </el-input>
     </div>
     <div class="upData">
-      <button class='upButt' @click='submit'>发布精选</button>
+      <button
+        class='upButt'
+        type="primary"
+        @click='submit'
+      >发布精选</button>
     </div>
   </div>
 </template>
@@ -51,6 +55,7 @@ export default {
         content: '',
         category: ''
       },
+      fullscreenLoading: false,
       isDrop: false,
       options: [{
         value: 1,
@@ -77,8 +82,37 @@ export default {
       this.isDrop = !this.isDrop
     },
     submit () {
-      this.axios.post('/book/web/api/release/essence', this.publish).then(res => console.log(res))
-      console.log(this.publish)
+      const loading = this.$loading({
+        lock: true,
+        text: '文章发布中',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      console.log(this.title)
+      if (this.publish.title === '') {
+        loading.text = '标题不能为空'
+        loading.spinner = 'el-icon-error'
+      } else if (this.publish.content === '') {
+        loading.text = '正文不能为空'
+        loading.spinner = 'el-icon-error'
+      } else if (this.publish.category === '') {
+        loading.text = '请选择类型'
+        loading.spinner = 'el-icon-error'
+      } else {
+        this.axios.post('/book/web/api/release/essence', this.publish).then(res => {
+          if (res.data.msg === 'success') {
+            loading.text = '文章已发布'
+            loading.spinner = 'el-icon-success'
+            setTimeout(() => {
+              loading.close()
+            }, 1000)
+            this.$router.push({name: 'Selection'})
+          }
+        })
+      }
+      setTimeout(() => {
+        loading.close()
+      }, 1000)
     }
   }
 }
@@ -110,6 +144,13 @@ export default {
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity:0;
+  }
+  .el-icon-success,.el-icon-loading,.el-icon-error{
+    font-size: 40px;
+    margin-bottom 15px;
+  }
+  .el-loading-spinner{
+    margin-top -40px;
   }
   .ReleaseContent
     width 100%;

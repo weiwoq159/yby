@@ -95,9 +95,11 @@ export default {
       this.$store.commit('SET_URL', this.$store.state.isLogin)
     }
     let source = this.$route.params.source
+    let classify = this.$route.params.classify
+    console.log(source)
     let _that = this
-    this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '10', category: source}).then(function (res) {
-      console.log(res.data.data)
+    this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '10', category: source, classify: classify}).then(function (res) {
+      console.log(res)
       _that.selectionList = res.data
     })
   }
@@ -105,12 +107,17 @@ export default {
 </script>
 
 <style scoped lang='stylus'>
+  .noMessage{
+    text-align center;
+    padding:20px 0px;
+  }
   .newsList{
     background: #eee;
     padding 0 10px;
     border-top-left-radius 30px;
     border-top-right-radius 30px;
-    padding-bottom: 10px;
+    border-radius : 30px;
+    padding-bottom 20px;
   }
   .active
     color #333!important

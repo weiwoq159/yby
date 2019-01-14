@@ -32,8 +32,14 @@ export default {
   props: ['list', 'height', 'name', 'scource'],
   methods: {
     goToDetail (item) {
-      this.$router.push({name: 'HrList', params: { source: this.source, url: this.name }})
+      console.log(item)
+      this.$router.push({name: 'HrList', params: {source: this.scource, url: this.name, classify: item.classify}})
     }
+  },
+  mounted () {
+    console.log('-----this.source-----')
+    console.log(this.scource)
+    console.log('-----this.source-----')
   }
 }
 </script>

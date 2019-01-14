@@ -40,7 +40,7 @@ export default {
     }
   },
   mounted () {
-    this.axios.post('/book/web/api/iReplys/searchIReplys', {fromUid: 1}).then(this.searchIReplys)
+    this.axios.post('/book/web/api/iReplys/searchIReplys', {pageNum: 1, pageSize: 12}).then(this.searchIReplys)
   }
 }
 </script>

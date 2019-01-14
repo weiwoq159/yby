@@ -16,7 +16,7 @@
       <!--<a href='http://www.1boyun.com/'>-->
         <!--人力资源解决方案-->
       <!--</a>-->
-      <a href="http://www.1boyun.com/">人力资源解决方案</a>
+      <a href="http://www.1boyun.com/">人力资源解决方案 <i class='el-icon-back arrow'></i></a>
     </button>
   </div>
 </template>
@@ -30,6 +30,8 @@ export default {
 </script>
 
 <style scoped lang='stylus'>
+  .arrow
+    transform rotate(180deg)
   .bottomTemp
     display flex
     justify-content space-around

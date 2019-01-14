@@ -14,7 +14,7 @@
         :style="{backgroundImage:'url(' + item.img + ')'}"
         @click='goToDetail(item)'
       >
-        <span>1{{item.category}}</span>
+        <span>{{item.count}}</span>
         <p>{{item.classify}}</p>
         <div class='bottomLine'></div>
       </li>
@@ -31,11 +31,14 @@ export default {
     news (newVal, oldVal) {
       api.checkAFPic(newVal)
       console.log(newVal)
+    },
+    AFPic (newVal, oldVal) {
+      console.log(newVal)
     }
   },
   methods: {
     goToDetail (item) {
-      this.$router.push({name: 'HrList', params: { source: this.source, url: this.name }})
+      this.$router.push({name: 'HrList', params: {source: this.scource, url: this.name, classify: item.classify}})
     }
   }
 }
@@ -59,6 +62,7 @@ export default {
     border-radius 4px
     span
       width 40px;
+      font-size: 14px;
       border-radius 4px;
       background: #c40000;
       color: #fff

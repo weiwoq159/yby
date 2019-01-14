@@ -43,7 +43,7 @@ export default {
   },
   mounted () {
     this.axios.get('./static/address.json').then(this.changeAddress)
-    this.axios.post('book/web/api/book/searchHome', {category: this.category}).then(this.searchHome)
+    this.axios.post('/book/web/api/book/searchHome', {category: this.category}).then(this.searchHome)
   }
 }
 </script>

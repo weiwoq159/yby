@@ -16,14 +16,17 @@
           :value="item">
         </el-option>
       </el-select>
-      <el-select v-model="statusChose" placeholder="筛选" class='selected1 selcted2'>
-        <el-option
-          v-for="item in status"
-          :key="item.id"
-          :label="item.name"
-          :value="item.id">
-        </el-option>
-      </el-select>
+      <div class="screen">
+        <i class='icon-liebiao iconfont'></i>
+        <el-select v-model="statusChose" placeholder="筛选" class='selected1 selcted2'>
+          <el-option
+            v-for="item in status"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id">
+          </el-option>
+        </el-select>
+      </div>
     </div>
     <publishList
       class='list'
@@ -108,6 +111,9 @@ export default {
 </script>
 
 <style>
+.icon-liebiao{
+  font-size: 16px;
+}
 .myPublish{
   min-height: 100%;
   background: #eee;
@@ -123,7 +129,22 @@ export default {
   width: 60px;
 }
 .selcted2{
-  width: 70px;
+  width: 60px;
+}
+.selcted2 span {
+  display: none;
+}
+.selcted2::-webkit-input-placeholder{
+  color:red;
+}
+.selcted2::-moz-placeholder{   /* Mozilla Firefox 19+ */
+  color:red;
+}
+.selcted2:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+  color:red;
+}
+.selcted2:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+  color:red;
 }
 .selected1 div .el-input__inner {
   padding-right:0px;
