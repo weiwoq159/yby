@@ -45,22 +45,22 @@
         <p class='time'>{{item.createTimes | dateFilter}}</p>
       </div>
       <div class="content">
-        <p>回复:{{item.replyToUname}} {{item.content}}</p>
+        <p> <span v-if='item.replyToUname'>回复:</span>{{item.replyToUname}} {{item.content}}</p>
       </div>
-      <div class="bottom">
-        <div class="newsBottom">
-          <div class="message" @click='repeat(item)'>
-            <i class='iconfont icon-liuyan'></i>
-            <span>{{item.replyNum}}</span>
-          </div>
-          <div
-            :class="item.status === 1 ? 'starActive' : 'star'"
-            @click='changeColor(item)'>
-            <i class='iconfont icon-heart'></i>
-            <span>{{item.goodUp}}</span>
-          </div>
-        </div>
-      </div>
+      <!--<div class="bottom">-->
+        <!--<div class="newsBottom">-->
+          <!--<div class="message" @click='repeat(item)'>-->
+            <!--<i class='iconfont icon-liuyan'></i>-->
+            <!--<span>{{item.replyNum}}</span>-->
+          <!--</div>-->
+          <!--<div-->
+            <!--:class="item.status === 1 ? 'starActive' : 'star'"-->
+            <!--@click='changeColor(item)'>-->
+            <!--<i class='iconfont icon-heart'></i>-->
+            <!--<span>{{item.goodUp}}</span>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
       <!--{{item.replyUname}} <span v-if='item.replyToUname'>回复:</span>{{item.replyToUname}} {{item.content}}-->
     </div>
   </div>

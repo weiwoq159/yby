@@ -4,7 +4,8 @@ const state = {
   singer: 'maqiang',
   isLogin: isLogin,
   userId: 17,
-  url: ''
+  url: '',
+  userInfo: ''
 }
 
 export default state

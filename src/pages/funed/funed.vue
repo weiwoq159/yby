@@ -3,7 +3,7 @@
 * User: 马强/529524114@qq.com
 * Date: 2018/12/25
 * Time: 下午5:14
-* name:
+* name: 公积金页面
 */
 <template>
   <div class='funed'>
@@ -50,6 +50,7 @@ export default {
       api.checkImg(this.AFPic)
     },
     fundHomeDate (res) {
+      console.log(res)
       this.fundedList = res.data
     }
   },

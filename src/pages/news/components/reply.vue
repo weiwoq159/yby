@@ -50,10 +50,11 @@
               <li
                 v-for="(reply, inde) in item.relpy"
                 :key="inde"
+                v-if='inde <= 10'
                 >
                 {{reply.replyUname}} <span v-if='reply.replyToUname'>回复:</span>{{reply.replyToUname}} {{reply.content}}
               </li>
-              <li class='more'>
+              <li class='more' v-if='item.relpy.length >= 10'>
                 <router-link :to="{name:'Reply',params:{content: item}}">点击查看更多 </router-link>
               </li>
             </ul>
@@ -68,10 +69,10 @@
        v-if='showOrDis'
        >
       <div class="inputt">
-        <input type="text" v-model='replyContent' @click.prevent>
+        <input type="text" v-model='replyContent' @click.stop>
         <i
           class='iconfont icon-tijiao'
-          @click='displayReply($event)'
+          @click.stop='displayReply($event)'
         ></i>
       </div>
     </div>
@@ -80,14 +81,10 @@
 
 <script>
 import api from '@/api/api'
-import replyInput from '../../common/replyInput'
 
 export default {
   name: 'reply',
   props: ['bookId'],
-  components: {
-    replyInput
-  },
   data () {
     return {
       showOrDis: false,
@@ -107,7 +104,8 @@ export default {
       highLight: 0,
       reply: {},
       replyContent: '123123123',
-      replyCon: ''
+      replyCon: '',
+      selectItem: ''
     }
   },
   methods: {
@@ -146,9 +144,17 @@ export default {
       console.log(res)
       this.reply = res.data.data.sort(api.time)
     },
+    replyOK (res) {
+      this.selectItem.relpy.push({
+        content: this.replyContent,
+        createTimes: (new Date()).getTime(),
+        replyUname: this.$store.state.userInfo.name
+      })
+    },
     repeat (item) {
       this.replyCon = item
       this.showOrDis = true
+      this.selectItem = item
     },
     displayReply () {
       this.showOrDis = false
@@ -159,7 +165,7 @@ export default {
           replyType: 1,
           content: this.replyContent
 
-        }).then(this.changeReply)
+        }).then(this.replyOK())
     }
   },
   mounted () {

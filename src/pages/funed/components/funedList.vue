@@ -27,11 +27,11 @@
       </router-link>
       <!--底部按钮-->
       <div class="newsBottom">
-        <div class="message">
+        <div class="message" @click='gotoReply(content)'>
           <i class='iconfont icon-liuyan'></i>
           {{content.replyNum}}
         </div>
-        <div :class="content.isStar ? 'starActive' : 'star'" @click='changeColor(content)'>
+        <div :class="content.isLiked === 1 ? 'starActive' : 'star'" @click='changeColor(content)'>
           <i class='iconfont icon-heart1'></i>
           <span>{{content.liked}}</span>
         </div>
@@ -49,17 +49,20 @@ export default {
   },
   methods: {
     changeColor (item) {
-      this.axios.post('/book/web/api/praise/add', {typeId: item.id, type: 1}).then(res => {
-        item.isStar = !item.isStar
-        console.log(item)
-        if (this.isStar) {
-          item.status = 1
+      console.log(item)
+      this.axios.post('/book/web/api/praise/add', {typeId: item.id, type: 2}).then(res => {
+        if (item.isLiked === 0) {
+          item.isLiked = 1
           item.liked++
         } else {
-          item.status = 0
+          item.isLiked = 0
           item.liked--
         }
       })
+    },
+    gotoReply (content) {
+      console.log(content)
+      this.$router.push({name: 'News', params: {bookId: content.id, name: content, url: this.$store.state.url}})
     }
   }
 }

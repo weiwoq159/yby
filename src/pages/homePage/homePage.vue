@@ -27,7 +27,14 @@ export default {
     HomePageSearch,
     Navigation
   },
+  methods: {
+    myPublish (res) {
+      this.$store.commit('SET_USERINFO', res.data.data)
+      console.log(this.$store.state.userInfo)
+    }
+  },
   mounted () {
+    this.axios.post('/book/web/api/login/userMessage ', {pageNum: 1, pageSize: 12}).then(this.myPublish)
     try {
       if (localStorage.token) {
         let token = localStorage.token

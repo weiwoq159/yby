@@ -109,7 +109,7 @@ export default {
 
 <style>
 .myPublish{
-  height: 100%;
+  min-height: 100%;
   background: #eee;
   padding:13px;
   box-sizing: border-box;

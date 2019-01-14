@@ -9,6 +9,9 @@ const mutation = {
   },
   [type.SET_USERID] (state, userId) {
     state.userId = userId
+  },
+  [type.SET_USEINFO] (state, userInfo) {
+    state.userInfo = userInfo
   }
 }
 

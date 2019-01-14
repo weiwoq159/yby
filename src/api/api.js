@@ -22,6 +22,7 @@ export default {
     return b.liked - a.liked
   },
   selectReply (a, b) {
+    console.log(a)
     return b.replyNum - a.replyNum
   },
   checkImg (that) {

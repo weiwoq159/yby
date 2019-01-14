@@ -8,10 +8,10 @@
 <template>
   <div class='replyInput' @touchmove.prevent @click='displayReply'>
     <div class="inputt">
-      <input type="text" v-model='reply' @click.prevent>
+      <input type="text" v-model='reply' @click.stop>
       <i
         class='iconfont icon-tijiao'
-        @click='replyEnter'
+        @click.stop='replyEnter'
       ></i>
     </div>
   </div>
