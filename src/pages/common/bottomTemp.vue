@@ -40,6 +40,8 @@ export default {
     bottom:0px;
     width 100%;
     padding .1rem 0;
+    background #ffffff;
+    box-shadow 0 25px 72px 0 #999;
     button
       width 1.66rem;
       height:.25rem;
