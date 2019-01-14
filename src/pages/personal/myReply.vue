@@ -6,7 +6,9 @@
 * name:我的回复
 */
 <template>
-  <div class='myReply'>
+  <div class='myReply'
+       type="primary"
+       >
     <div
       class="reply"
       v-for='(item, index) in contentList'
@@ -30,13 +32,26 @@ export default {
   name: 'myReply',
   data () {
     return {
-      contentList: []
+      contentList: [],
+      fullscreenLoading: false
     }
   },
   methods: {
     searchIReplys (res) {
       this.contentList = [...res.data.data.comment, ...res.data.data.reply]
       console.log(this.contentList)
+      if (this.contentList.length === 0) {
+        const loading = this.$loading({
+          lock: true,
+          text: '该用户暂无评论',
+          spinner: 'el-icon-error',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        setTimeout(() => {
+          loading.close()
+          this.$router.push(history.go(-1))
+        }, 2000)
+      }
     }
   },
   mounted () {
@@ -45,7 +60,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
   .myReply{
     padding:15px;
     background: #f8f8f8;
@@ -66,6 +81,13 @@ export default {
     font-size: 10px;
     margin-bottom: 11px;
     color:#999;
+  }
+  .el-icon-success,.el-icon-loading,.el-icon-error{
+    font-size: 40px;
+    margin-bottom:15px;
+  }
+  .el-loading-spinner{
+    margin-top:-40px;
   }
   .intro{
     background: #fafafa;

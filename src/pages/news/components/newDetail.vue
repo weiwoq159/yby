@@ -34,7 +34,7 @@
     <div
       class='replyInput'
       @touchmove.prevent
-      @click='displayReply($event)'
+      @click.stop='disReply()'
       v-if='showOrDis'
     >
       <div class="inputt">
@@ -79,6 +79,10 @@ export default {
         }
       })
     },
+    disReply () {
+      console.log(123123)
+      this.showOrDis = false
+    },
     replyOK (res) {
       console.log(res)
       let lis = {
@@ -96,14 +100,14 @@ export default {
       this.selectItem = item
     },
     displayReply () {
+      console.log(this.list)
       this.showOrDis = false
-      this.axios.post('/book/web/api/reply/replyAdd',
+      this.axios.post('/book/web/api/comment/commentAdd',
         {
-          commentId: this.replyCon.id,
-          replyId: this.replyCon.fromUid,
-          replyType: 1,
+          bookId: this.replyCon.id,
+          bookTitle: this.list.title,
+          bookType: this.list.type,
           content: this.replyContent
-
         }).then(this.replyOK)
     }
   }
@@ -136,6 +140,7 @@ export default {
 .inputt input {
   width: 100%;
   height: 100%;
+  padding: 0 12px;
 }
 .icon-tijiao{
   font-size: 28px;

@@ -22,7 +22,20 @@ Vue.use(elementUi)
 /* eslint-disable no-new */
 
 axios.interceptors.request.use(config => {
-  let AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI1NzgyNDYzOTE0MDc4MjA4Iiwic3QiOiIyIiwibG4iOiI4MCIsInBoIjoiMTM4MzU1MDA3MTIiLCJybiI6IumprOW8uuW8uiIsImV4cCI6MTU0Nzg5MjQ4NX0.gYUnvUJpbIxr3XkGlJuiZar59CDjXS2FoEdSUgCAFiM'
+  try {
+    if (localStorage.token) {
+      let token = localStorage.token
+      console.log('-----token-----')
+      console.log(token)
+      console.log('-----token-----')
+    }
+  } catch (e) {
+    console.log('不支持')
+  }
+  localStorage.setItem('XMDADMINTOKEN', 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NTM0MTEwNTQ2MTI4ODk2Iiwic3QiOiIyIiwibG4iOiI2MiIsInBoIjoiMTg5ODcwOTAwNzMiLCJybiI6IjE4OTg3MDkwMDczIiwiZXhwIjoxNTQ4MDcxNjkyfQ.acf_iVnSldU7gPs-fgDX99Ob8nYTmRd_TMBIjnMaoOA\n')
+  let token = localStorage.getItem('XMDADMINTOKEN')
+  console.log(token)
+  let AUTH_TOKEN = token
   if (AUTH_TOKEN) { // 判断是否存在token，如果存在的话，则每个http header都加上token
     config.headers.common = {
       'x-authentication-token': `${AUTH_TOKEN}`

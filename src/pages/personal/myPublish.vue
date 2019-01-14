@@ -57,14 +57,14 @@ export default {
       yearChose: '',
       status: [
         {
-          name: '提交',
+          name: '已发布',
+          id: 1
+        }, {
+          name: '审核中',
           id: 2
         }, {
-          name: '已审核',
+          name: '审核未通过',
           id: 3
-        }, {
-          name: '审核失败',
-          id: 4
         }
       ],
       statusChose: ''
@@ -126,13 +126,16 @@ export default {
   justify-content: space-between;
 }
 .selected1{
-  width: 60px;
+  width: 70px;
 }
 .selcted2{
-  width: 60px;
+  width: 70px;
 }
 .selcted2 span {
   display: none;
+}
+.selcted2 input {
+  text-align: center;
 }
 .selcted2::-webkit-input-placeholder{
   color:red;

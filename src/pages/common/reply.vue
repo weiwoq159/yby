@@ -156,7 +156,6 @@ export default {
 .photoImg
   width 40px;
   height 40px;
-  background: #000;
 .name
   display flex
   justify-content space-between;

@@ -124,7 +124,7 @@ export default {
 .listSort
   display flex
   justify-content space-around
-  padding:10px 25px;
+  padding:10px 0px;
   li
     color: #aaa;
     font-size: .11rem;

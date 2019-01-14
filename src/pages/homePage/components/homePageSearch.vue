@@ -23,13 +23,33 @@ export default {
   },
   methods: {
     search () {
-      this.$router.push({name: 'SearchResults', params: {name: this.input5}})
+      if (this.input5 === '') {
+        const loading = this.$loading({
+          lock: true,
+          text: '请输入搜索内容',
+          spinner: 'el-icon-error',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        setTimeout(() => {
+          loading.close()
+        }, 2000)
+        return false
+      } else {
+        this.$router.push({name: 'SearchResults', params: {name: this.input5}})
+      }
     }
   }
 }
 </script>
 
 <style lang='stylus'>
+  .el-icon-success,.el-icon-loading,.el-icon-error{
+    font-size: 40px;
+    margin-bottom:15px;
+  }
+  .el-loading-spinner{
+    margin-top:-40px;
+  }
   .search
     height:.3rem
     padding 0 .3rem

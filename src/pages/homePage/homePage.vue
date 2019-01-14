@@ -45,7 +45,7 @@ export default {
     } catch (e) {
       console.log('不支持')
     }
-    let token = localStorage.getItem('token')
+    let token = localStorage.getItem('XMDADMINTOKEN')
     console.log(token)
   }
 }

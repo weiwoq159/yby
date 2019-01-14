@@ -83,6 +83,16 @@ Vue.filter('dateFilter', function (time) {
   return date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate()
 })
 
+Vue.filter('changeStatus', function (time) {
+  if (time === 1) {
+    return '已发布'
+  } else if (time === 2) {
+    return '已审核'
+  } else if (time === 3) {
+    return '审核未通过'
+  }
+})
+
 Vue.filter('num', function (value) {
   let chineseArr = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
   let english = value.split('')
