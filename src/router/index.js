@@ -118,7 +118,7 @@ export default new Router({
     path: '/personal/mypublish',
     name: 'MyPublish',
     meta: {
-      title: '我发布的'
+      title: '我的发布'
     },
     component: MyPublish
   },
