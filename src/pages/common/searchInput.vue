@@ -6,7 +6,10 @@
 * name:
 */
 <template>
-  <div class='searchInput'>
+  <div
+    class='searchInput'
+    type="primary"
+  >
     <div class="left">
       <el-select v-model="id" :placeholder="chosePlace">
         <el-option
@@ -51,8 +54,20 @@ export default {
     }
   },
   methods: {
-    upLoad (res) {
-      this.$router.push({name: 'SearchResults', params: {name: this.input}})
+    upLoad () {
+      if (this.input === '') {
+        const loading = this.$loading({
+          lock: true,
+          text: '请输入搜索内容',
+          spinner: 'el-icon-error',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        setTimeout(() => {
+          loading.close()
+        }, 2000)
+      } else {
+        this.$router.push({name: 'SearchResults', params: {name: this.input}})
+      }
     }
   },
   watch: {
@@ -68,6 +83,13 @@ export default {
 
 <style lang='stylus'>
   @import "~@/assets/index.styl"
+  .el-icon-success,.el-icon-loading,.el-icon-error{
+    font-size: 40px;
+    margin-bottom:15px;
+  }
+  .el-loading-spinner{
+    margin-top:-40px;
+  }
   .searchInput
     height:50px;
     display flex;
@@ -86,11 +108,11 @@ export default {
       height:.25rem
       padding:0px;
     .left
-      width 30%;
+      width 35%;
       i
         line-height:.25rem
     .right
-      width 65%;
+      width 60%;
       position relative
       .seach_button
         position absolute;

@@ -21,7 +21,7 @@
       <el-container>
         <el-aside width="40px">
           <div class="photoImg">
-            <img :src="item.fromUheadportrait" alt="">
+            <img src="static/img/photo.png" alt="">
           </div>
         </el-aside>
         <el-main>
@@ -65,7 +65,7 @@
     <div
        class='replyInput'
        @touchmove.prevent
-       @click='displayReply($event)'
+       @click.stop='disReply()'
        v-if='showOrDis'
        >
       <div class="inputt">
@@ -147,6 +147,10 @@ export default {
           item.goodUp--
         }
       })
+    },
+    disReply () {
+      console.log(123123)
+      this.showOrDis = false
     },
     changeReply (res) {
       console.log(res)
@@ -260,7 +264,6 @@ export default {
   .photoImg
     width 40px;
     height 40px;
-    background: #000;
   .name
     display flex
     justify-content space-between;

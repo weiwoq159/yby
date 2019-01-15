@@ -8,11 +8,10 @@
 <template>
   <div class='publishList'>
     <div class="left">
-      <p class='data'>{{year}}<span class='month'>{{month - 1}}月</span></p>
+      <p class='data'>{{day}}<span class='month'>{{month}}月</span></p>
     </div>
-    <img src="static/img/afPic1.png" alt="">
     <div class="right">
-      <p class='title'>{{publishList.title}}<span class='state'>{{publishList.status}}</span></p>
+      <p class='title'>{{publishList.title}}<span class='state'>{{publishList.status | changeStatus}}</span></p>
       <p class='content'>{{publishList.content | changeTitle}}</p>
     </div>
   </div>
@@ -25,11 +24,11 @@ export default {
   computed: {
     month () {
       let date = new Date(this.publishList.time.replace(/-/g, '/'))
-      return date.getMonth()
+      return date.getMonth() + 1
     },
-    year () {
+    day () {
       let date = new Date(this.publishList.time.replace(/-/g, '/'))
-      return date.getFullYear()
+      return date.getDate()
     }
   }
 }
@@ -60,8 +59,11 @@ export default {
         color: #333
         white-space:nowrap;
     .right
+      margin-left 15px;
+      width 100%;
       .title
         font-size: 14px;
+        width 100%;
         color:#333
       .content
         font-size: 12px;

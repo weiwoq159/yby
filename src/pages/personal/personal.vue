@@ -9,6 +9,7 @@
   <div class='PersonalCenter'>
     <div class="pic">
       <div class="head">
+        <img src="static/img/photo.png" alt="" class='photo'>
       </div>
       <div class="persongInfo">
         <p class="name">{{user.name}}</p>
@@ -72,6 +73,9 @@ export default {
   .PersonalCenter{
     height: 100%;
     background: #f8f8f8;
+  }
+  .photo{
+    width: 100%;
   }
   .pic{
     display: flex;

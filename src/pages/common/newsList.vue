@@ -87,7 +87,7 @@ export default {
     }
   },
   // 获取新闻列表页面
-  activated () {
+  mounted () {
     console.log(this.$route.params.url)
     if (this.$route.params.url) {
       this.$store.commit('SET_URL', this.$route.params.url)
@@ -99,7 +99,6 @@ export default {
     console.log(source)
     let _that = this
     this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '10', category: source, classify: classify}).then(function (res) {
-      console.log(res)
       _that.selectionList = res.data
     })
   }
