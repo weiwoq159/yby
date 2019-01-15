@@ -89,7 +89,7 @@ export default {
   .funedList
     background: #f8f8f8;
     padding:15px 12px;
-    border-radius 25px;
+    border-radius 15px;
     .newsTitle
       text-align center
       margin-bottom  15px
