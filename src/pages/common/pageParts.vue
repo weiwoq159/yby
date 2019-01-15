@@ -33,7 +33,7 @@ export default {
   methods: {
     goToDetail (item) {
       console.log(item)
-      this.$router.push({name: 'HrList', params: {source: this.scource, url: this.name, classify: item.classify}})
+      this.$router.push({name: 'SocialList', params: {source: this.scource, url: this.name, classify: item.classify}})
     }
   },
   mounted () {

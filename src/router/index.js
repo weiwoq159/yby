@@ -30,6 +30,16 @@ export default new Router({
     component: HomePage
   },
   {
+    path: '/tabGroup/HR/list',
+    name: 'Hrlist',
+    component: HrList
+  },
+  {
+    path: '/tabGroup/social/list',
+    name: 'SocialList',
+    component: HrList
+  },
+  {
     path: '/tabGroup',
     name: 'tabGroup',
     component: TabGroup,
@@ -72,14 +82,6 @@ export default new Router({
         title: '燚精选'
       },
       component: Selection
-    },
-    {
-      path: '/tabGroup/HrList',
-      name: 'HrList',
-      meta: {
-        title: '列表'
-      },
-      component: HrList
     }
     ]
   },

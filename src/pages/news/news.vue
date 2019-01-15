@@ -16,6 +16,7 @@
     <Reply
       :bookId='bookId'
       :newReply='newReply'
+      :list='list'
     ></Reply>
   </div>
 </template>
