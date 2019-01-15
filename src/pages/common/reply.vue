@@ -117,7 +117,7 @@ export default {
   div
     border:1px solid #666
     color: #666
-    padding:3px 8px;
+    padding:0.6vw 3vw;
     border-radius 30px;
   .star
     margin-right 11px;
@@ -153,6 +153,7 @@ export default {
 .replyMes
   background: #ffffff;
   padding:15px;
+  margin-bottom:3vw;
 .photoImg
   width 40px;
   height 40px;
@@ -167,7 +168,7 @@ export default {
   font-size: 10px;
   color:#aaa;
 .text
-  font-size: 12pt;
+  font-size: 12px;
   color: #666;
   margin-top 9px;
 main

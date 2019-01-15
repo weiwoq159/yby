@@ -136,6 +136,9 @@ export default {
 </script>
 
 <style>
+  .el-input__suffix{
+    right:13px;
+  }
   .selectList {
     position: absolute;
     right: 0px;
@@ -160,10 +163,10 @@ export default {
   }
   .choseName{
     margin-left: 5px;
-    font-size: 16px;
+    font-size:14px;
   }
 .icon-liebiao{
-  font-size: 16px;
+  font-size: 14px;
 }
 .myPublish{
   min-height: 100%;
