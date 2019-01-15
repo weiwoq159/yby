@@ -6,8 +6,8 @@ const state = {
   userId: 17,
   url: '',
   userInfo: {
-    id: '80',
-    name: '您',
+    id: '',
+    name: '',
     phone: ''
   }
 }

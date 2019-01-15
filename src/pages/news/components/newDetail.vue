@@ -69,7 +69,7 @@ export default {
   methods: {
     changeColor (item) {
       console.log(this.list)
-      this.axios.post('/book/web/api/praise/add', {typeId: item.id, type: 2}).then(res => {
+      this.axios.post('/book/web/api/praise/add', {typeId: item.id, type: 1}).then(res => {
         console.log(res)
         if (!item.isLiked) {
           item.isLiked = 1

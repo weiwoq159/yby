@@ -3,7 +3,7 @@ import Vue from 'vue'
 Vue.filter('telToName', function (value) {
   console.log(value)
   if ((/^1(3|4|5|7|8)\d{9}$/.test(value))) {
-    return value.substr(0, 3) + '****' + value.substr(7, 11)
+    return value.substr(0, 3) + '*****' + value.substr(8, 11)
   } else {
     return value
   }
