@@ -12,7 +12,7 @@
       <!--<p class="title">{{list.title}}</p>-->
       <p class="title" v-html='list.title'></p>
       <div class="detail">
-        <p>来源:{{list.source}}</p>
+        <p>来源:{{list.source | changeTitle}}</p>
         <p class='clickNum'>点击量:{{list.clicks}}</p>
         <p>更新时间:{{list.ceateTime | dateShow}}</p>
       </div>
@@ -152,7 +152,7 @@ export default {
   font-size: 16px;
   background:#eee;
   border-radius:100px;
-  padding-right: 45px;
+  padding-right: 13vw;
 }
 .icon-tijiao{
   font-size: 32px;
@@ -172,6 +172,7 @@ export default {
     font-size: .14rem;
     color:#333;
     margin-bottom: .1rem
+    line-height:6vw;
   .detail
     display: flex;
     justify-content space-around;

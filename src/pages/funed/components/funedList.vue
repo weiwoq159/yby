@@ -85,6 +85,7 @@ export default {
   .titleName
     font-size: 3.8vw;
     color:#333;
+    line-height:5vw;
   .funed_tist
     margin-bottom 10px;
   .listBox

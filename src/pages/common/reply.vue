@@ -164,13 +164,14 @@ export default {
 .title
   font-size: 14px;
   color:#333;
+  margin-top :-3vw;
 .date
   font-size: 10px;
   color:#aaa;
 .text
   font-size: 12px;
   color: #666;
-  margin-top 9px;
+  /*margin-top 9px;*/
 main
   padding:10px 0px 0px 15px
 .messageReply
@@ -182,6 +183,7 @@ main
   padding:10px 15px;
 .messageReply ul li
   margin-top 3px;
+  line-height:6vw;
 .more
   text-align right
   font-size: 12px;

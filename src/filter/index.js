@@ -9,7 +9,7 @@ Vue.filter('telToName', function (value) {
 })
 Vue.filter('changeTitle', function (value) {
   if (value) {
-    if (value.length <= 20) {
+    if (value.length <= 10) {
       return value
     } else {
       return value.substring(0, 20) + '...'
