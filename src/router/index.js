@@ -17,6 +17,7 @@ import News from '../pages/news/news'
 import text from '../pages/common/text'
 import HrList from '../pages/common/newsList'
 import Reply from '../pages/common/reply'
+import list from '../pages/common/list'
 Vue.use(Router)
 
 export default new Router({
@@ -142,6 +143,11 @@ export default new Router({
     path: '/text',
     name: 'text',
     component: text
+  },
+  {
+    path: '/list',
+    name: 'list',
+    component: list
   }
   ]
 })

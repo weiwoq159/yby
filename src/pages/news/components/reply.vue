@@ -162,6 +162,7 @@ export default {
         createTimes: (new Date()).getTime(),
         replyUname: this.$store.state.userInfo.name
       })
+      this.replyContent = ''
       console.log(this.selectItem.relpy)
     },
     repeat (item) {
@@ -275,6 +276,7 @@ export default {
     font-size: 10px;
     color:#aaa;
   .text
+    word-wrap:break-word
     font-size: 12pt;
     color: #666;
     margin-top 9px;

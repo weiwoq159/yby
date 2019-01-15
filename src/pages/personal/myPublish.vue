@@ -17,15 +17,19 @@
         </el-option>
       </el-select>
       <div class="screen">
-        <i class='icon-liebiao iconfont'></i>
-        <el-select  v-model="statusChose" placeholder="筛选" class='selected1 selcted2'>
-          <el-option
-            v-for="item in status"
-            :key="item.id"
-            :label="item.name"
-            :value="item.id">
-          </el-option>
-        </el-select>
+        <div class='pullList' @click='choseNameList'>
+          <i class='icon-liebiao iconfont'></i>
+          <span class='choseName'>{{choseName}}</span>
+        </div>
+        <ul v-if='display'>
+          <li
+            v-for='(item, index) in status'
+            :key='index'
+            @click='chooseName(item)'
+          >
+            {{item.name}}
+          </li>
+        </ul>
       </div>
     </div>
     <publishList
@@ -35,7 +39,7 @@
       :publishList='item'
     >
     </publishList>
-    <div v-if='publishList1.length===0'>
+    <div v-if='publishList.length===0'>
       <p>该年度暂无文章发布</p>
     </div>
   </div>
@@ -50,11 +54,12 @@ export default {
   },
   data () {
     return {
-      publishList: '',
+      publishList: [],
       publishList1: '',
-      publishList2: '',
+      publishList2: [],
       yearArr: [],
       yearChose: '',
+      display: false,
       status: [
         {
           name: '已发布',
@@ -67,17 +72,37 @@ export default {
           id: 3
         }
       ],
+      choseName: '筛选',
       statusChose: ''
     }
   },
   methods: {
+    chooseName (item) {
+      this.statusChose = item.id
+      this.choseName = item.name
+      this.display = !this.display
+    },
+    choseNameList () {
+      this.display = !this.display
+    },
     myPublish (res) {
+      // console.log('-----res-----')
+      // console.log(res)
+      // console.log('-----res-----')
+      // let _this = this
+      // this.yearChose = '2019'
+      // Object.keys(res.data.data).forEach(function (item) {
+      //   res.data.data[item].forEach(function (i) {
+      //     _this.publishList.push(i)
+      //   })
+      // })
       this.publishList = res.data.data
-      this.yearChose = 2019
+      this.yearChose = '2019'
     }
   },
   watch: {
     yearChose (newVal, oldVal) {
+      console.log(newVal)
       this.publishList1 = this.publishList.filter(val => {
         if (val.time.substring(0, 4) === newVal.toString()) {
           return val
@@ -105,12 +130,32 @@ export default {
     }
     console.log(this.yearArr)
     // this.axios.get('static/tsconfig.json').then(this.myPublish)
-    this.axios.post('/book/web/api/book/getRelease ', {pageNum: 1, pageSize: 12}).then(this.myPublish)
+    this.axios.post('/book/web/api/book/getRelease', {pageNum: 1, pageSize: 12}).then(this.myPublish)
   }
 }
 </script>
 
 <style>
+  .screen{
+    text-align: center;
+  }
+  .pullList{
+    display: flex;
+  }
+.screen li{
+  text-align: center;
+  padding:8px 0;
+  font-size: 12px;
+}
+  .screen ul {
+    width: 80px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 3px;
+  }
+  .choseName{
+    margin-left: 5px;
+  }
 .icon-liebiao{
   font-size: 16px;
 }
@@ -124,6 +169,7 @@ export default {
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .selected1{
   width: 70px;
@@ -136,18 +182,6 @@ export default {
 }
 .selcted2 input {
   text-align: center;
-}
-.selcted2::-webkit-input-placeholder{
-  color:red;
-}
-.selcted2::-moz-placeholder{   /* Mozilla Firefox 19+ */
-  color:red;
-}
-.selcted2:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
-  color:red;
-}
-.selcted2:-ms-input-placeholder{  /* Internet Explorer 10-11 */
-  color:red;
 }
 .selected1 div .el-input__inner {
   padding-right:0px;

@@ -9,7 +9,7 @@
   <div
     class='pullScroll'
     ref='pullScroll'
-    @scroll.passive="onScroll($event)"
+    @scroll="onScroll($event)"
     @touchstart='touchStart($event)'
     @touchmove='touchMove($event)'
     @touchend='touchEnd($event)'
@@ -145,6 +145,7 @@ export default {
     // 滚动条事件
     onScroll (e) {
       // 获取列表高度
+      console.log(e)
       let listHeight = this.myScrollList.offsetHeight
       let listScrollTop = e.target.scrollTop + this.myScroll.offsetHeight // 当前滚动条位置
       if (this.state === 0 && listHeight - listScrollTop < 100) {

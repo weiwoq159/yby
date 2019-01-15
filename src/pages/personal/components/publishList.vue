@@ -7,13 +7,15 @@
 */
 <template>
   <div class='publishList'>
-    <div class="left">
-      <p class='data'>{{day}}<span class='month'>{{month}}月</span></p>
-    </div>
-    <div class="right">
-      <p class='title'>{{publishList.title}}<span class='state'>{{publishList.status | changeStatus}}</span></p>
-      <p class='content'>{{publishList.content | changeTitle}}</p>
-    </div>
+    <router-link :to="{name:'News',params :{bookId:publishList.id, name:publishList, url:this.$store.state.url}}">
+      <div class="left">
+        <p class='data'>{{day}}<span class='month'>{{month}}月</span></p>
+      </div>
+      <div class="right">
+        <p class='title'>{{publishList.title}}<span class='state'>{{publishList.status | changeStatus}}</span></p>
+        <p class='content'>{{publishList.content | changeTitle}}</p>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -42,20 +44,21 @@ export default {
   .publishList
     padding:15px;
     background: #fff;
-    display flex;
-    align-items stretch
     margin-bottom:10px;
-    img
-      widows:68px;
-      height 68px;
-      margin 0 16px;
-    .left
+    a
+      width 100%
+      display block
+      display flex;
+      align-items stretch
+      .left
       .month
-        font-size: 12px;
+        font-size: 10px;
         color #333
         white-space:nowrap;
-      .date
-        font-size: 14;
+        font-weight: 300;
+      .data
+        font-size: 14px;
+        font-weight: 900;
         color: #333
         white-space:nowrap;
     .right
@@ -70,4 +73,9 @@ export default {
         color:#666
         margin-top 9px;
         line-height:1.5
+    img
+      widows:68px;
+      height 68px;
+      margin 0 16px;
+
 </style>

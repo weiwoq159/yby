@@ -14,14 +14,14 @@
             <i class="iconfont icon-anonymous-iconfont"></i>
             <span>精华</span>
           </div>
-          <p v-html='content.title'></p>
+          <p class='titleName' v-html='content.title'></p>
           <!--<p class="titleText">{{content.title | changeTitle}}</p>-->
         </div>
         <div class="content">
           <p>{{content.intro | changeContent}}</p>
         </div>
         <div class="bottom">
-          <span class='tag'>{{content.classify}}</span>
+          <span class='tag'>{{content.tags}}</span>
           <p class='whereFrom'>来源:{{content.source | changeSource}}</p>
           <p class='updateTime'>{{content.ceateTime | dateShow }}</p>
         </div>
@@ -70,6 +70,8 @@ export default {
 }
 </script>
 <style scoped lang='stylus'>
+  .titleName
+    font-size: 16px;
   .funed_tist
     margin-bottom 10px;
   .listBox
@@ -81,6 +83,7 @@ export default {
       display flex
       align-items center
       color #666
+      font-size: 16px;
       .essence
         padding:2px 8px;
         border-radius 20px;

@@ -10,7 +10,7 @@
     <el-container>
       <el-aside width="40px">
         <div class="photoImg">
-          <img :src="content.fromUheadportrait" alt="">
+          <img src="static/img/photo.png" alt="">
         </div>
       </el-aside>
       <el-main>
@@ -42,7 +42,6 @@
     >
       <div class="name">
         <p class='userName'>{{item.replyUname}}</p>
-        {{item}}
         <p class='time'>{{item.createTimes | dateFilter}}</p>
       </div>
       <div class="content">

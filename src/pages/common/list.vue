@@ -85,7 +85,7 @@ export default {
     }
   },
   mounted () {
-    for (let i = 0; i <= 30; i++) {
+    for (let i = 0; i <= 60; i++) {
       this.list.push({
         name: 'lili',
         id: 1

@@ -87,5 +87,10 @@ export default {
       return value
     })
     return listArr
+  },
+  onScroll (e) {
+    console.log('-----e-----')
+    console.log(e)
+    console.log('-----e-----')
   }
 }

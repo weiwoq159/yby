@@ -29,11 +29,13 @@
 import api from '@/api/api'
 import AFPic from './components/AFPic'
 import FunedList from './components/funedList'
+import pullScroll from '../common/pullScroll'
 export default {
   name: 'funed',
   components: {
     AFPic,
-    FunedList
+    FunedList,
+    pullScroll
   },
   data () {
     return {
@@ -41,7 +43,14 @@ export default {
       fundedList: '',
       category: 4,
       url: '',
-      name: '公积金'
+      name: '公积金',
+      page: {
+        counter: 9,
+        pageStart: 1,
+        pageEnd: 1,
+        total: 10
+      },
+      scrollState: true
     }
   },
   methods: {
@@ -52,6 +61,9 @@ export default {
     fundHomeDate (res) {
       console.log(res)
       this.fundedList = res.data
+    },
+    onScroll (e) {
+      console.log(e)
     }
   },
   mounted () {
@@ -63,6 +75,12 @@ export default {
   activated () {
     this.$store.commit('SET_URL', this.$route.path)
     this.url = this.$store.state.url
+    window.addEventListener('scroll', function (e) {
+      console.log(e)
+    })
+  },
+  destroyed () {
+    console.log()
   }
 }
 </script>

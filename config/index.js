@@ -30,7 +30,7 @@ module.exports = {
     // },
     proxyTable: {
       '/book/web/api':{
-        target: 'http://106.39.102.148:9998', //测试环境
+        target: 'http://zhiku-test.1boyun.com:9998', //测试环境
         pathRewrite: {
           '^/book/web/api':'/book/web/api'
         },

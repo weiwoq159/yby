@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     changeColor (item) {
-      console.log(item)
+      console.log(this.list)
       this.axios.post('/book/web/api/praise/add', {typeId: item.id, type: 2}).then(res => {
         console.log(res)
         if (!item.isLiked) {
@@ -94,6 +94,7 @@ export default {
       }
       this.list.replyNum++
       this.$emit('changeList', lis)
+      this.replyContent = ''
     },
     repeat (item) {
       this.replyCon = item
