@@ -69,7 +69,7 @@
        v-if='showOrDis'
        >
       <div class="inputt">
-        <input type="text" v-model='replyContent' @click.stop>
+        <input type="text" v-model='replyContent' @click.stop ref='content'>
         <i
           class='iconfont icon-tijiao'
           @click.stop='displayReply($event)'
@@ -169,17 +169,24 @@ export default {
       this.replyCon = item
       this.showOrDis = true
       this.selectItem = item
+      this.$nextTick(() => {
+        this.$refs.content.focus()
+      })
     },
     displayReply () {
-      this.showOrDis = false
-      this.axios.post('/book/web/api/reply/replyAdd',
-        {
-          commentId: this.replyCon.id,
-          replyId: this.replyCon.fromUid,
-          replyType: 2,
-          content: this.replyContent
-
-        }).then(this.replyOK())
+      if (this.replyContent === '') {
+        this.showOrDis = false
+        return false
+      } else {
+        this.showOrDis = false
+        this.axios.post('/book/web/api/comment/commentAdd',
+          {
+            bookId: this.replyCon.id,
+            bookTitle: this.list.title,
+            bookType: this.list.type,
+            content: this.replyContent
+          }).then(this.replyOK)
+      }
     }
   }
 }
@@ -211,6 +218,8 @@ export default {
   .inputt input {
     width: 100%;
     height: 100%;
+    padding: 0 12px;
+    font-size: 16px;
   }
   .icon-tijiao{
     font-size: 28px;

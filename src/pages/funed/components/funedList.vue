@@ -10,7 +10,7 @@
     <div class="listBox">
       <router-link :to="{name:'News',params :{bookId:content.id, name:content, url:this.$store.state.url}}">
         <div class="title">
-          <div class="essence" v-if="content.essence===1">
+          <div class="essence" v-if="content.essence===0">
             <i class="iconfont icon-anonymous-iconfont"></i>
             <span>精华</span>
           </div>
@@ -22,7 +22,7 @@
         </div>
         <div class="bottom">
           <span class='tag'>{{content.tags}}</span>
-          <p class='whereFrom'>来源:{{content.source | changeSource}}</p>
+          <p class='whereFrom'>来源:{{content.source}}</p>
           <p class='updateTime'>更新时间：{{content.ceateTime | dateShow }}</p>
         </div>
       </router-link>
@@ -90,9 +90,10 @@ export default {
         color:#fff
         font-size: 11px;
         background: #c400000;
-        display inline
         margin-right 10px;
         min-width 46px;
+        display: flex;
+        align-items: center;
       .titleText
         font-size: 14px;
     .content
