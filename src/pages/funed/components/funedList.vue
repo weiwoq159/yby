@@ -87,8 +87,13 @@ export default {
       align-items center
       color #666
       font-size:4.2vw
+      .iconfont
+        font-size:14px;
+      span
+        display:inline-block;
+        margin-left:0.8vw;
       .essence
-        padding:2px 8px;
+        padding:2px 0px 2px 5px;
         border-radius 20px;
         color:#fff
         font-size: 11px;
@@ -122,7 +127,7 @@ export default {
       span
         border-radius 15px;
         border 1px solid #aaa
-        padding 1vw 2vw;
+        padding 0.5vw 2vw;
   .newsBottom
     display: flex
     flex-direction : row-reverse
