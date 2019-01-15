@@ -84,7 +84,7 @@ import api from '@/api/api'
 
 export default {
   name: 'reply',
-  props: ['bookId', 'newReply'],
+  props: ['bookId', 'newReply', 'list'],
   data () {
     return {
       showOrDis: false,
@@ -180,6 +180,9 @@ export default {
       })
     },
     displayReply () {
+      console.log('-----this.list-----')
+      console.log(this.list)
+      console.log('-----this.list-----')
       if (this.replyContent === '') {
         this.showOrDis = false
         return false

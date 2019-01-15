@@ -8,7 +8,7 @@
 <template>
   <div class="funed_tist">
     <div class="listBox">
-      <router-link :to="{name:'News',params :{bookId:content.id, name:content, url:this.$store.state.url}}">
+      <router-link :to="{name:na,params :{bookId:content.id, name:content, url:this.$store.state.url}}">
         <div class="title">
           <div class="essence" v-if="content.essence===1">
             <i class="iconfont icon-anonymous-iconfont"></i>
@@ -45,10 +45,15 @@
 <script>
 export default {
   name: 'funedList',
-  props: ['content', 'url'],
-  mounted () {
-    // console.log('-----------------')
-    // console.log(this.content)
+  props: ['content', 'url', 'source'],
+  computed: {
+    na () {
+      if (localStorage.getItem('source')) {
+        return 'News' + localStorage.getItem('source')
+      } else {
+        return 'News' + this.$store.state.url
+      }
+    }
   },
   methods: {
     changeColor (item) {

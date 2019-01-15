@@ -32,13 +32,12 @@ export default {
   props: ['list', 'height', 'name', 'scource'],
   methods: {
     goToDetail (item) {
-      console.log()
-      if (item.category === 1) {
-        this.$router.push({name: 'socialList', params: {source: this.scource, url: this.name, classify: item.classify}})
-      } else {
-        this.$router.push({name: 'hrList', params: {source: this.scource, url: this.name, classify: item.classify}})
-      }
-      // this.$router.push({name: 'HrList', params: {source: this.scource, url: this.name, classify: item.classify}})
+      console.log(item.category)
+      let url = 'list' + item.category
+      console.log(url)
+      localStorage.setItem('source', item.category)
+      localStorage.setItem('classify', item.classify)
+      this.$router.push({name: url, params: {category: item.category, classify: item.classify}})
     }
   },
   mounted () {

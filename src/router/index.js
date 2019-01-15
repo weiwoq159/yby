@@ -30,6 +30,66 @@ export default new Router({
     component: HomePage
   },
   {
+    path: '/tabGroup/HR/list',
+    name: 'list1',
+    component: HrList
+  },
+  {
+    path: '/tabGroup/social/list',
+    name: 'list2',
+    component: HrList
+  },
+  {
+    path: '/tabGroup/taxation/list',
+    name: 'list3',
+    component: HrList
+  },
+  {
+    path: '/tabGroup/funed/list',
+    name: 'list4',
+    component: HrList
+  },
+  {
+    path: '/tabGroup/HR/news/:bookId',
+    name: 'News1',
+    meta: {
+      title: '新闻详情'
+    },
+    component: News
+  },
+  {
+    path: '/tabGroup/social/news/:bookId',
+    name: 'News2',
+    meta: {
+      title: '新闻详情'
+    },
+    component: News
+  },
+  {
+    path: '/tabGroup/taxation/news/:bookId',
+    name: 'News3',
+    meta: {
+      title: '新闻详情'
+    },
+    component: News
+  },
+  {
+    path: '/tabGroup/funed/news/:bookId',
+    name: 'News4',
+    meta: {
+      title: '新闻详情'
+    },
+    component: News
+  },
+  {
+    path: '/tabGroup/Selection/news/:bookId',
+    name: 'News5',
+    meta: {
+      title: '新闻详情'
+    },
+    component: News
+  },
+  {
     path: '/tabGroup',
     name: 'tabGroup',
     component: TabGroup,
@@ -39,14 +99,7 @@ export default new Router({
       meta: {
         title: '社会保障'
       },
-      component: Social,
-      children: [
-        {
-          path: '/tabGroup/social/list',
-          name: 'socialList',
-          component: HrList
-        }
-      ]
+      component: Social
     },
     {
       path: '/tabGroup/HR',
@@ -54,14 +107,7 @@ export default new Router({
       meta: {
         title: '人力资源'
       },
-      component: HumanResources,
-      children: [
-        {
-          path: '/tabGroup/HR/list',
-          name: 'hrList',
-          component: HrList
-        }
-      ]
+      component: HumanResources
     },
     {
       path: '/tabGroup/taxation',
@@ -86,14 +132,6 @@ export default new Router({
         title: '燚精选'
       },
       component: Selection
-    },
-    {
-      path: '/tabGroup/HrList',
-      name: 'HrList',
-      meta: {
-        title: '列表'
-      },
-      component: HrList
     }
     ]
   },
@@ -112,14 +150,6 @@ export default new Router({
       title: '我的回复'
     },
     component: Reply
-  },
-  {
-    path: '/tabGroup/Selection/news/:bookId',
-    name: 'News',
-    meta: {
-      title: '新闻详情'
-    },
-    component: News
   },
   {
     path: '/personal',

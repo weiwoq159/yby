@@ -26,6 +26,7 @@
             :key="index"
             :content='item'
             :url='url'
+            :source='category'
           >
           </FunedList>
         </div>

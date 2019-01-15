@@ -7,23 +7,32 @@
 */
 <template>
   <div class='newsList'>
-    <ul class='listSort'>
-      <li v-for='item in sort'
-          :key='item.id'
-          :class="highLight===item.id ? 'active' : ''"
-          @click="changeActive(item)"
-      >{{item.name}}</li>
-    </ul>
-    <FunedList
-      v-for="(item, index) in selectionList.data"
-      :key="index"
-      :content='item'
-    >
-    </FunedList>
+    <TagHeader></TagHeader>
+    <Navigation></Navigation>
+    <SearchInput></SearchInput>
+    <div class="newsL">
+      <ul class='listSort'>
+        <li v-for='item in sort'
+            :key='item.id'
+            :class="highLight===item.id ? 'active' : ''"
+            @click="changeActive(item)"
+        >{{item.name}}</li>
+      </ul>
+      <FunedList
+        v-for="(item, index) in selectionList.data"
+        :key="index"
+        :content='item'
+        :source='source'
+      >
+      </FunedList>
+    </div>
   </div>
 </template>
 
 <script>
+import TagHeader from '../common/header'
+import SearchInput from '../common/searchInput'
+import Navigation from '../tabGroup/components/navigation'
 import FunedList from '@/pages/funed/components/funedList'
 import bottomTemp from '../common/bottomTemp'
 import api from '@/api/api'
@@ -31,7 +40,10 @@ export default {
   name: 'newsList',
   components: {
     FunedList,
-    bottomTemp
+    bottomTemp,
+    TagHeader,
+    SearchInput,
+    Navigation
   },
   data () {
     return {
@@ -51,7 +63,8 @@ export default {
         id: 3
       }],
       highLight: 0,
-      reply: {}
+      reply: {},
+      source: ''
     }
   },
   methods: {
@@ -87,18 +100,11 @@ export default {
     }
   },
   // 获取新闻列表页面
-  mounted () {
-    console.log(this.$route.params.url)
-    if (this.$route.params.url) {
-      this.$store.commit('SET_URL', this.$route.params.url)
-    } else {
-      this.$store.commit('SET_URL', this.$store.state.isLogin)
-    }
-    let source = this.$route.params.source
-    let classify = this.$route.params.classify
-    console.log(source)
+  activated () {
+    this.source = parseInt(localStorage.getItem('source')) || this.$route.params.category
+    let classify = localStorage.getItem('classify') || this.$route.params.classify
     let _that = this
-    this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '10', category: source, classify: classify}).then(function (res) {
+    this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '10', category: this.source, classify: classify}).then(function (res) {
       _that.selectionList = res.data
     })
   }
@@ -110,13 +116,16 @@ export default {
     text-align center;
     padding:20px 0px;
   }
+   .newsL{
+     background: #f8f8f8;
+     padding 0 10px;
+     border-top-left-radius 30px;
+     border-top-right-radius 30px;
+     border-radius :15px;
+     padding-bottom 20px;
+   }
   .newsList{
-    background: #f8f8f8;
-    padding 0 10px;
-    border-top-left-radius 30px;
-    border-top-right-radius 30px;
-    border-radius :15px;
-    padding-bottom 20px;
+    height:100%;
   }
   .active
     color #333!important

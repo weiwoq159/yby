@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     goToDetail (item) {
-      this.$router.push({name: 'HrList', params: {source: this.scource, url: this.name, classify: item.classify}})
+      this.$router.push({name: 'list4', params: {source: this.scource, url: this.name, classify: item.classify}})
     }
   }
 }

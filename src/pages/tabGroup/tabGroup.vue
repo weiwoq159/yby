@@ -52,14 +52,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$route.path)
-    let className = document.getElementsByClassName('active1')
-    if (className) {
-      let item = Array.from(document.getElementsByClassName('router-link-active'))
-      item.forEach(i => {
-        i.classList.remove('router-link-active')
-      })
-    }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {

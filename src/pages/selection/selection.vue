@@ -18,6 +18,7 @@
       v-for="(item, index) in selectionList.data"
       :key="index"
       :content='item'
+      :source='category'
     >
     </FunedList>
     <bottomTemp></bottomTemp>
