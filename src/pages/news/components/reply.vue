@@ -88,19 +88,20 @@ export default {
   data () {
     return {
       showOrDis: false,
-      sort: [{
-        name: '被赞最多',
-        id: 2
-      }, {
-        name: '回复最多',
-        id: 3
-      }, {
-        name: '时间正序',
-        id: 0
-      }, {
-        name: '时间倒序',
-        id: 1
-      }],
+      sort: [
+        {
+          name: '时间倒序',
+          id: 1
+        }, {
+          name: '时间正序',
+          id: 0
+        }, {
+          name: '被赞最多',
+          id: 2
+        }, {
+          name: '评论最多',
+          id: 3
+        } ],
       highLight: 0,
       reply: [],
       replyContent: '',
@@ -172,6 +173,7 @@ export default {
       console.log(this.selectItem.relpy)
     },
     repeat (item) {
+      console.log(item)
       this.replyCon = item
       this.showOrDis = true
       this.selectItem = item
@@ -188,11 +190,10 @@ export default {
         return false
       } else {
         this.showOrDis = false
-        this.axios.post('/book/web/api/comment/commentAdd',
+        this.axios.post('/book/web/api/reply/replyAdd',
           {
-            bookId: this.replyCon.id,
-            bookTitle: this.list.title,
-            bookType: this.list.type,
+            commentId: this.replyCon.id,
+            replyType: 1,
             content: this.replyContent
           }).then(this.replyOK)
       }

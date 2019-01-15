@@ -14,7 +14,7 @@ module.exports = {
     //   '/api':{
     //     target: 'http://106.39.102.148:9998', //测试环境
     //     pathRewrite: {
-    //       '^/api':'/book/web/api'
+    //        '^/api':'/book/web/api'
     //     },
     //     changeOrigin: true,
     //   }

@@ -90,7 +90,7 @@ export default {
         status: 0,
         relpy: {}
       }
-      this.list.replyNum++
+      this.list.commentNum++
       this.$emit('changeList', lis)
       this.replyContent = ''
     },

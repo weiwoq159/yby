@@ -38,7 +38,8 @@ export default {
     return {
       list: '',
       bookId: '',
-      newReply: ''
+      newReply: '',
+      booId: ''
     }
   },
   methods: {
@@ -58,10 +59,16 @@ export default {
       this.list = this.$route.params.name
       console.log(this.list)
     } else {
-      this.list = localStorage.getItem('id')
-      this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '4', id: this.list})
+      this.bookId = localStorage.getItem('id')
+      this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '4', id: this.bookId})
         .then(this.fundHomeDate)
     }
+    this.axios.post('/book/web/api/book/click', {id: this.bookId})
+      .then(res => {
+        console.log('-----res-----')
+        console.log(res)
+        console.log('-----res-----')
+      })
   }
 }
 </script>
