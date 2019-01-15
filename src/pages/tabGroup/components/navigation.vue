@@ -14,7 +14,6 @@
         @click="changeUrl(item)"
       >
         <router-link
-          :class="url == item.name || url == item.link ? 'active1' : '123123123'"
           :to='item.link'
           @click="changeUrl(item)"
         >{{item.name}}
