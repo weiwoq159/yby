@@ -10,7 +10,7 @@
     <div class="listBox">
       <router-link :to="{name:'News',params :{bookId:content.id, name:content, url:this.$store.state.url}}">
         <div class="title">
-          <div class="essence" v-if="content.essence===1">
+          <div class="essence" v-if="content.essence===0">
             <i class="iconfont icon-anonymous-iconfont"></i>
             <span>精华</span>
           </div>
@@ -93,9 +93,10 @@ export default {
         color:#fff
         font-size: 11px;
         background: #c400000;
-        display inline
         margin-right 10px;
         min-width 46px;
+        display: flex;
+        align-items: center;
       .titleText
         font-size: 14px;
     .content

@@ -13,9 +13,7 @@
       :option = 'address'
       :chosePlace='place'
       ref='searchInput'></SearchInput>
-    <keep-alive exclude='Selection'>
-      <router-view ref='part'></router-view>
-    </keep-alive>
+    <router-view ref='part'></router-view>
   </div>
 </template>
 

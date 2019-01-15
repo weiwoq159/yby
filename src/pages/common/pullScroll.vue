@@ -171,6 +171,7 @@ export default {
     this.myScroll = this.$refs.pullScroll // 获取滑条dom
     this.myScrollList = this.myScroll.children[1] // 获取列表dom
     console.log(this.myScrollList)
+    console.log(this.myScroll)
   }
 }
 </script>

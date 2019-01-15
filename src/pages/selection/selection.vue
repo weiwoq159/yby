@@ -105,7 +105,7 @@ export default {
     }
   },
   // 获取新闻列表页面
-  activated () {
+  mounted () {
     this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '10', category: this.category}).then(this.fundHomeDate)
   }
 }
@@ -123,8 +123,8 @@ export default {
   color #333!important
 .listSort
   display flex
-  justify-content space-around
-  padding:10px 0px;
+  justify-content space-between
+  padding:10px 15px;
   li
     color: #aaa;
     font-size: .11rem;

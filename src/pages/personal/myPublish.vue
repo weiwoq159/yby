@@ -21,7 +21,7 @@
           <i class='icon-liebiao iconfont'></i>
           <span class='choseName'>{{choseName}}</span>
         </div>
-        <ul v-if='display'>
+        <ul v-if='display' class='selectList'>
           <li
             v-for='(item, index) in status'
             :key='index'
@@ -136,7 +136,12 @@ export default {
 </script>
 
 <style>
+  .selectList {
+    position: absolute;
+    right: 0px;
+  }
   .screen{
+    position: relative;
     text-align: center;
   }
   .pullList{

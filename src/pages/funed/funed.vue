@@ -12,16 +12,25 @@
       :name='name'
       :scource='category'
     ></AFPic>
-    <div class="funedList">
-      <p class="newsTitle">精选推荐</p>
-      <FunedList
-        v-for="(item, index) in fundedList.data"
-        :key="index"
-        :content='item'
-        :url='url'
-      >
-      </FunedList>
-    </div>
+    <pullScroll
+      :on-refresh='onRefresh'
+      :on-pull='onPull'
+      :scroll-state='scrollState'
+      :page='page'
+      ref='pullScroll'>
+      <div slot='scrollList'>
+        <div class="funedList">
+          <p class="newsTitle">精选推荐</p>
+          <FunedList
+            v-for="(item, index) in fundedList.data"
+            :key="index"
+            :content='item'
+            :url='url'
+          >
+          </FunedList>
+        </div>
+      </div>
+    </pullScroll>
   </div>
 </template>
 
@@ -50,7 +59,9 @@ export default {
         pageEnd: 1,
         total: 10
       },
-      scrollState: true
+      scrollState: true,
+      myScroll: '',
+      myScrollList: ''
     }
   },
   methods: {
@@ -64,6 +75,37 @@ export default {
     },
     onScroll (e) {
       console.log(e)
+    },
+    onRefresh (mun) { // 刷新回调
+      setTimeout(() => {
+        let arr = []
+        for (let i = 1; i <= 30; i++) {
+          arr.push({
+            name: 'lilei',
+            id: 1
+          })
+        }
+        this.list = arr
+        this.page.counter = 1
+        this.$refs.pullScroll.setState(4)
+      }, 400)
+    },
+    onPull (mun) { // 加载回调
+      console.log(this.page.counter)
+      if (this.page.counter <= this.page.total) {
+        setTimeout(() => {
+          this.page.counter++
+          for (let i = 1; i <= 10; i++) {
+            this.list.push({
+              name: 'lucy',
+              id: 1
+            })
+          }
+          this.$refs.pullScroll.setState(5)
+        }, 500)
+      } else {
+        this.$refs.pullScroll.setState(7)
+      }
     }
   },
   mounted () {
@@ -75,9 +117,6 @@ export default {
   activated () {
     this.$store.commit('SET_URL', this.$route.path)
     this.url = this.$store.state.url
-    window.addEventListener('scroll', function (e) {
-      console.log(e)
-    })
   },
   destroyed () {
     console.log()
