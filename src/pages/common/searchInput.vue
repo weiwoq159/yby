@@ -117,7 +117,7 @@ export default {
       position relative
       .seach_button
         position absolute;
-        top:1.2vw;
+        top:1vw;
         right:10px;
         background: rgba(0,0,0,0);
         color:$button
