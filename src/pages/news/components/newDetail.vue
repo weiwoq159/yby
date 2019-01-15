@@ -185,6 +185,7 @@ export default {
   display: flex
   flex-direction : row-reverse
   margin-top 7px;
+  margin-right 13px;
   font-size: 10px;
   div
     border:1px solid #666
@@ -195,8 +196,8 @@ export default {
     margin-right 11px;
   .starActive
     margin-right:11px;
-    color:red!important;
-    border:1px solid red!important
+    color:#c40000!important;
+    border:1px solid #c40000!important
   i
     font-size: 10px;
     margin-right 3px;
