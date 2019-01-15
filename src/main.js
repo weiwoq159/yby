@@ -44,6 +44,11 @@ axios.interceptors.request.use(config => {
   }
   return config
 })
+if (store.state.userInfo.name === '') {
+  axios.post('/book/web/api/login/userMessage ', {pageNum: 1, pageSize: 12}).then(res => {
+    store.commit('SET_USERINFO', res.data.data)
+  })
+}
 router.beforeEach((to, from, next) => {
   /* 路由发生变化修改页面title */
   if (to.meta.title) {
