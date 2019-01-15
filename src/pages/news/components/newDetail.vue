@@ -138,11 +138,12 @@ export default {
   background: rgba(0,0,0,.3);
   z-index: 999999;
 }
+
 .inputt{
-  background: #000;
+  background: #f6f6f6;
   width: 100%;
   height:.6rem;
-  padding:10px;
+  padding:10px 15px;
   box-sizing: border-box;
   position: absolute;
   bottom: 0px;
@@ -152,15 +153,21 @@ export default {
 }
 .inputt input {
   width: 100%;
-  height: 100%;
+  height: 90%;
   padding: 0 12px;
   font-size: 16px;
+  background:#eee;
+  border-radius:100px;
+
 }
 .icon-tijiao{
-  font-size: 28px;
+  font-size: 32px;
   color: #c40000;
   margin-left: 10px;
+  position:absolute;
+  right:17px;
 }
+
 .newDetail
   padding: .2rem .15rem
   width 100%
