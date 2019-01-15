@@ -43,13 +43,13 @@ export default {
     background #ffffff;
     box-shadow 0 25px 72px 0 #999;
     button
-      width 1.66rem;
+      width 45%;
       height:.25rem;
       border-radius 14rem
       font-size: 14px;
       a
         color #ffffff
-        font-size:14px ;
+        font-size:12px ;
   .release
     background #c400000
   .hrSolve

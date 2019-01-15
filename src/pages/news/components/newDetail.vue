@@ -149,7 +149,7 @@ export default {
   margin-left: 10px;
 }
 .newDetail
-  padding: .3rem .15rem
+  padding: .2rem .15rem
   width 100%
   height 100%
   box-sizing: border-box;
@@ -161,7 +161,7 @@ export default {
   .detail
     display: flex;
     justify-content space-around;
-    padding 0 .3rem
+    /*padding 0 .3rem*/
     font-size: .1rem;
     color #aaa;
   .text

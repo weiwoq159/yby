@@ -21,9 +21,9 @@
           <p>{{content.intro | changeContent}}</p>
         </div>
         <div class="bottom">
-          <span class='tag'>{{content.classify}}</span>
+          <span class='tag'>{{content.tags}}</span>
           <p class='whereFrom'>来源:{{content.source | changeSource}}</p>
-          <p class='updateTime'>{{content.ceateTime | dateShow }}</p>
+          <p class='updateTime'>更新时间：{{content.ceateTime | dateShow }}</p>
         </div>
       </router-link>
       <!--底部按钮-->
@@ -81,6 +81,7 @@ export default {
       display flex
       align-items center
       color #666
+      font-size:4.2vw
       .essence
         padding:2px 8px;
         border-radius 20px;
@@ -95,7 +96,7 @@ export default {
     .content
       margin-top:10px;
       p
-        font-size: 12px;
+        font-size: 3.5vw;
         color: #666
         line-height 1.4;
     .bottom
@@ -108,7 +109,7 @@ export default {
       span
         border-radius 15px;
         border 1px solid #aaa
-        padding 3px;
+        padding 1vw 3vw;
   .newsBottom
     display: flex
     flex-direction : row-reverse

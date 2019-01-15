@@ -46,7 +46,7 @@ export default {
 
 <style scoped lang='stylus'>
 .pageParts
-  padding:13px;
+  padding:0 13px;
   .hrList
     background-size cover
     border-radius 5px;

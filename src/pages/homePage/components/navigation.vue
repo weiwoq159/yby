@@ -52,13 +52,15 @@ export default {
     margin-top .41rem;
     display: flex
     justify-content: space-around
-    padding: 0 .50rem
+    padding: 0 .40rem
     li
       font-size: .12rem;
+      /*margin-right:0.5vw;*/
       a
         color:$link
     div
       width 1px;
       height: 100%
       background: #000;
+
 </style>
