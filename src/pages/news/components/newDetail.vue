@@ -9,7 +9,8 @@
   <div class='news'>
 
     <div class="newDetail">
-      <p class="title">{{list.title}}</p>
+      <!--<p class="title">{{list.title}}</p>-->
+      <p class="title" v-html='list.title'></p>
       <div class="detail">
         <p>来源:{{list.source}}</p>
         <p class='clickNum'>点击量:{{list.clicks}}</p>

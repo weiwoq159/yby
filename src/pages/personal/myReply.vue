@@ -54,7 +54,7 @@ export default {
       }
     }
   },
-  mounted () {
+  activated () {
     this.axios.post('/book/web/api/iReplys/searchIReplys', {pageNum: 1, pageSize: 12}).then(this.searchIReplys)
   }
 }

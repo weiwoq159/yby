@@ -14,7 +14,8 @@
             <i class="iconfont icon-anonymous-iconfont"></i>
             <span>精华</span>
           </div>
-          <p class="titleText">{{content.title | changeTitle}}</p>
+          <p v-html='content.title'></p>
+          <!--<p class="titleText">{{content.title | changeTitle}}</p>-->
         </div>
         <div class="content">
           <p>{{content.intro | changeContent}}</p>
@@ -74,6 +75,8 @@ export default {
   .listBox
     background: #fff;
     padding:15px;
+    a
+      display block
     .title
       display flex
       align-items center
@@ -109,7 +112,7 @@ export default {
   .newsBottom
     display: flex
     flex-direction : row-reverse
-    margin-top 7px;
+    margin-top 20px;
     font-size: 10px;
     div
       border:1px solid #666
