@@ -13,7 +13,7 @@
     <div class="drowDown">
       <div class="ReleaseTitle" @click=DropDown()>
         <el-input v-model="publish.kind" placeholder="" :disabled="true"></el-input>
-        <span> > </span>
+        <span class="el-icon-arrow-right"> </span>
       </div>
       <transition name="fade">
         <ul class='dropList' v-if='isDrop'>
@@ -30,7 +30,7 @@
     <div class="ReleaseContent">
       <el-input
         type="textarea"
-        placeholder="正文"
+        placeholder="内容"
         v-model="publish.content">
       </el-input>
     </div>
