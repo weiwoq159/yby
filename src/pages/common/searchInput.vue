@@ -22,9 +22,9 @@
     </div>
     <div class="right">
       <el-input v-model="input" placeholder="请输入关键字"></el-input>
-      <button class='seach_button' @click='upLoad()'>
+      <div class='seach_button' @click='upLoad()'>
         <i class='iconfont icon-search'></i>
-      </button>
+      </div>
     </div>
   </div>
 </template>
@@ -117,7 +117,7 @@ export default {
       position relative
       .seach_button
         position absolute;
-        top: -2vw;
+        top:1.2vw;
         right:10px;
         background: rgba(0,0,0,0);
         color:$button
