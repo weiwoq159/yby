@@ -32,7 +32,7 @@
 <script>
 export default {
   name: 'searchInput',
-  props: ['option', 'chosePlace'],
+  props: ['option', 'chosePlace', 'name'],
   data () {
     return {
       options: [{
@@ -80,6 +80,10 @@ export default {
     },
     chosePlace (newVal, oldVal) {
       this.place = newVal
+    },
+    name (newVal, oldVal) {
+      console.log(newVal)
+      this.input = newVal
     }
   }
 }

@@ -8,7 +8,7 @@
 <template>
   <div class='searchResults'>
     <Header></Header>
-    <SearchInput v-on:changeList='change'></SearchInput>
+    <SearchInput v-on:changeList='change' :name='name'></SearchInput>
     <FunedList
       v-for="(item, index) in searchList.data"
       :key="index"

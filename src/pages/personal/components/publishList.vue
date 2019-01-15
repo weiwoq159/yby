@@ -7,7 +7,7 @@
 */
 <template>
   <div class='publishList'>
-    <router-link :to="{name:'News',params :{bookId:publishList.id, name:publishList, url:this.$store.state.url}}">
+    <div class='pub' @click='gotoD(publishList)'>
       <div class="left">
         <p class='data'>{{day}}<span class='month'>{{month}}月</span></p>
       </div>
@@ -15,7 +15,7 @@
         <p class='title'>{{publishList.title}}<span class='state'>{{publishList.status | changeStatus}}</span></p>
         <p class='content'>{{publishList.content | changeTitle}}</p>
       </div>
-    </router-link>
+    </div>
   </div>
 </template>
 
@@ -32,6 +32,13 @@ export default {
       let date = new Date(this.publishList.time.replace(/-/g, '/'))
       return date.getDate()
     }
+  },
+  methods: {
+    gotoD (publishList) {
+      console.log(publishList)
+      let str = 'News' + publishList.category
+      this.$router.push({name: str, params: {bookId: publishList.id, name: publishList, url: this.$store.state.url}})
+    }
   }
 }
 </script>
@@ -45,7 +52,7 @@ export default {
     padding:15px;
     background: #fff;
     margin-bottom:10px;
-    a
+    .pub
       width 100%
       display block
       display flex;

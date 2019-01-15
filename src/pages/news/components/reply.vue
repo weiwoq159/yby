@@ -102,7 +102,7 @@ export default {
           name: '评论最多',
           id: 3
         } ],
-      highLight: 0,
+      highLight: 1,
       reply: [],
       replyContent: '',
       replyCon: '',
@@ -111,7 +111,7 @@ export default {
   },
   watch: {
     newReply (newVal, oldVal) {
-      this.reply.push(newVal)
+      this.reply.unshift(newVal)
     },
     bookId (newVal, oldVal) {
       this.axios.post('/book/web/api/comment/commentShow', {bookId: this.bookId, pageNum: '1', pageSize: '10'}).then(this.changeReply)
@@ -158,7 +158,7 @@ export default {
       this.reply = res.data.data.comment.sort(api.time)
     },
     replyOK (res) {
-      this.selectItem.relpy.push({
+      this.selectItem.relpy.unshift({
         content: this.replyContent,
         createTimes: (new Date()).getTime(),
         replyUname: this.$store.state.userInfo.name,
@@ -182,9 +182,6 @@ export default {
       })
     },
     displayReply () {
-      console.log('-----this.list-----')
-      console.log(this.list)
-      console.log('-----this.list-----')
       if (this.replyContent === '') {
         this.showOrDis = false
         return false
