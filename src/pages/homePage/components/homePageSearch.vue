@@ -68,13 +68,17 @@ export default {
         border-bottom-right-radius .4rem;
         border-top-right-radius .4rem
   .el-icon-search
-    font-size: .19rem;
+    font-size: .22rem;
+    border-left:1px solid #aaa
+    padding-left:10px
+    display:inline-block;
+    color:#333;
   .el-input-group__append
     border-color : #aaa!important;
-    border-left:1px solid #aaa
+    padding: 0 15px;
+    /*border-left:1px solid #aaa*/
   .el-button--default
     font-size: .19rem;
     border-left:0px;
-  .el-icon-search
-    padding-left 0px
+
 </style>
