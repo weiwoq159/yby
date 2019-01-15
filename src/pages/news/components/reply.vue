@@ -280,7 +280,8 @@ export default {
   .listSort
     display flex
     justify-content space-around
-    padding:5px 0;
+    /*padding:5px 0;*/
+    margin-bottom:10px;
     li
       color: #aaa;
       font-size: .11rem;
