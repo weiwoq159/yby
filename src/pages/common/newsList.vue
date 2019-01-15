@@ -105,6 +105,7 @@ export default {
     let classify = localStorage.getItem('classify') || this.$route.params.classify
     let _that = this
     this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '10', category: this.source, classify: classify}).then(function (res) {
+      console.log(res.data)
       _that.selectionList = res.data
     })
   }

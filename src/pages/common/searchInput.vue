@@ -66,7 +66,11 @@ export default {
           loading.close()
         }, 2000)
       } else {
-        this.$router.push({name: 'SearchResults', params: {name: this.input}})
+        if (this.$route.fullPath === '/SearchResults') {
+          this.$emit('changeList', [this.input, this.id])
+          console.log(this.id)
+        }
+        this.$router.push({name: 'SearchResults', params: {name: this.input, id: this.id}})
       }
     }
   },

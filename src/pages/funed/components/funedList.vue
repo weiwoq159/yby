@@ -8,9 +8,9 @@
 <template>
   <div class="funed_tist">
     <div class="listBox">
-      <router-link :to="{name:na,params :{bookId:content.id, name:content, url:this.$store.state.url}}">
+      <div @click='gotoReply(content)'>
         <div class="title">
-          <div class="essence" v-if="content.essence===0">
+          <div class="essence" v-if="content.essence===1">
             <i class="iconfont icon-anonymous-iconfont"></i>
             <span>精华</span>
           </div>
@@ -27,12 +27,12 @@
             <p>更新时间:{{content.ceateTime | dateShow }}</p>
           </div>
         </div>
-      </router-link>
+      </div>
       <!--底部按钮-->
       <div class="newsBottom">
         <div class="message" @click='gotoReply(content)'>
           <i class='iconfont icon-liuyan'></i>
-          {{content.replyNum}}
+          {{content.commentNum}}
         </div>
         <div :class="content.isLiked === 1 ? 'starActive' : 'star'" @click='changeColor(content)'>
           <i class='iconfont icon-heart1'></i>
@@ -45,15 +45,19 @@
 <script>
 export default {
   name: 'funedList',
-  props: ['content', 'url', 'source'],
-  computed: {
-    na () {
-      if (localStorage.getItem('source')) {
-        return 'News' + localStorage.getItem('source')
-      } else {
-        return 'News' + this.$store.state.url
-      }
+  data () {
+    return {
+      cat: ''
     }
+  },
+  props: ['content', 'url', 'source'],
+  activated () {
+    this.cat = 'News' + localStorage.getItem('source')
+    console.log(this.cat)
+  },
+  mounted () {
+    this.cat = 'News' + localStorage.getItem('source')
+    console.log(this.cat)
   },
   methods: {
     changeColor (item) {
@@ -71,7 +75,8 @@ export default {
     },
     gotoReply (content) {
       console.log(content)
-      this.$router.push({name: 'News', params: {bookId: content.id, name: content, url: this.$store.state.url}})
+      localStorage.setItem('id', content.id)
+      this.$router.push({name: this.cat, params: {bookId: content.id, name: content, url: this.$store.state.url}})
     }
   }
 }

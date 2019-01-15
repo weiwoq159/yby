@@ -8,7 +8,7 @@
 <template>
   <div class='searchResults'>
     <Header></Header>
-    <SearchInput></SearchInput>
+    <SearchInput v-on:changeList='change'></SearchInput>
     <FunedList
       v-for="(item, index) in searchList.data"
       :key="index"
@@ -16,6 +16,7 @@
       v-if='len !== 0'
     >
     </FunedList>
+    <p v-show='false'>{{name}}</p>
     <div v-if='len === 0'>
       <img class='rocket' src="static/img/rocket.png" alt="">
       <p class='resultText'>未搜索到相关内容</p>
@@ -41,7 +42,9 @@ export default {
       searchList: '',
       standby: '',
       name: '',
-      len: ''
+      len: '',
+      id: '',
+      false: false
     }
   },
   methods: {
@@ -49,6 +52,16 @@ export default {
       console.log(res)
       this.searchList = res.data
       this.len = this.searchList.data.length
+    },
+    change (childValue) {
+      this.name = childValue
+      console.log(this.name)
+      this.axios.post('/book/web/api/book/search', {
+        pageNum: 1,
+        pageSize: 10,
+        keyword: this.name[0],
+        category: parseInt(this.name[1])
+      }).then(this.mounted)
     }
   },
   watch: {
@@ -60,7 +73,8 @@ export default {
       this.axios.post('/book/web/api/book/search', {
         pageNum: 1,
         pageSize: 10,
-        keyword: this.name
+        keyword: this.name,
+        category: this.id
       }).then(this.mounted)
     }
   },
