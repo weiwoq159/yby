@@ -26,7 +26,7 @@
         </el-aside>
         <el-main>
           <div class="name">
-            <p class="title" v-if='item.fromUname'>{{item.fromUname}}</p>
+            <p class="title" v-if='item.fromUname'>{{item.fromUname | telToName}}</p>
             <p class="title" v-if='!item.fromUname'>123123</p>
             <p class="date">{{item.createTimes | dateFilter}}</p>
           </div>
@@ -40,7 +40,7 @@
               <div
                 :class="item.status == 1 ? 'starActive' : 'star'"
                 @click='changeColor(item)'>
-                <i class='iconfont icon-heart'></i>
+                <i class='iconfont icon-heart1'></i>
                 <span>{{item.goodUp}}</span>
               </div>
             </div>
@@ -52,7 +52,7 @@
                 :key="inde"
                 v-if='inde <= 10'
                 >
-                {{reply.replyUname}} <span v-if='reply.replyToUname'>回复:</span>{{reply.replyToUname}} {{reply.content}}
+                {{reply.replyUname | telToName}} <span v-if='reply.replyToUname'>回复:</span>{{reply.replyToUname}} {{reply.content}}
               </li>
               <li class='more' v-if='item.relpy.length >= 10'>
                 <router-link :to="{name:'Reply',params:{content: item}}">点击查看更多 </router-link>
@@ -221,6 +221,9 @@ export default {
     padding: 0 12px;
     font-size: 16px;
   }
+  .icon-heart1{
+    font-size: 10px;
+  }
   .icon-tijiao{
     font-size: 28px;
     color: #c40000;
@@ -229,7 +232,7 @@ export default {
   .newsBottom
     display: flex
     flex-direction : row-reverse
-    margin-top 7px;
+    margin-top 20px;
     font-size: 10px;
     div
       border:1px solid #666
@@ -238,10 +241,19 @@ export default {
       border-radius 30px;
     .star
       margin-right 11px;
+      display flex
+      align-items center
+      justify-content space-between
     .starActive
       margin-right:11px;
       color:#c40000!important;
       border:1px solid #c40000!important
+      display flex
+      align-items center
+      justify-content space-between
+    i
+      font-size: 10px;
+      margin-right 4px;
   .bottom
     display: flex
     flex-direction row-reverse

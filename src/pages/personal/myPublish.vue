@@ -160,6 +160,7 @@ export default {
   }
   .choseName{
     margin-left: 5px;
+    font-size: 16px;
   }
 .icon-liebiao{
   font-size: 16px;
