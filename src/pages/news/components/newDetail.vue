@@ -89,6 +89,11 @@ export default {
         content: this.replyContent,
         createTimes: (new Date()).getTime(),
         replyUname: this.$store.state.userInfo.name,
+        fromUheadportrait: null,
+        fromUname: this.$store.state.userInfo.name,
+        goodUp: null,
+        replyNum: 0,
+        status: 0,
         relpy: {}
       }
       this.list.replyNum++

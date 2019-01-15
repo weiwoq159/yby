@@ -55,7 +55,6 @@ export default {
 
   },
   activated () {
-    console.log('searchResult')
     if (this.$route.params.name) {
       this.name = this.$route.params.name
       this.axios.post('/book/web/api/book/search', {

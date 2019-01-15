@@ -34,7 +34,7 @@ axios.interceptors.request.use(config => {
   }
   // localStorage.setItem('XMDADMINTOKEN', 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NTM0MTEwNTQ2MTI4ODk2Iiwic3QiOiIyIiwibG4iOiI2MiIsInBoIjoiMTg5ODcwOTAwNzMiLCJybiI6IjE4OTg3MDkwMDczIiwiZXhwIjoxNTQ4MDcxNjkyfQ.acf_iVnSldU7gPs-fgDX99Ob8nYTmRd_TMBIjnMaoOA\n')
   let token = localStorage.getItem('XMDADMINTOKEN')
-  console.log(token)
+  // console.log(token)
   let AUTH_TOKEN = token
   if (AUTH_TOKEN) { // 判断是否存在token，如果存在的话，则每个http header都加上token
     config.headers.common = {
@@ -49,6 +49,7 @@ if (store.state.userInfo.name === '') {
     store.commit('SET_USERINFO', res.data.data)
   })
 }
+
 router.beforeEach((to, from, next) => {
   /* 路由发生变化修改页面title */
   if (to.meta.title) {
