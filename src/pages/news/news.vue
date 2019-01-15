@@ -44,18 +44,24 @@ export default {
   methods: {
     changeList (changeList) {
       this.newReply = changeList
+    },
+    fundHomeDate (res) {
+      console.log(res)
+      this.list = res.data.data[0]
+      console.log(this.list)
     }
   },
   activated () {
     this.bookId = this.$route.params.bookId
     this.list = this.$route.params.name
-    this.$refs.navigation.url = this.$route.params.url
-    if (this.$route.params.url !== '/tabGroup/Selection') {
-      this.$refs.navigation.$el.children[0].children[4].children[0].className = ''
+    if (this.$route.params.name) {
+      this.list = this.$route.params.name
+      console.log(this.list)
+    } else {
+      this.list = localStorage.getItem('id')
+      this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '4', id: this.list})
+        .then(this.fundHomeDate)
     }
-  },
-  beforeRouteLeave (to, from, next) {
-    next()
   }
 }
 </script>

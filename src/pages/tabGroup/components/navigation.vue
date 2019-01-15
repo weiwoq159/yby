@@ -33,26 +33,30 @@ export default {
       routePath: '',
       list: [{
         name: '人力资源',
-        link: '/tabGroup/HR'
+        link: '/tabGroup/HR',
+        category: 1
       }, {
         name: '社会保障',
-        link: '/tabGroup/social'
+        link: '/tabGroup/social',
+        category: 2
       }, {
         name: '财务税收',
-        link: '/tabGroup/taxation'
+        link: '/tabGroup/taxation',
+        category: 3
       }, {
         name: '公积金',
-        link: '/tabGroup/funed'
+        link: '/tabGroup/funed',
+        category: 4
       }, {
         name: '燚精选',
-        link: '/tabGroup/Selection'
+        link: '/tabGroup/Selection',
+        category: 5
       }]
     }
   },
   methods: {
     changeUrl (item) {
-      this.$store.commit('SET_URL', item.name)
-      this.url = this.$store.state.url
+      localStorage.setItem('source', item.category)
     }
   },
   activated () {

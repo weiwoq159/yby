@@ -23,7 +23,7 @@
         <div class="newsBottom">
           <div class="message" @click='repeat(list)'>
             <i class='iconfont icon-liuyan'></i>
-            <span>{{list.replyNum}}</span>
+            <span>{{list.commentNum}}</span>
           </div>
           <div :class="list.isLiked == 1 ? 'starActive' : 'star'" @click='changeColor(list)'>
             <i class='iconfont icon-heart1'></i>
@@ -60,12 +60,6 @@ export default {
     }
   },
   props: ['list', 'bookId'],
-  beforeCreate () {
-    if (this.$route.params.name === undefined) {
-      this.$store.commit('SET_URL', this.$store.state.singer)
-      this.$router.history.go(-1)
-    }
-  },
   methods: {
     changeColor (item) {
       console.log(this.list)
@@ -158,7 +152,7 @@ export default {
   font-size: 16px;
   background:#eee;
   border-radius:100px;
-
+  padding-right: 45px;
 }
 .icon-tijiao{
   font-size: 32px;
