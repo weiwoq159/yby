@@ -119,7 +119,7 @@ export default {
       margin-top 16px;
       .whereFrom
         display:inline-block;
-        margin-left:2vw;
+        margin-left:1vw;
       .updateTime
         display:inline-block;
         text-align :right;
