@@ -231,6 +231,7 @@ export default {
     font-size: 16px;
     background:#eee;
     border-radius:100px;
+    padding-right: 13vw;
   }
   .icon-heart1{
     font-size: 10px;
