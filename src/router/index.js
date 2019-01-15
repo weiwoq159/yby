@@ -39,14 +39,7 @@ export default new Router({
       meta: {
         title: '社会保障'
       },
-      component: Social,
-      children: [
-        {
-          path: '/tabGroup/social/list',
-          name: 'socialList',
-          component: HrList
-        }
-      ]
+      component: Social
     },
     {
       path: '/tabGroup/HR',
@@ -54,14 +47,7 @@ export default new Router({
       meta: {
         title: '人力资源'
       },
-      component: HumanResources,
-      children: [
-        {
-          path: '/tabGroup/HR/list',
-          name: 'hrList',
-          component: HrList
-        }
-      ]
+      component: HumanResources
     },
     {
       path: '/tabGroup/taxation',
