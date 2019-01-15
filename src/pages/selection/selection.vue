@@ -117,7 +117,7 @@ export default {
   padding 0 3.5vw;
   border-top-left-radius 15px;
   border-top-right-radius 15px;
-  padding-bottom: 10px;
+  padding-bottom: 11vw;
 }
 .active
   color #333!important

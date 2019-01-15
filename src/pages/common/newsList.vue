@@ -111,11 +111,11 @@ export default {
     padding:20px 0px;
   }
   .newsList{
-    background: #eee;
+    background: #f8f8f8;
     padding 0 10px;
     border-top-left-radius 30px;
     border-top-right-radius 30px;
-    border-radius : 30px;
+    border-radius :15px;
     padding-bottom 20px;
   }
   .active
@@ -123,7 +123,7 @@ export default {
   .listSort
     display flex
     justify-content space-around
-    padding:10px 35px;
+    padding:10px 0px;
     li
       color: #aaa;
       font-size: .11rem;

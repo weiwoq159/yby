@@ -22,8 +22,10 @@
         </div>
         <div class="bottom">
           <span class='tag'>{{content.tags}}</span>
-          <p class='whereFrom'>来源:{{content.source}}</p>
-          <p class='updateTime'>更新时间：{{content.ceateTime | dateShow }}</p>
+          <p class='whereFrom'>来源:{{content.source | changeSource}}</p>
+          <div class='updateTime'>
+            <p>更新时间:{{content.ceateTime | dateShow }}</p>
+          </div>
         </div>
       </router-link>
       <!--底部按钮-->
@@ -71,7 +73,8 @@ export default {
 </script>
 <style scoped lang='stylus'>
   .titleName
-    font-size: 16px;
+    font-size: 3.8vw;
+    color:#333;
   .funed_tist
     margin-bottom 10px;
   .listBox
@@ -105,14 +108,21 @@ export default {
     .bottom
       font-size: 10px;
       color:#aaa;
-      display: flex;
-      justify-content space-between;
+      /*display: flex;*/
+      /*justify-content space-between;*/
       align-items center
       margin-top 16px;
+      .whereFrom
+        display:inline-block;
+        margin-left:2vw;
+      .updateTime
+        display:inline-block;
+        text-align :right;
+        float:right;
       span
         border-radius 15px;
         border 1px solid #aaa
-        padding 1vw 3vw;
+        padding 1vw 2vw;
   .newsBottom
     display: flex
     flex-direction : row-reverse

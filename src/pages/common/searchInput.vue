@@ -90,6 +90,7 @@ export default {
   .el-loading-spinner{
     margin-top:-40px;
   }
+
   .searchInput
     height:50px;
     display flex;
@@ -100,7 +101,7 @@ export default {
       height:.25rem
       border-radius 40px;
       padding-right:30px;
-      padding-left:7px;
+      padding-left:16px;
       font-size: 12px;
       line-height 1.5;
       border 1px solid #aaa;
@@ -120,4 +121,5 @@ export default {
         right:10px;
         background: rgba(0,0,0,0);
         color:$button
+
 </style>
