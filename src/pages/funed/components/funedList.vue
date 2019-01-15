@@ -130,7 +130,7 @@ export default {
     div
       border:1px solid #666
       color: #666
-      padding:3px 8px;
+      padding:0.6vw 3vw;
       border-radius 30px;
     .star
       margin-right 11px;
@@ -147,4 +147,5 @@ export default {
     i
       font-size: 10px;
       margin-right 4px;
+      margin-top:1px;
 </style>
