@@ -31,13 +31,63 @@ export default new Router({
   },
   {
     path: '/tabGroup/HR/list',
-    name: 'Hrlist',
+    name: 'list1',
     component: HrList
   },
   {
     path: '/tabGroup/social/list',
-    name: 'SocialList',
+    name: 'list2',
     component: HrList
+  },
+  {
+    path: '/tabGroup/taxation/list',
+    name: 'list3',
+    component: HrList
+  },
+  {
+    path: '/tabGroup/funed/list',
+    name: 'list4',
+    component: HrList
+  },
+  {
+    path: '/tabGroup/HR/news/:bookId',
+    name: 'News1',
+    meta: {
+      title: '新闻详情'
+    },
+    component: News
+  },
+  {
+    path: '/tabGroup/social/news/:bookId',
+    name: 'News2',
+    meta: {
+      title: '新闻详情'
+    },
+    component: News
+  },
+  {
+    path: '/tabGroup/taxation/news/:bookId',
+    name: 'News3',
+    meta: {
+      title: '新闻详情'
+    },
+    component: News
+  },
+  {
+    path: '/tabGroup/funed/news/:bookId',
+    name: 'News4',
+    meta: {
+      title: '新闻详情'
+    },
+    component: News
+  },
+  {
+    path: '/tabGroup/Selection/news/:bookId',
+    name: 'News5',
+    meta: {
+      title: '新闻详情'
+    },
+    component: News
   },
   {
     path: '/tabGroup',
@@ -100,14 +150,6 @@ export default new Router({
       title: '我的回复'
     },
     component: Reply
-  },
-  {
-    path: '/tabGroup/Selection/news/:bookId',
-    name: 'News',
-    meta: {
-      title: '新闻详情'
-    },
-    component: News
   },
   {
     path: '/personal',
