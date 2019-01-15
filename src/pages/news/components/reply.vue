@@ -226,8 +226,8 @@ export default {
       margin-right 11px;
     .starActive
       margin-right:11px;
-      color:red!important;
-      border:1px solid red!important
+      color:#c40000!important;
+      border:1px solid #c40000!important
   .bottom
     display: flex
     flex-direction row-reverse

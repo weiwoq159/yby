@@ -18,7 +18,7 @@
       </el-select>
     </div>
     <div class="right">
-      <el-input v-model="input" placeholder="请输入内容"></el-input>
+      <el-input v-model="input" placeholder="请输入关键字"></el-input>
       <button class='seach_button' @click='upLoad()'>
         <i class='iconfont icon-search'></i>
       </button>
