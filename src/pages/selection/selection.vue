@@ -39,10 +39,10 @@ export default {
       selectionList: '',
       standby: '',
       sort: [{
-        name: '时间正序',
+        name: '时间倒序',
         id: 0
       }, {
-        name: '时间倒序',
+        name: '时间正序',
         id: 1
       }, {
         name: '被赞最多',
