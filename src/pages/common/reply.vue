@@ -42,6 +42,7 @@
     >
       <div class="name">
         <p class='userName'>{{item.replyUname}}</p>
+        {{item}}
         <p class='time'>{{item.createTimes | dateFilter}}</p>
       </div>
       <div class="content">

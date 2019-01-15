@@ -18,7 +18,7 @@
       </el-select>
       <div class="screen">
         <i class='icon-liebiao iconfont'></i>
-        <el-select v-model="statusChose" placeholder="筛选" class='selected1 selcted2'>
+        <el-select  v-model="statusChose" placeholder="筛选" class='selected1 selcted2'>
           <el-option
             v-for="item in status"
             :key="item.id"
