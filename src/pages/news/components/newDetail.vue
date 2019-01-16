@@ -133,7 +133,9 @@ export default {
   background: rgba(0,0,0,.3);
   z-index: 999999;
 }
-
+.news >>> img{
+  width 100%
+}
 .inputt{
   background: #f6f6f6;
   width: 100%;

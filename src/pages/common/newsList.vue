@@ -76,11 +76,10 @@ export default {
       reply: {},
       source: '',
       page: {
-        counter: 9,
-        pageStart: 1,
-        pageEnd: 1,
+        counter: 1,
         total: 10
       },
+      classify: '',
       scrollState: true
     }
   },
@@ -116,13 +115,20 @@ export default {
       })
     },
     onPull (mun) { // 加载回调
-      console.log(this.page.counter)
       if (this.page.counter <= this.page.total) {
-        setTimeout(() => {
+        console.log('执行毁掉')
+        this.axios.post('/book/web/api/book/search',
+          {
+            pageNum: this.page.counter + 1,
+            pageSize: this.page.total,
+            category: this.source,
+            classify: this.classify
+          }).then((res) => {
+          this.selectionList.data = [...this.selectionList.data, ...res.data.data]
+          console.log(this.selectionList)
           this.page.counter++
-          console.log(123)
           this.$refs.pullScroll.setState(5)
-        }, 500)
+        })
       } else {
         this.$refs.pullScroll.setState(7)
       }
@@ -136,11 +142,13 @@ export default {
   // 获取新闻列表页面
   activated () {
     this.source = parseInt(localStorage.getItem('source')) || this.$route.params.category
-    let classify = localStorage.getItem('classify') || this.$route.params.classify
+    this.classify = localStorage.getItem('classify') || this.$route.params.classify
     let _that = this
-    this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 10, category: this.source, classify: classify}).then(function (res) {
+    this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 10, category: this.source, classify: this.classify}).then(function (res) {
       console.log(res.data)
       _that.selectionList = res.data
+      _that.page.total = res.data.meta.total
+      console.log(_that.page.total)
     })
   }
 }

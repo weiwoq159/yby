@@ -145,14 +145,11 @@ export default {
     // 滚动条事件
     onScroll (e) {
       // 获取列表高度
-      console.log(e)
-      console.log(this.myScrollList)
+
       let listHeight = this.myScrollList.offsetHeight
       let listScrollTop = e.target.scrollTop + this.myScroll.offsetHeight // 当前滚动条位置
-      console.log(this.myScrollList.offsetHeight)
-      console.log(e.target.scrollTop)
-      console.log(this.myScroll.offsetHeight)
       if (this.state === 0 && listHeight - listScrollTop < 100) {
+        console.log('zhixingfangfa')
         this.bottomCallback()
       }
     },

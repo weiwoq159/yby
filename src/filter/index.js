@@ -25,7 +25,6 @@ Vue.filter('content', function (value) {
 })
 Vue.filter('replyNum', function (value) {
   if (value === null) {
-    console.log(value)
     return 0
   } else {
     return value
@@ -49,7 +48,7 @@ Vue.filter('changeContent', function (value) {
   value = value.replace(/&nbsp;/ig, '')
   value = value.replace(/\s+/ig, '')
   value = value.replace(/[a-zA-Z]/, '')
-  return value.substring(0, 50) + '...'
+  return value.substring(0, 80) + '...'
 })
 Vue.filter('changeSource', function (value) {
   if (value.length > 7) {

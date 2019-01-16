@@ -89,25 +89,25 @@ export default {
     },
     fundHomeDate (res) {
       console.log(res)
-      let source = this.$route.params.source
-      let id = this.$route.params.id
-      let _that = this
-      if (source === undefined) {
-        this.selectionList = res.data
-        this.selectionList.data.sort(api.selectTime)
-      } else {
-        this.standby = res.data
-        // this.$route.params.id
-        this.axios.post('/book/web/api/book/listPage', {pageNum: '1', pageSize: 10, category: source, classifyId: id}).then(function (res) {
-          console.log(res.data.data)
-          _that.selectionList = res.data
-        })
-      }
+      // let source = this.$route.params.source
+      // let id = this.$route.params.id
+      // let _that = this
+      // if (source === undefined) {
+      this.selectionList = res.data
+      this.selectionList.data.sort(api.selectTime)
+      // } else {
+      //   // this.standby = res.data
+      //   // // this.$route.params.id
+      //   // this.axios.post('/book/web/api/book/listPage', {pageNum: 1, pageSize: 10, category: source, classifyId: id}).then(function (res) {
+      //   //   console.log(res.data.data)
+      //   //   _that.selectionList = res.data
+      //   // })
+      // }
     }
   },
   // 获取新闻列表页面
   mounted () {
-    this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 20, category: this.category}).then(this.fundHomeDate)
+    this.axios.post('/book/web/api/book/search', {pageNum: 1, pageSize: 20, category: this.category}).then(this.fundHomeDate)
   }
 }
 </script>

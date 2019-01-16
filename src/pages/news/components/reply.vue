@@ -120,7 +120,7 @@ export default {
     bookId (newVal, oldVal) {
       console.log(newVal, oldVal)
       this.selectItem = []
-      this.axios.post('/book/web/api/comment/commentShow', {bookId: this.bookId, pageNum: '1', pageSize: '100'}).then(this.changeReply)
+      this.axios.post('/book/web/api/comment/commentShow', {bookId: this.bookId, pageNum: 1, pageSize: 10}).then(this.changeReply)
     }
   },
   methods: {
