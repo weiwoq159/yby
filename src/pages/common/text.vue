@@ -21,20 +21,22 @@ export default {
       }
     }
   },
-
   methods: {
-    handleItemChange (val) {
-      console.log('active item:', val)
-    },
-    changeAddress (res) {
-      console.log(res)
-      this.options = res.data
-      this.place = '请选择省市'
-    }
+
   },
   mounted () {
-    this.axios.get('./static/address.json', {category: '1'})
-      .then(this.changeAddress)
+    for (let i = 0; i <= 40; i++) {
+      this.axios.post('/book/web/api/comment/commentAdd',
+        {
+          bookId: '6487153192182116372',
+          bookTitle: '2019年的养老金政策发生了哪些变化',
+          bookType: 0,
+          content: '1'
+        }).then((res) => {
+        console.log(123)
+      })
+    }
+    console.log('任务结束')
   }
 }
 </script>

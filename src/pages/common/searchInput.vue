@@ -68,9 +68,9 @@ export default {
       } else {
         if (this.$route.fullPath === '/SearchResults') {
           this.$emit('changeList', [this.input, this.id])
-          console.log(this.id)
+        } else {
+          this.$router.push({name: 'SearchResults', params: {name: this.input, id: this.id}})
         }
-        this.$router.push({name: 'SearchResults', params: {name: this.input, id: this.id}})
       }
     }
   },
@@ -80,10 +80,6 @@ export default {
     },
     chosePlace (newVal, oldVal) {
       this.place = newVal
-    },
-    name (newVal, oldVal) {
-      console.log(newVal)
-      this.input = newVal
     }
   }
 }

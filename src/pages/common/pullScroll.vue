@@ -10,10 +10,10 @@
     class='pullScroll'
     ref='pullScroll'
     @scroll="onScroll($event)"
-    @touchstart='touchStart($event)'
-    @touchmove='touchMove($event)'
-    @touchend='touchEnd($event)'
   >
+    <!--@touchmove='touchMove($event)'-->
+    <!--@touchstart='touchStart($event)'-->
+    <!--@touchend='touchEnd($event)'-->
     <div class="scroll-top" :style='{height: top+"px"}'>
       <div v-if='this.aspect === 2'>
         <p v-if='state === 1'>
@@ -48,10 +48,10 @@ export default {
     'page': {
       type: Object // counter: 当前页  pageStart: 开始页数  pageEnd: 结束页数  total: 总页数
     },
-    'onRefresh': {
-      type: Function,
-      require: true
-    },
+    // 'onRefresh': {
+    //   type: Function,
+    //   require: true
+    // },
     'onPull': {
       type: Function,
       require: true
@@ -95,32 +95,32 @@ export default {
       }
       console.log(index)
     },
-    touchStart (e) {
-      this.startPageX = e.targetTouches[0].pageX
-      this.startPageY = e.targetTouches[0].pageY
-    },
+    // touchStart (e) {
+    //   this.startPageX = e.targetTouches[0].pageX
+    //   this.startPageY = e.targetTouches[0].pageY
+    // },
     // 手指滑动
-    touchMove (e) {
-      let _this = this
-      if (this.scrollState && e.targetTouches[0].pageY > _this.startPageY) {
-        _this.aspect = 2
-        if (_this.myScroll.scrollTop === 0) {
-          let diff = e.targetTouches[0].pageY - _this.startPageY
-          // 计算滑动距离
-          _this.top = Math.pow(diff, 0.9)
-          let ranget = diff / document.body.clientHeight * 100
-          if (ranget > 20) {
-            this.state = 3
-          } else if (ranget < 15) {
-            this.state = 1
-          }
-          e.preventDefault()
-        }
-      } else if (this.scrollState && e.targetTouches[0].pageY < _this.startPageY) {
-        _this.top = 0
-        _this.aspect = 1
-      }
-    },
+    // touchMove (e) {
+    //   let _this = this
+    //   if (this.scrollState && e.targetTouches[0].pageY > _this.startPageY) {
+    //     _this.aspect = 2
+    //     if (_this.myScroll.scrollTop === 0) {
+    //       let diff = e.targetTouches[0].pageY - _this.startPageY
+    //       // 计算滑动距离
+    //       _this.top = Math.pow(diff, 0.9)
+    //       let ranget = diff / document.body.clientHeight * 100
+    //       if (ranget > 20) {
+    //         this.state = 3
+    //       } else if (ranget < 15) {
+    //         this.state = 1
+    //       }
+    //       e.preventDefault()
+    //     }
+    //   } else if (this.scrollState && e.targetTouches[0].pageY < _this.startPageY) {
+    //     _this.top = 0
+    //     _this.aspect = 1
+    //   }
+    // },
     // 滑动结束  模块隐藏
     /*
      * 刷新中：1
@@ -131,24 +131,25 @@ export default {
      * 下拉刷新：6
      * 没有更多：7
      */
-    touchEnd (e) {
-      if (this.aspect === 2 && this.state === 3) {
-        console.log('go here')
-        this.top = 100
-        this.state = 2
-        this.topCallBack()
-      } else if (this.aspect === 2) {
-        this.top = 0
-        this.state = 0
-      }
-    },
+    // touchEnd (e) {
+    //   if (this.aspect === 2 && this.state === 3) {
+    //     console.log('go here')
+    //     this.top = 100
+    //     this.state = 2
+    //     this.topCallBack()
+    //   } else if (this.aspect === 2) {
+    //     this.top = 0
+    //     this.state = 0
+    //   }
+    // },
     // 滚动条事件
     onScroll (e) {
       // 获取列表高度
-      console.log(e)
+
       let listHeight = this.myScrollList.offsetHeight
       let listScrollTop = e.target.scrollTop + this.myScroll.offsetHeight // 当前滚动条位置
       if (this.state === 0 && listHeight - listScrollTop < 100) {
+        console.log('zhixingfangfa')
         this.bottomCallback()
       }
     },
@@ -162,13 +163,14 @@ export default {
           this.state = 0
         }, 500)
       }
-    },
-    topCallBack () {
-      this.onRefresh(this.state)
     }
+    // topCallBack () {
+    //   this.onRefresh(this.state)
+    // }
   },
   mounted () {
     this.myScroll = this.$refs.pullScroll // 获取滑条dom
+    console.log(this.myScroll.children[1])
     this.myScrollList = this.myScroll.children[1] // 获取列表dom
   }
 }

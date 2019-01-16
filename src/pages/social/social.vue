@@ -41,11 +41,6 @@ export default {
   mounted () {
     this.axios.post('/book/web/api/book/searchHome', {category: this.category}).then(this.searchHome)
   }
-  // ,
-  // beforeRouteLeave (to, from, next) {
-  //   console.log(this)
-  //   next()
-  // }
 }
 </script>
 

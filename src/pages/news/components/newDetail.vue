@@ -23,11 +23,11 @@
         <div class="newsBottom">
           <div class="message" @click='repeat(list)'>
             <i class='iconfont icon-liuyan'></i>
-            <span>{{list.commentNum}}</span>
+            <span>{{list.commentNum | replyNum}}</span>
           </div>
           <div :class="list.isLiked == 1 ? 'starActive' : 'star'" @click='changeColor(list)'>
             <i class='iconfont icon-heart1'></i>
-            <span>{{list.liked}}</span>
+            <span>{{list.liked | replyNum}}</span>
           </div>
         </div>
       </div>
@@ -85,10 +85,11 @@ export default {
         replyUname: this.$store.state.userInfo.name,
         fromUheadportrait: null,
         fromUname: this.$store.state.userInfo.name,
-        goodUp: null,
+        goodUp: 0,
         replyNum: 0,
         status: 0,
-        relpy: {}
+        relpy: [],
+        id: res.data.data.commentId
       }
       this.list.commentNum++
       this.$emit('changeList', lis)
@@ -132,7 +133,9 @@ export default {
   background: rgba(0,0,0,.3);
   z-index: 999999;
 }
-
+.news >>> img{
+  width 100%
+}
 .inputt{
   background: #f6f6f6;
   width: 100%;

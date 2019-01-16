@@ -55,7 +55,7 @@ export default {
     }
   },
   activated () {
-    this.axios.post('/book/web/api/iReplys/searchIReplys', {pageNum: 1, pageSize: 12}).then(this.searchIReplys)
+    this.axios.post('/book/web/api/iReplys/searchIReplys', {pageNum: 1, pageSize: 20}).then(this.searchIReplys)
   }
 }
 </script>

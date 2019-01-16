@@ -21,31 +21,23 @@ Vue.config.productionTip = false
 Vue.use(elementUi)
 /* eslint-disable no-new */
 
+// localStorage.setItem('XMDADMINTOKEN', 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NTM0MTEwNTQ2MTI4ODk2Iiwic3QiOiIyIiwibG4iOiI2MiIsInBoIjoiMTg5ODcwOTAwNzMiLCJybiI6IjE4OTg3MDkwMDczIiwiZXhwIjoxNTQ4MDcxNjkyfQ.acf_iVnSldU7gPs-fgDX99Ob8nYTmRd_TMBIjnMaoOA')
+console.log(localStorage.XMDADMINTOKEN)
 axios.interceptors.request.use(config => {
-  try {
-    if (localStorage.token) {
-      let token = localStorage.token
-      console.log('-----token-----')
-      console.log(token)
-      console.log('-----token-----')
-    }
-  } catch (e) {
-    console.log('不支持')
+  config.headers.common = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'X-Requested-With,Content-Type',
+    'Access-Control-Allow-Methods': 'PUT,POST,GET,DELETE,OPTIONS',
+    'x-authentication-token': localStorage.XMDADMINTOKEN === undefined ? '' : localStorage.XMDADMINTOKEN
   }
-  // localStorage.setItem('XMDADMINTOKEN', 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NTM0MTEwNTQ2MTI4ODk2Iiwic3QiOiIyIiwibG4iOiI2MiIsInBoIjoiMTg5ODcwOTAwNzMiLCJybiI6IjE4OTg3MDkwMDczIiwiZXhwIjoxNTQ4MDcxNjkyfQ.acf_iVnSldU7gPs-fgDX99Ob8nYTmRd_TMBIjnMaoOA\n')
-  let token = localStorage.getItem('XMDADMINTOKEN')
-  // console.log(token)
-  let AUTH_TOKEN = token
-  if (AUTH_TOKEN) { // 判断是否存在token，如果存在的话，则每个http header都加上token
-    config.headers.common = {
-      'x-authentication-token': `${AUTH_TOKEN}`
-    }
-    config.headers.name = 'daf'
-  }
+  // config.timeout = 3600*24*7;
+  config.timeout = 10000
   return config
 })
-if (store.state.userInfo.name === '') {
-  axios.post('/book/web/api/login/userMessage ', {pageNum: 1, pageSize: 12}).then(res => {
+console.log(store.state.userInfo.id === '')
+if (store.state.userInfo.id === '') {
+  axios.post('/book/web/api/login/userMessage ', {pageNum: 1, pageSize: 20}).then(res => {
     store.commit('SET_USERINFO', res.data.data)
   })
 }
