@@ -130,7 +130,7 @@ export default {
     }
     console.log(this.yearArr)
     // this.axios.get('static/tsconfig.json').then(this.myPublish)
-    this.axios.post('/book/web/api/book/getRelease', {pageNum: 1, pageSize: 12}).then(this.myPublish)
+    this.axios.post('/book/web/api/book/getRelease', {pageNum: 1, pageSize: 20}).then(this.myPublish)
   }
 }
 </script>

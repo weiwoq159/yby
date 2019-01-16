@@ -98,7 +98,7 @@ export default {
       } else {
         this.standby = res.data
         // this.$route.params.id
-        this.axios.post('/book/web/api/book/listPage', {pageNum: '1', pageSize: '10', category: source, classifyId: id}).then(function (res) {
+        this.axios.post('/book/web/api/book/listPage', {pageNum: '1', pageSize: 10, category: source, classifyId: id}).then(function (res) {
           console.log(res.data.data)
           _that.selectionList = res.data
         })
@@ -107,7 +107,7 @@ export default {
   },
   // 获取新闻列表页面
   mounted () {
-    this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '10', category: this.category}).then(this.fundHomeDate)
+    this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 20, category: this.category}).then(this.fundHomeDate)
   }
 }
 </script>

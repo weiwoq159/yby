@@ -12,7 +12,7 @@ Vue.filter('changeTitle', function (value) {
     if (value.length <= 10) {
       return value
     } else {
-      return value.substring(0, 20) + '...'
+      return value.substring(0, 10) + '...'
     }
   }
 })
@@ -23,7 +23,14 @@ Vue.filter('content', function (value) {
     return value.substring(0, 40) + '...'
   }
 })
-
+Vue.filter('replyNum', function (value) {
+  if (value === null) {
+    console.log(value)
+    return 0
+  } else {
+    return value
+  }
+})
 Vue.filter('telReplace', function (value) {
   if (value) {
     return value.substr(0, 3) + '****' + value.substr(7, 11)

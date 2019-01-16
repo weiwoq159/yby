@@ -63,7 +63,7 @@ export default {
       console.log('-----this.bookId-----')
       console.log(this.bookId)
       console.log('-----this.bookId-----')
-      this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '4', id: this.bookId})
+      this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 20, id: this.bookId})
         .then(this.fundHomeDate)
     }
     this.axios.post('/book/web/api/book/click', {id: this.bookId})

@@ -21,8 +21,8 @@ Vue.config.productionTip = false
 Vue.use(elementUi)
 /* eslint-disable no-new */
 
-localStorage.setItem('XMDADMINTOKEN', 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NTM0MTEwNTQ2MTI4ODk2Iiwic3QiOiIyIiwibG4iOiI2MiIsInBoIjoiMTg5ODcwOTAwNzMiLCJybiI6IjE4OTg3MDkwMDczIiwiZXhwIjoxNTQ4MDcxNjkyfQ.acf_iVnSldU7gPs-fgDX99Ob8nYTmRd_TMBIjnMaoOA')
-
+// localStorage.setItem('XMDADMINTOKEN', 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NTM0MTEwNTQ2MTI4ODk2Iiwic3QiOiIyIiwibG4iOiI2MiIsInBoIjoiMTg5ODcwOTAwNzMiLCJybiI6IjE4OTg3MDkwMDczIiwiZXhwIjoxNTQ4MDcxNjkyfQ.acf_iVnSldU7gPs-fgDX99Ob8nYTmRd_TMBIjnMaoOA')
+console.log(localStorage.XMDADMINTOKEN)
 axios.interceptors.request.use(config => {
   config.headers.common = {
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -35,9 +35,9 @@ axios.interceptors.request.use(config => {
   config.timeout = 10000
   return config
 })
-
-if (store.state.userInfo.name === '') {
-  axios.post('/book/web/api/login/userMessage ', {pageNum: 1, pageSize: 12}).then(res => {
+console.log(store.state.userInfo.id === '')
+if (store.state.userInfo.id === '') {
+  axios.post('/book/web/api/login/userMessage ', {pageNum: 1, pageSize: 20}).then(res => {
     store.commit('SET_USERINFO', res.data.data)
   })
 }

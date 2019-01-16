@@ -23,11 +23,11 @@
         <div class="newsBottom">
           <div class="message" @click='repeat(list)'>
             <i class='iconfont icon-liuyan'></i>
-            <span>{{list.commentNum}}</span>
+            <span>{{list.commentNum | replyNum}}</span>
           </div>
           <div :class="list.isLiked == 1 ? 'starActive' : 'star'" @click='changeColor(list)'>
             <i class='iconfont icon-heart1'></i>
-            <span>{{list.liked}}</span>
+            <span>{{list.liked | replyNum}}</span>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@ export default {
         replyUname: this.$store.state.userInfo.name,
         fromUheadportrait: null,
         fromUname: this.$store.state.userInfo.name,
-        goodUp: null,
+        goodUp: 0,
         replyNum: 0,
         status: 0,
         relpy: [],

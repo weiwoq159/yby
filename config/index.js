@@ -19,24 +19,24 @@ module.exports = {
     //     changeOrigin: true,
     //   }
     // },
-    // proxyTable: {
-    //   '/book/web/api':{
-    //     target: 'http://zk.1boyun.com', //测试环境
-    //     pathRewrite: {
-    //       '^/book/web/api':'/book/web/api'
-    //     },
-    //     changeOrigin: true,
-    //   }
-    // },
     proxyTable: {
       '/book/web/api':{
-        target: 'http://zhiku-test.1boyun.com:9998', //测试环境
+        target: 'http://zk.1boyun.com', //测试环境
         pathRewrite: {
           '^/book/web/api':'/book/web/api'
         },
         changeOrigin: true,
       }
     },
+    // proxyTable: {
+    //   '/book/web/api':{
+    //     target: 'http://zhiku-test.1boyun.com:9998', //测试环境
+    //     pathRewrite: {
+    //       '^/book/web/api':'/book/web/api'
+    //     },
+    //     changeOrigin: true,
+    //   }
+    // },
 
     // Various Dev Server settings
     //host: 'localhost',

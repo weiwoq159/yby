@@ -7,25 +7,33 @@
 */
 <template>
   <div class='newsList'>
-    <TagHeader></TagHeader>
-    <Navigation></Navigation>
-    <SearchInput></SearchInput>
-    <div class="newsL">
-      <ul class='listSort'>
-        <li v-for='item in sort'
-            :key='item.id'
-            :class="highLight===item.id ? 'active' : ''"
-            @click="changeActive(item)"
-        >{{item.name}}</li>
-      </ul>
-      <FunedList
-        v-for="(item, index) in selectionList.data"
-        :key="index"
-        :content='item'
-        :source='source'
-      >
-      </FunedList>
-    </div>
+    <pullScroll
+      :on-pull='onPull'
+      :scroll-state='scrollState'
+      :page='page'
+      ref='pullScroll'>
+      <div slot='scrollList'>
+        <TagHeader></TagHeader>
+        <Navigation></Navigation>
+        <SearchInput></SearchInput>
+        <div class="newsL">
+          <ul class='listSort'>
+            <li v-for='item in sort'
+                :key='item.id'
+                :class="highLight===item.id ? 'active' : ''"
+                @click="changeActive(item)"
+            >{{item.name}}</li>
+          </ul>
+          <FunedList
+            v-for="(item, index) in selectionList.data"
+            :key="index"
+            :content='item'
+            :source='source'
+          >
+          </FunedList>
+        </div>
+      </div>
+    </pullScroll>
   </div>
 </template>
 
@@ -36,6 +44,7 @@ import Navigation from '../tabGroup/components/navigation'
 import FunedList from '@/pages/funed/components/funedList'
 import bottomTemp from '../common/bottomTemp'
 import api from '@/api/api'
+import pullScroll from '../common/pullScroll'
 export default {
   name: 'newsList',
   components: {
@@ -43,7 +52,8 @@ export default {
     bottomTemp,
     TagHeader,
     SearchInput,
-    Navigation
+    Navigation,
+    pullScroll
   },
   data () {
     return {
@@ -64,7 +74,14 @@ export default {
       }],
       highLight: 0,
       reply: {},
-      source: ''
+      source: '',
+      page: {
+        counter: 9,
+        pageStart: 1,
+        pageEnd: 1,
+        total: 10
+      },
+      scrollState: true
     }
   },
   methods: {
@@ -97,14 +114,31 @@ export default {
           item.liked--
         }
       })
+    },
+    onPull (mun) { // 加载回调
+      console.log(this.page.counter)
+      if (this.page.counter <= this.page.total) {
+        setTimeout(() => {
+          this.page.counter++
+          console.log(123)
+          this.$refs.pullScroll.setState(5)
+        }, 500)
+      } else {
+        this.$refs.pullScroll.setState(7)
+      }
     }
+  },
+  created () {
+    window.addEventListener('scroll', (e) => {
+      console.log(e)
+    })
   },
   // 获取新闻列表页面
   activated () {
     this.source = parseInt(localStorage.getItem('source')) || this.$route.params.category
     let classify = localStorage.getItem('classify') || this.$route.params.classify
     let _that = this
-    this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '10', category: this.source, classify: classify}).then(function (res) {
+    this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 10, category: this.source, classify: classify}).then(function (res) {
       console.log(res.data)
       _that.selectionList = res.data
     })

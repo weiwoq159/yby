@@ -36,13 +36,13 @@
             <div class="newsBottom">
               <div class="message" @click='repeat(item)'>
                 <i class='iconfont icon-liuyan'></i>
-                <span>{{item.replyNum}}</span>
+                <span>{{item.replyNum | replyNum}}</span>
               </div>
               <div
                 :class="item.status == 1 ? 'starActive' : 'star'"
                 @click='changeColor(item)'>
                 <i class='iconfont icon-heart1'></i>
-                <span>{{item.goodUp}}</span>
+                <span>{{item.goodUp | replyNum}}</span>
               </div>
             </div>
           </div>
@@ -53,9 +53,11 @@
                 :key="inde"
                 v-if='inde <= 10'
                 >
-                {{reply.replyUname | telToName}} <span v-if='reply.replyToUname'>回复:</span>{{reply.replyToUname}} {{reply.content}}
+                <span class="uName">{{reply.replyUname | telToName}}</span>
+                <span v-if='!reply.replyToUname'>:</span>
+                <span v-if='reply.replyToUname'>回复:</span>{{reply.replyToUname}} {{reply.content}}
               </li>
-              <li class='more' v-if='item.relpy.length >= 10'>
+              <li class='more' v-if='item.relpy.length >= 1'>
                 <router-link :to="{name:'Reply',params:{content: item}}">点击查看更多 </router-link>
               </li>
             </ul>
@@ -113,8 +115,10 @@ export default {
   watch: {
     newReply (newVal, oldVal) {
       this.reply.unshift(newVal)
+      console.log(oldVal)
     },
     bookId (newVal, oldVal) {
+      console.log(newVal, oldVal)
       this.selectItem = []
       this.axios.post('/book/web/api/comment/commentShow', {bookId: this.bookId, pageNum: '1', pageSize: '100'}).then(this.changeReply)
     }
@@ -141,6 +145,7 @@ export default {
     changeColor (item) {
       console.log(item)
       this.axios.post('/book/web/api/praise/add', {typeId: item.id, type: 2}).then(res => {
+        console.log(res)
         console.log(item.status)
         if (!item.status) {
           item.status = 1
@@ -156,13 +161,13 @@ export default {
     },
     changeReply (res) {
       this.reply = []
-      if (res.data === null) {
+      if (res.data.data === null) {
         return this.showOrDis
       } else {
         this.reply = res.data.data.comment.sort(api.time)
       }
     },
-    replyOK (res) {
+    replyOK () {
       console.log(this.selectItem)
       this.selectItem.relpy.push({
         content: this.replyContent,
@@ -176,6 +181,7 @@ export default {
         relpy: []
       })
       this.replyContent = ''
+      this.replyCon.replyNum++
       console.log(this.selectItem.relpy)
     },
     repeat (item) {
@@ -206,10 +212,14 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  .uName{
+    color:#333;
+    font-weight:900
+  }
   .noReply{
     font-size: 14px;
     text-align center
-    margin 20px 0px;
+    margin 20px 0;
     color #ccc
   }
   .replyInput{
@@ -229,7 +239,7 @@ export default {
     padding:10px 15px;
     box-sizing: border-box;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -309,6 +319,7 @@ export default {
     background: #ffffff;
     padding:15px;
     margin-bottom:3vw;
+    color:#666
   .photoImg
     width 40px;
     height 40px;
@@ -328,7 +339,7 @@ export default {
     color: #666;
     margin-top 9px;
   main
-    padding:10px 0px 0px 15px
+    padding:10px 0 0 15px
   .messageReply
     margin-top 10px;
     background: #f5f5f5
