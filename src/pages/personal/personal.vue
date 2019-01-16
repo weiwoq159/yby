@@ -87,7 +87,7 @@ export default {
   .head{
     width: .52rem;
     height:.52rem;
-    background: #000;
+    /*background: #000;*/
     border-radius: .52rem;
   }
   .persongInfo{

@@ -126,19 +126,20 @@ export default {
     position fixed
     bottom 0;
     width 100%;
-    height 30px;
+    height 7vw;
     padding 15px 0px
   .upButt
     background: #c40000;
     color #fff;
     text-align center
-    padding:5px 0px;
+    /*padding:5px 0px;*/
     display block
     width 90%;
     margin 0 auto
     border-radius 20px;
     align-items center
-    font-size: 16px;
+    font-size: 4vw;
+    line-height: 4vw;
   .fade-enter-active, .fade-leave-active {
     transition: opacity 1.5s;
   }
@@ -155,7 +156,7 @@ export default {
   .ReleaseContent
     width 100%;
     display flex;
-    margin-top .15rem
+    margin-top 3vw;
     border-bottom: 1px solid #eee
     .el-textarea__inner
       border-style none;
@@ -163,7 +164,7 @@ export default {
   .ReleaseTitle
     width 100%;
     display flex;
-    margin-top .15rem
+    /*margin-top .15rem*/
     border-bottom:1px solid #eee
     p
       padding-left:12px
@@ -177,16 +178,16 @@ export default {
       background: #fff
       .el-input__inner
         width 100%;
-        height:.38rem;
+        height:12vw;
         border-style none
         background-color: #fff!important;
         color: #606266
-        line-height: 1
+        line-height: 8vw;
   .dropList
     padding-top:10px;
     padding-left:40px
     p
       height:20px;
       line-height 20px;
-      font-size: 14px
+      font-size: 4.3vw;
 </style>
