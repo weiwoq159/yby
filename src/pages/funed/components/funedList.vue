@@ -62,7 +62,7 @@ export default {
   methods: {
     changeColor (item) {
       console.log(item)
-      this.axios.post('/book/web/api/praise/add', {typeId: item.id, type: 2}).then(res => {
+      this.axios.post('/book/web/api/praise/add', {typeId: item.id, type: 1}).then(res => {
         console.log(res)
         if (item.isLiked === 0) {
           item.isLiked = 1
@@ -74,8 +74,8 @@ export default {
       })
     },
     gotoReply (content) {
-      console.log(content)
       localStorage.setItem('id', content.id)
+      this.cat = 'News' + content.category
       this.$router.push({name: this.cat, params: {bookId: content.id, name: content, url: this.$store.state.url}})
     }
   }

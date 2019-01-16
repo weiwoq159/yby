@@ -60,6 +60,9 @@ export default {
       console.log(this.list)
     } else {
       this.bookId = localStorage.getItem('id')
+      console.log('-----this.bookId-----')
+      console.log(this.bookId)
+      console.log('-----this.bookId-----')
       this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: '4', id: this.bookId})
         .then(this.fundHomeDate)
     }

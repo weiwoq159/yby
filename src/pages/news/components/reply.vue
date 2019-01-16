@@ -14,6 +14,7 @@
           @click="changeActive(item)"
       >{{item.name}}</li>
     </ul>
+    <p class='noReply' v-if='this.reply.length === 0'>暂无评论</p>
     <div class="replyMes"
          v-for='(item, index) in reply'
          :key = "index"
@@ -102,7 +103,7 @@ export default {
           name: '评论最多',
           id: 3
         } ],
-      highLight: 1,
+      highLight: 0,
       reply: [],
       replyContent: '',
       replyCon: '',
@@ -114,7 +115,8 @@ export default {
       this.reply.unshift(newVal)
     },
     bookId (newVal, oldVal) {
-      this.axios.post('/book/web/api/comment/commentShow', {bookId: this.bookId, pageNum: '1', pageSize: '10'}).then(this.changeReply)
+      this.selectItem = []
+      this.axios.post('/book/web/api/comment/commentShow', {bookId: this.bookId, pageNum: '1', pageSize: '100'}).then(this.changeReply)
     }
   },
   methods: {
@@ -150,15 +152,19 @@ export default {
       })
     },
     disReply () {
-      console.log(123123)
       this.showOrDis = false
     },
     changeReply (res) {
-      console.log(res)
-      this.reply = res.data.data.comment.sort(api.time)
+      this.reply = []
+      if (res.data === null) {
+        return this.showOrDis
+      } else {
+        this.reply = res.data.data.comment.sort(api.time)
+      }
     },
     replyOK (res) {
-      this.selectItem.relpy.unshift({
+      console.log(this.selectItem)
+      this.selectItem.relpy.push({
         content: this.replyContent,
         createTimes: (new Date()).getTime(),
         replyUname: this.$store.state.userInfo.name,
@@ -167,7 +173,7 @@ export default {
         goodUp: null,
         replyNum: 0,
         status: 0,
-        relpy: {}
+        relpy: []
       })
       this.replyContent = ''
       console.log(this.selectItem.relpy)
@@ -200,6 +206,12 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  .noReply{
+    font-size: 14px;
+    text-align center
+    margin 20px 0px;
+    color #ccc
+  }
   .replyInput{
     width: 100%;
     height: 100%;

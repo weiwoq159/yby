@@ -88,7 +88,8 @@ export default {
         goodUp: null,
         replyNum: 0,
         status: 0,
-        relpy: {}
+        relpy: [],
+        id: res.data.data.commentId
       }
       this.list.commentNum++
       this.$emit('changeList', lis)

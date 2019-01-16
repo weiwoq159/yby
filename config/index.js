@@ -19,28 +19,28 @@ module.exports = {
     //     changeOrigin: true,
     //   }
     // },
-    proxyTable: {
-      '/book/web/api':{
-        target: 'http://zk.1boyun.com', //测试环境
-        pathRewrite: {
-          '^/book/web/api':'/book/web/api'
-        },
-        changeOrigin: true,
-      }
-    },
     // proxyTable: {
     //   '/book/web/api':{
-    //     target: 'http://zhiku-test.1boyun.com:9998', //测试环境
+    //     target: 'http://zk.1boyun.com', //测试环境
     //     pathRewrite: {
     //       '^/book/web/api':'/book/web/api'
     //     },
     //     changeOrigin: true,
     //   }
     // },
+    proxyTable: {
+      '/book/web/api':{
+        target: 'http://zhiku-test.1boyun.com:9998', //测试环境
+        pathRewrite: {
+          '^/book/web/api':'/book/web/api'
+        },
+        changeOrigin: true,
+      }
+    },
 
     // Various Dev Server settings
     //host: 'localhost',
-    host: '10.8.13.74', // can be overwritten by process.env.HOST
+    host: '10.8.13.42', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
