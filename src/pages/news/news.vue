@@ -104,12 +104,12 @@ export default {
     //   this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 20, id: this.bookId})
     //     .then(this.fundHomeDate)
     // }
-    // this.axios.post('/book/web/api/book/click', {id: this.bookId})
-    //   .then(res => {
-    //     console.log('-----res-----')
-    //     console.log(res)
-    //     console.log('-----res-----')
-    //   })
+    this.axios.post('/book/web/api/book/click', {id: this.bookId})
+      .then(res => {
+        console.log('-----res-----')
+        console.log(res)
+        console.log('-----res-----')
+      })
   }
 }
 </script>

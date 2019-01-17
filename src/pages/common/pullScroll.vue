@@ -10,6 +10,7 @@
     class='pullScroll'
     ref='pullScroll'
     @scroll="onScroll($event)"
+    @touchmove='onScroll($event)'
   >
     <!--@touchmove='touchMove($event)'-->
     <!--@touchstart='touchStart($event)'-->
@@ -30,7 +31,7 @@
         </p>
       </div>
     </div>
-    <div class="scrollList" :style="{ transform: 'translate3d(0, ' + top + 'px, 0)'}">
+    <div class="scrollList" id='scrollList' :style="{ transform: 'translate3d(0, ' + top + 'px, 0)'}">
       <slot name='scrollList'></slot>
       <div class="scroll-bottom">
         <div v-if="state==6">加载中</div>
@@ -145,11 +146,11 @@ export default {
     // 滚动条事件
     onScroll (e) {
       // 获取列表高度
-
       let listHeight = this.myScrollList.offsetHeight
       let listScrollTop = e.target.scrollTop + this.myScroll.offsetHeight // 当前滚动条位置
+
+      console.log(listScrollTop, listHeight)
       if (this.state === 0 && listHeight - listScrollTop < 100) {
-        console.log('zhixingfangfa')
         this.bottomCallback()
       }
     },

@@ -100,6 +100,7 @@ export default {
     }
   },
   activated () {
+    this.id = this.$route.params.id
     if (this.$route.params.name) {
       this.name = this.$route.params.name
       this.axios.post('/book/web/api/book/search', {

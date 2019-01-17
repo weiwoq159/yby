@@ -7,33 +7,26 @@
 */
 <template>
   <div class='newsList'>
-    <pullScroll
-      :on-pull='onPull'
-      :scroll-state='scrollState'
-      :page='page'
-      ref='pullScroll'>
-      <div slot='scrollList'>
-        <TagHeader></TagHeader>
-        <Navigation></Navigation>
-        <SearchInput></SearchInput>
-        <div class="newsL">
-          <ul class='listSort'>
-            <li v-for='item in sort'
-                :key='item.id'
-                :class="highLight===item.id ? 'active' : ''"
-                @click="changeActive(item)"
-            >{{item.name}}</li>
-          </ul>
-          <FunedList
-            v-for="(item, index) in selectionList.data"
-            :key="index"
-            :content='item'
-            :source='source'
-          >
-          </FunedList>
-        </div>
+      <TagHeader></TagHeader>
+      <Navigation></Navigation>
+      <SearchInput></SearchInput>
+      <div class="newsL">
+        <ul class='listSort'>
+          <li v-for='item in sort'
+              :key='item.id'
+              :class="highLight===item.id ? 'active' : ''"
+              @click="changeActive(item)"
+          >{{item.name}}</li>
+        </ul>
+        <FunedList
+          v-for="(item, index) in selectionList.data"
+          :key="index"
+          :content='item'
+          :source='source'
+        >
+        </FunedList>
+        <p @click='loading' class='loading'>{{text}}</p>
       </div>
-    </pullScroll>
   </div>
 </template>
 
@@ -61,10 +54,10 @@ export default {
       standby: '',
       sort: [{
         name: '时间倒序',
-        id: 0
+        id: 1
       }, {
         name: '时间正序',
-        id: 1
+        id: 0
       }, {
         name: '被赞最多',
         id: 2
@@ -72,15 +65,16 @@ export default {
         name: '评论最多',
         id: 3
       }],
-      highLight: 0,
+      highLight: 1,
       reply: {},
       source: '',
       page: {
-        counter: 1,
+        counter: 2,
         total: 10
       },
       classify: '',
-      scrollState: true
+      scrollState: true,
+      text: '点击加载更多'
     }
   },
   methods: {
@@ -114,7 +108,7 @@ export default {
         }
       })
     },
-    onPull (mun) { // 加载回调
+    loading (mun) { // 加载回调
       if (this.page.counter <= this.page.total) {
         this.page.total = Math.ceil(this.selectionList.meta.total / 10)
         console.log(this.page)
@@ -128,14 +122,11 @@ export default {
           this.selectionList.data = [...this.selectionList.data, ...res.data.data]
           console.log(this.selectionList)
           this.page.counter++
-          this.$refs.pullScroll.setState(5)
         })
       } else {
-        this.$refs.pullScroll.setState(7)
+        this.text = '没有更多'
       }
     }
-  },
-  created () {
   },
   // 获取新闻列表页面
   activated () {
@@ -143,26 +134,27 @@ export default {
       counter: 1,
       total: 10
     }
-    console.log(this.page)
-    this.highLight = 0
+    this.highLight = 1
     this.source = this.$route.params.category || parseInt(localStorage.getItem('source'))
     this.classify = this.$route.params.classify || localStorage.getItem('classify')
     let _that = this
-    this.$refs.pullScroll.setState(5)
     this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 10, category: this.source, classify: this.classify}).then(function (res) {
-      console.log(res)
-      console.log(res.data)
       _that.selectionList = res.data
-      _that.selectionList.data.sort(api.selectTime)
-      console.log(_that.selectionList)
+      _that.selectionList.data.sort(api.unSelectTime)
       _that.page.total = res.data.meta.total
-      console.log(_that.page.total)
+      _that.$refs.pullScroll.setState(5)
     })
   }
 }
 </script>
 
 <style scoped lang='stylus'>
+  .loading{
+    text-align center
+    font-size: 16px;
+    color #ccc
+    padding 10px 0
+  }
   .noMessage{
     text-align center;
     padding:20px 0px;
