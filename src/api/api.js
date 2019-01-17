@@ -13,7 +13,7 @@ export default {
     return b.goodUp - a.goodUp
   },
   selectTime (a, b) {
-    console.log(a.time, b.time)
+    // console.log(a.time, b.time)
     return (new Date(b.time)).getTime() - (new Date(a.time)).getTime()
   },
   unSelectTime (a, b) {
@@ -23,7 +23,7 @@ export default {
     return b.liked - a.liked
   },
   selectReply (a, b) {
-    console.log(a)
+    console.log(b.commentNum)
     return b.commentNum - a.commentNum
   },
   checkImg (that) {

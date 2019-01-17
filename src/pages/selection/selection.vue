@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     changeActive (item) {
-      console.log(item.id)
+      console.log(this.selectionList.data)
       this.highLight = item.id
       switch (item.id) {
         case 0 :

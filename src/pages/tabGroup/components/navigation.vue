@@ -63,7 +63,7 @@ export default {
     if (this.$route.path !== '/tabGroup/HrList') {
       this.$store.commit('SET_URL', this.$route.path)
       this.url = this.$store.state.url
-      console.log(this.url)
+      // console.log(this.url)
     }
   }
 }

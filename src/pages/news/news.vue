@@ -16,7 +16,6 @@
     <Reply
       :bookId='bookId'
       :newReply='newReply'
-      :list='list'
       ref='reply'
     ></Reply>
   </div>
@@ -56,9 +55,7 @@ export default {
       this.newReply = changeList
     },
     fundHomeDate (res) {
-      console.log(res)
       this.list = res.data.data[0]
-      console.log(this.list)
     },
     onPull (mun) { // 加载回调
       if (this.page.counter <= this.page.total) {
@@ -86,22 +83,33 @@ export default {
       counter: 1,
       total: 10
     }
-    this.bookId = this.$route.params.bookId
-    this.list = this.$route.params.name
-    if (this.$route.params.name) {
-      this.list = this.$route.params.name
-      console.log(this.list)
-    } else {
-      this.bookId = localStorage.getItem('id')
-      this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 20, id: this.bookId})
-        .then(this.fundHomeDate)
-    }
-    this.axios.post('/book/web/api/book/click', {id: this.bookId})
-      .then(res => {
-        console.log('-----res-----')
-        console.log(res)
-        console.log('-----res-----')
+    console.log(this.$route.path)
+    let url = this.$route.path
+    let lastLink = url.substring(url.lastIndexOf('/') + 1, url.length)
+    this.axios.post('/book/web/api/book/search',
+      {
+        pageNum: '1',
+        pageSize: 20,
+        id: lastLink
       })
+      .then(this.fundHomeDate)
+    this.bookId = lastLink
+    console.log(this.bookId)
+    // this.bookId = this.$route.params.bookId
+    // if (this.$route.params.name) {
+    //   this.list = this.$route.params.name
+    //   console.log(this.list)
+    // } else {
+    //   this.bookId = localStorage.getItem('id')
+    //   this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 20, id: this.bookId})
+    //     .then(this.fundHomeDate)
+    // }
+    // this.axios.post('/book/web/api/book/click', {id: this.bookId})
+    //   .then(res => {
+    //     console.log('-----res-----')
+    //     console.log(res)
+    //     console.log('-----res-----')
+    //   })
   }
 }
 </script>
