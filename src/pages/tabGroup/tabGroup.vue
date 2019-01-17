@@ -83,7 +83,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 .tabgroup{
   height: 100%;

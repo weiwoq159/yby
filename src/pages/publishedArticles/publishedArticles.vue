@@ -9,7 +9,7 @@
   <div class='release'>
     <div class="ReleaseTitle">
       <label class="leftTitle">标题：</label>
-      <el-input v-model="publish.title" ></el-input>
+      <el-input class="rightFont" v-model="publish.title" ></el-input>
     </div>
     <div class="drowDown">
       <div class="ReleaseTitle" @click=DropDown()>
@@ -17,7 +17,7 @@
         <el-input v-model="publish.kind"  :disabled="true"></el-input>
         <span class="el-icon-arrow-right"></span>
       </div>
-      <div name="fade" class="select">
+      <div name="fade" class="seList">
         <ul class='dropList' v-if='isDrop'>
           <li v-for='item in options' :key='item.id' @click='changeInput(item)' >
             <p>{{item.label}}</p>
@@ -31,6 +31,7 @@
     </div>
     <div class="upData">
       <button class='upButt' type="primary" @click='submit'>发布精选</button>
+      <button class='upButt downButt' type="primary" @click='cancel'>取消发布</button>
     </div>
   </div>
 </template>
@@ -42,7 +43,7 @@ export default {
     return {
       publish: {
         title: '',
-        kind: '人力资源：',
+        kind: '人力资源',
         content: '',
         category: ''
       },
@@ -110,7 +111,13 @@ export default {
       setTimeout(() => {
         loading.close()
       }, 1000)
+    },
+    cancel () {
+      this.$router.back()
     }
+  },
+  mounted () {
+    this.publish.category = this.options[0].value
   }
 }
 </script>
@@ -127,13 +134,17 @@ export default {
     text-align: center;
     font-size:4vw;
   }
-  .select{
+  .seList{
     position: absolute;
     background: #fff;
     left: 15vw;
   }
   .leftTitle.leftTitle2{
     margin-left :1vw;
+  }
+  .rightFont .el-input__inner
+  {
+    margin-left:-1vw;
   }
   .upData
     position relative
@@ -143,19 +154,22 @@ export default {
     bottom 0;
     width 100%;
     height 7vw;
-    padding 15px 0px
+    padding 0.1rem 0
+    background #fff
   .upButt
     background: #c40000;
     color #fff;
     text-align center
     /*padding:5px 0px;*/
     display block
-    width 90%;
+    width 45%;
     margin 0 auto
     border-radius 20px;
     align-items center
     font-size: 4vw;
     line-height: 4vw;
+  .downButt
+    background: #ffa200
   .fade-enter-active, .fade-leave-active {
     transition: opacity 1.5s;
   }
@@ -172,18 +186,18 @@ export default {
   .ReleaseContent
     width 100%;
     display flex;
-    margin-top 3vw;
-    border-bottom: 1px solid #eee
+    margin-top 1vw;
     .el-textarea__inner
+      margin-top:2vw;
+      margin-left:-2vw;
       border-style none;
-      height:480px;
+      height:100vw;
   .ReleaseTitle
     width 100%;
     display flex;
-    /*margin-top .15rem*/
-    border-bottom:1px solid #eee
+    border-bottom 1px solid #eee
     p
-      padding-left:12px
+      padding-left 12px
       width 60px;
       line-height .38rem
       font-size: .14rem;
@@ -199,7 +213,7 @@ export default {
         border-style none
         background-color: #fff!important;
         color: #333;
-        line-height: 8vw;
+        line-height 8vw;
   .dropList
     padding-top:10px;
     padding-left:40px;

@@ -70,7 +70,7 @@ export default {
     console.log(localStorage.getItem('token'))
     let token = localStorage.getItem('token')
     if (!token) {
-      location.href = 'http://10.8.13.74:8080/#/Login?goLogin=1'
+      location.href = 'http://tax.1boyun.com/login?goLogin=1'
     } else {
       next()
     }
