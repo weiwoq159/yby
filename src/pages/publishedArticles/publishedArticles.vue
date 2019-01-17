@@ -116,6 +116,10 @@ export default {
 </script>
 
 <style lang='stylus'>
+  .el-input__inner[disabled]{
+    color :#000!important
+    opacity 1;
+  }
   .leftTitle{
     display:inline-block;
     width:30vw;
@@ -194,7 +198,7 @@ export default {
         height:12vw;
         border-style none
         background-color: #fff!important;
-        color: #606266!important;
+        color: #333;
         line-height: 8vw;
   .dropList
     padding-top:10px;
