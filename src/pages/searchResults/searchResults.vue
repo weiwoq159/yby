@@ -27,7 +27,7 @@
 
 <script>
 import Header from '@/pages/common/header'
-import SearchInput from '@/pages/common/searchInput'
+import SearchInput from '../common/searcResulthInput'
 import FunedList from '@/pages/funed/components/funedList'
 export default {
   name: 'searchResults',
@@ -77,6 +77,7 @@ export default {
   },
   beforeRouteLeave (to, from, next) {
     this.searchList = ''
+    this.name = ''
     next()
   }
 }

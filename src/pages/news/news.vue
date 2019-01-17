@@ -6,27 +6,19 @@
 * name:
 */
 <template>
-  <div class='news'>
-    <pullScroll
-      :on-pull='onPull'
-      :scroll-state='scrollState'
-      :page='page'
-      ref='pullScroll'>
-      <div slot='scrollList'>
-        <TagHeader></TagHeader>
-        <Navigation ref='navigation'></Navigation>
-        <NewDetail
-          :list='list'
-          @changeList='changeList'
-        ></NewDetail>
-        <Reply
-          :bookId='bookId'
-          :newReply='newReply'
-          :list='list'
-          ref='reply'
-        ></Reply>
-      </div>
-    </pullScroll>
+  <div class='news' id='news'>
+    <TagHeader></TagHeader>
+    <Navigation ref='navigation'></Navigation>
+    <NewDetail
+      :list='list'
+      @changeList='changeList'
+    ></NewDetail>
+    <Reply
+      :bookId='bookId'
+      :newReply='newReply'
+      :list='list'
+      ref='reply'
+    ></Reply>
   </div>
 </template>
 
@@ -75,7 +67,7 @@ export default {
           {
             bookId: this.bookId,
             pageNum: this.page.counter + 1,
-            pageSize: 10
+            pageSize: 200
           }).then((res) => {
           this.page.total = Math.ceil(res.data.data.num / 10)
           // console.log(res.data.data)
@@ -90,6 +82,10 @@ export default {
     }
   },
   activated () {
+    this.page = {
+      counter: 1,
+      total: 10
+    }
     this.bookId = this.$route.params.bookId
     this.list = this.$route.params.name
     if (this.$route.params.name) {
@@ -113,7 +109,6 @@ export default {
 <style scoped>
 .news{
   width: 100%;
-  height: 100%;
   position: relative;
 }
 </style>

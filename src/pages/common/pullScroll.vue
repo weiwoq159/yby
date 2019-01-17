@@ -215,4 +215,7 @@ export default {
   text-align: center;
   line-height: 40px;
 }
+.scroll-bottom div{
+  font-size: 14px;
+}
 </style>

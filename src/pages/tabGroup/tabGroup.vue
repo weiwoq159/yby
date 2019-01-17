@@ -44,9 +44,6 @@ export default {
       }, {
         id: '4',
         name: '公积金'
-      }, {
-        id: '5',
-        name: '燚️精选'
       }],
       place: '请选择'
     }
@@ -88,5 +85,7 @@ export default {
 </script>
 
 <style scoped>
-
+.tabgroup{
+  height: 100%;
+}
 </style>

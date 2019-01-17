@@ -63,13 +63,13 @@ export default {
       status: [
         {
           name: '已发布',
-          id: 1
-        }, {
-          name: '审核中',
           id: 2
         }, {
-          name: '审核未通过',
+          name: '审核中',
           id: 3
+        }, {
+          name: '审核未通过',
+          id: 4
         }
       ],
       choseName: '筛选',

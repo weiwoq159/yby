@@ -39,7 +39,10 @@ export default {
   methods: {
     goToDetail (item) {
       console.log(item)
-      this.$router.push({name: 'list4', params: {source: this.scource, url: this.name, classify: item.classify}})
+      this.$router.push(
+        {name: 'list4',
+          params: {source: item.classify, url: this.name, classify: item.classify}
+        })
     }
   }
 }

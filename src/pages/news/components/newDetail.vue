@@ -35,8 +35,9 @@
     <div
       class='replyInput'
       @touchmove.prevent
-      @click.stop='disReply()'
+      @click.stop='disReply'
       v-show='showOrDis'
+      :style='{height: height + "px"}'
     >
       <div class="inputt">
         <input type="text" v-model='replyContent' ref='content' @click.stop >
@@ -56,7 +57,8 @@ export default {
     return {
       showOrDis: false,
       arr: [1, 2, 3, 3],
-      replyContent: ''
+      replyContent: '',
+      height: 667
     }
   },
   props: ['list', 'bookId'],
@@ -96,6 +98,9 @@ export default {
       this.replyContent = ''
     },
     repeat (item) {
+      this.height = document.body.clientHeight
+      console.log('-----------------------------')
+      console.log(this.height)
       this.replyCon = item
       this.showOrDis = true
       this.selectItem = item
@@ -133,8 +138,15 @@ export default {
   background: rgba(0,0,0,.3);
   z-index: 999999;
 }
+.text >>> div {
+  width:100%!important
+}
+.text >>> *{
+  font-size: 16px!important;
+  line-height 1.5!important;
+}
 .news >>> img{
-  width 100%
+  width:100%
 }
 .inputt{
   background: #f6f6f6;

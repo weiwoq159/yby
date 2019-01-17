@@ -16,7 +16,7 @@
           v-for="item in options"
           :key="item.id"
           :label="item.name"
-          :value="item.name">
+          :value="item.id">
         </el-option>
       </el-select>
     </div>
@@ -37,16 +37,20 @@ export default {
     return {
       options: [{
         id: '1',
-        name: '人力资源'
+        name: '人力资源',
+        link: '/tabGroup/HR'
       }, {
         id: '2',
-        name: '社会保障'
+        name: '社会保障',
+        link: '/tabGroup/social'
       }, {
         id: '3',
-        name: '财务税收'
+        name: '财务税收',
+        link: '/tabGroup/taxation'
       }, {
         id: '4',
-        name: '公积金'
+        name: '公积金',
+        link: '/tabGroup/funed'
       }],
       id: '',
       input: '',
@@ -66,13 +70,6 @@ export default {
           loading.close()
         }, 2000)
       } else {
-        if (this.$route.path === '/tabGroup/Selection') {
-          localStorage.setItem('searchUrl', this.id)
-          localStorage.setItem('yjx', 'true')
-        } else {
-          localStorage.setItem('searchUrl', this.$route.path)
-          localStorage.setItem('yjx', 'false')
-        }
         localStorage.setItem('seach', this.input)
         if (this.$route.fullPath === '/SearchResults') {
           this.$emit('changeList', [this.input, this.id])
@@ -80,6 +77,20 @@ export default {
           this.$router.push({name: 'SearchResults', params: {name: this.input, id: this.id}})
         }
       }
+    }
+  },
+  activated () {
+    this.input = localStorage.getItem('search')
+    let isSelect = localStorage.getItem('yjx')
+    if (isSelect === 'false') {
+      let name = this.options.filter(e => {
+        if (e.link === localStorage.getItem('searchUrl')) {
+          return e
+        }
+      })
+      this.id = name[0].name
+    } else {
+      this.id = localStorage.getItem('searchUrl')
     }
   },
   watch: {

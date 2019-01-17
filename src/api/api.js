@@ -23,7 +23,7 @@ export default {
   },
   selectReply (a, b) {
     console.log(a)
-    return b.replyNum - a.replyNum
+    return b.commentNum - a.commentNum
   },
   checkImg (that) {
     var listArr = that.map(function (value) {

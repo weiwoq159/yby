@@ -12,8 +12,12 @@
     </div>
     <div class="drowDown">
       <div class="ReleaseTitle" @click=DropDown()>
-        <el-input v-model="publish.kind" placeholder="" :disabled="true"></el-input>
-        <span class="el-icon-arrow-right"> </span>
+        <el-input
+          v-model="publish.kind"
+          placeholder=""
+          :disabled="true"
+        ></el-input>
+        <span class="el-icon-arrow-right"></span>
       </div>
       <transition name="fade">
         <ul class='dropList' v-if='isDrop'>
@@ -106,6 +110,12 @@ export default {
             setTimeout(() => {
               loading.close()
             }, 1000)
+            this.publish = {
+              title: '',
+              kind: '类型：',
+              content: '',
+              category: ''
+            }
             this.$router.push({name: 'Selection'})
           }
         })
@@ -121,7 +131,7 @@ export default {
 <style lang='stylus'>
   .upData
     position relative
-    box-shadow 0px -5px 25px #aaa
+    box-shadow 0px -5px 8px #aaa
     display flex
     position fixed
     bottom 0;
@@ -173,6 +183,7 @@ export default {
     span
       line-height .38rem
       margin-right 20px;
+      font-size: 14px;
     .el-input
       background: #fff
       .el-input__inner

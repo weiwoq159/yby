@@ -135,15 +135,16 @@ export default {
     }
   },
   created () {
-    window.addEventListener('scroll', (e) => {
-      console.log(e)
-    })
   },
   // 获取新闻列表页面
   activated () {
-    this.source = parseInt(localStorage.getItem('source')) || this.$route.params.category
-    this.classify = localStorage.getItem('classify') || this.$route.params.classify
+    this.source = this.$route.params.category || parseInt(localStorage.getItem('source'))
+    this.classify = this.$route.params.classify || localStorage.getItem('classify')
     let _that = this
+    this.page = {
+      counter: 1,
+      total: 10
+    }
     this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 10, category: this.source, classify: this.classify}).then(function (res) {
       console.log(res.data)
       _that.selectionList = res.data

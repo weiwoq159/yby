@@ -14,13 +14,21 @@
           @click="changeActive(item)"
       >{{item.name}}</li>
     </ul>
-    <FunedList
-      v-for="(item, index) in selectionList.data"
-      :key="index"
-      :content='item'
-      :source='category'
-    >
-    </FunedList>
+    <pullScroll
+      :on-pull='onPull'
+      :scroll-state='scrollState'
+      :page='page'
+      ref='pullScroll'>
+      <div slot='scrollList'>
+        <FunedList
+          v-for="(item, index) in selectionList.data"
+          :key="index"
+          :content='item'
+          :source='category'
+        >
+        </FunedList>
+      </div>
+    </pullScroll>
     <bottomTemp></bottomTemp>
   </div>
 </template>
@@ -29,11 +37,13 @@
 import FunedList from '@/pages/funed/components/funedList'
 import bottomTemp from '../common/bottomTemp'
 import api from '@/api/api'
+import pullScroll from '../common/pullScroll'
 export default {
   name: 'selection',
   components: {
     FunedList,
-    bottomTemp
+    bottomTemp,
+    pullScroll
   },
   data () {
     return {
@@ -54,7 +64,13 @@ export default {
       }],
       highLight: 0,
       reply: {},
-      category: 5
+      category: 5,
+      page: {
+        counter: 1,
+        total: 10
+      },
+      classify: '',
+      scrollState: true
     }
   },
   methods: {
@@ -87,6 +103,24 @@ export default {
         }
       }
     },
+    onPull (mun) { // 加载回调
+      if (this.page.counter <= this.page.total) {
+        console.log('执行毁掉')
+        this.axios.post('/book/web/api/book/search',
+          {
+            pageNum: this.page.counter + 1,
+            pageSize: this.page.total,
+            category: this.category
+          }).then((res) => {
+          this.selectionList.data = [...this.selectionList.data, ...res.data.data]
+          console.log(this.selectionList)
+          this.page.counter++
+          this.$refs.pullScroll.setState(5)
+        })
+      } else {
+        this.$refs.pullScroll.setState(7)
+      }
+    },
     fundHomeDate (res) {
       console.log(res)
       // let source = this.$route.params.source
@@ -107,13 +141,18 @@ export default {
   },
   // 获取新闻列表页面
   mounted () {
-    this.axios.post('/book/web/api/book/search', {pageNum: 1, pageSize: 20, category: this.category}).then(this.fundHomeDate)
+    this.page = {
+      counter: 1,
+      total: 10
+    }
+    this.axios.post('/book/web/api/book/search', {pageNum: 1, pageSize: 10, category: this.category}).then(this.fundHomeDate)
   }
 }
 </script>
 
 <style scoped lang='stylus'>
 .selection{
+  height:100%;
   background: #f8f8f8;
   padding 0 3.5vw;
   border-top-left-radius 15px;
