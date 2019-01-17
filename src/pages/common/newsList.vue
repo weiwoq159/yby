@@ -116,7 +116,8 @@ export default {
     },
     onPull (mun) { // 加载回调
       if (this.page.counter <= this.page.total) {
-        console.log('执行毁掉')
+        this.page.total = Math.ceil(this.selectionList.meta.total / 10)
+        console.log(this.page)
         this.axios.post('/book/web/api/book/search',
           {
             pageNum: this.page.counter + 1,
@@ -138,14 +139,16 @@ export default {
   },
   // 获取新闻列表页面
   activated () {
-    this.highLight = 0
-    this.source = this.$route.params.category || parseInt(localStorage.getItem('source'))
-    this.classify = this.$route.params.classify || localStorage.getItem('classify')
-    let _that = this
     this.page = {
       counter: 1,
       total: 10
     }
+    console.log(this.page)
+    this.highLight = 0
+    this.source = this.$route.params.category || parseInt(localStorage.getItem('source'))
+    this.classify = this.$route.params.classify || localStorage.getItem('classify')
+    let _that = this
+    this.$refs.pullScroll.setState(5)
     this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 10, category: this.source, classify: this.classify}).then(function (res) {
       console.log(res)
       console.log(res.data)

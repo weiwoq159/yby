@@ -19,7 +19,7 @@
       :scroll-state='scrollState'
       :page='page'
       ref='pullScroll'>
-      <div slot='scrollList'>
+      <div slot='scrollList' class='pull'>
         <FunedList
           v-for="(item, index) in selectionList.data"
           :key="index"
@@ -105,7 +105,8 @@ export default {
     },
     onPull (mun) { // 加载回调
       if (this.page.counter <= this.page.total) {
-        console.log('执行毁掉')
+        this.page.total = Math.ceil(this.selectionList.meta.total / 10)
+        console.log(this.page)
         this.axios.post('/book/web/api/book/search',
           {
             pageNum: this.page.counter + 1,
@@ -150,9 +151,14 @@ export default {
 }
 </script>
 
-<style scoped lang='stylus'>
+<style lang='stylus'>
+.tabgroup {
+  height: 100%;
+  overflow: hidden;
+}
+
 .selection{
-  height:100%;
+  height:calc(100% - 130px)
   background: #f8f8f8;
   padding 0 3.5vw;
   border-top-left-radius 15px;
