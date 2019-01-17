@@ -7,14 +7,20 @@
 */
 <template>
   <div class='searchResults'>
-    <pullScroll
+    <Header></Header>
+    <SearchInput v-on:changeList='change' :name='name'></SearchInput>
+    <div v-if='len === 0'>
+      <img class='rocket' src="static/img/rocket.png" alt="">
+      <p class='resultText'>未搜索到相关内容</p>
+      <p class='resultText'>试试从其他分类下进行搜索</p>
+    </div>
+    <pullScroll v-if="len!==0"
       :on-pull='onPull'
       :scroll-state='scrollState'
       :page='page'
       ref='pullScroll'>
       <div slot='scrollList'>
-        <Header></Header>
-        <SearchInput v-on:changeList='change' :name='name'></SearchInput>
+
         <FunedList
           v-for="(item, index) in searchList.data"
           :key="index"
@@ -24,12 +30,9 @@
         </FunedList>
       </div>
     </pullScroll>
+
     <p v-show='false'>{{name}}</p>
-    <div v-if='len === 0'>
-      <img class='rocket' src="static/img/rocket.png" alt="">
-      <p class='resultText'>未搜索到相关内容</p>
-      <p class='resultText'>试试从其他分类下进行搜索</p>
-    </div>
+
   </div>
 </template>
 
