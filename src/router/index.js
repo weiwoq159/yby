@@ -21,6 +21,7 @@ import list from '../pages/common/list'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [{
     path: '/',
     name: 'homePage',
@@ -113,7 +114,7 @@ export default new Router({
       path: '/tabGroup/taxation',
       name: 'Taxation',
       meta: {
-        title: '账务税收'
+        title: '财务税收'
       },
       component: Taxation
     },

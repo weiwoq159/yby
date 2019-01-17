@@ -7,15 +7,23 @@
 */
 <template>
   <div class='searchResults'>
-    <Header></Header>
-    <SearchInput v-on:changeList='change' :name='name'></SearchInput>
-    <FunedList
-      v-for="(item, index) in searchList.data"
-      :key="index"
-      :content='item'
-      v-if='len !== 0'
-    >
-    </FunedList>
+    <pullScroll
+      :on-pull='onPull'
+      :scroll-state='scrollState'
+      :page='page'
+      ref='pullScroll'>
+      <div slot='scrollList'>
+        <Header></Header>
+        <SearchInput v-on:changeList='change' :name='name'></SearchInput>
+        <FunedList
+          v-for="(item, index) in searchList.data"
+          :key="index"
+          :content='item'
+          v-if='len !== 0'
+        >
+        </FunedList>
+      </div>
+    </pullScroll>
     <p v-show='false'>{{name}}</p>
     <div v-if='len === 0'>
       <img class='rocket' src="static/img/rocket.png" alt="">
@@ -29,12 +37,15 @@
 import Header from '@/pages/common/header'
 import SearchInput from '../common/searcResulthInput'
 import FunedList from '@/pages/funed/components/funedList'
+import pullScroll from '../common/pullScroll'
+
 export default {
   name: 'searchResults',
   components: {
     Header,
     SearchInput,
-    FunedList
+    FunedList,
+    pullScroll
   },
   data () {
     return {
@@ -44,7 +55,13 @@ export default {
       name: '',
       len: '',
       id: '',
-      false: false
+      false: false,
+      page: {
+        counter: 1,
+        total: 10
+      },
+      classify: '',
+      scrollState: true
     }
   },
   methods: {
@@ -52,6 +69,10 @@ export default {
       console.log(res)
       this.searchList = res.data
       this.len = this.searchList.data.length
+    },
+    addResult (res) {
+      console.log(res)
+      this.searchList.data = [...this.searchList.data, ...res.data.data]
     },
     change (childValue) {
       this.name = childValue
@@ -62,14 +83,28 @@ export default {
         keyword: this.name[0],
         category: parseInt(this.name[1])
       }).then(this.mounted)
+    },
+    onPull (mun) { // 加载回调
+      console.log(this.page.counter)
+      if (this.page.counter <= this.page.total) {
+        console.log('执行毁掉')
+        this.axios.post('/book/web/api/book/search', {
+          pageNum: 1,
+          pageSize: 10,
+          keyword: this.name[0],
+          category: this.id
+        }).then(this.addResult)
+      } else {
+        this.$refs.pullScroll.setState(7)
+      }
     }
   },
   activated () {
     if (this.$route.params.name) {
       this.name = this.$route.params.name
       this.axios.post('/book/web/api/book/search', {
-        pageNum: 1,
-        pageSize: 10,
+        pageNum: this.page.counter,
+        pageSize: this.page.total,
         keyword: this.name,
         category: this.id
       }).then(this.mounted)
@@ -84,6 +119,9 @@ export default {
 </script>
 
 <style scoped>
+.searchResults{
+  height: 100%;
+}
 .rocket{
   width: 25px;
   height:38px;

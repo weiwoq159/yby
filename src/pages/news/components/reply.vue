@@ -94,10 +94,10 @@ export default {
       sort: [
         {
           name: '时间倒序',
-          id: 1
+          id: 0
         }, {
           name: '时间正序',
-          id: 0
+          id: 1
         }, {
           name: '被赞最多',
           id: 2
@@ -164,6 +164,9 @@ export default {
       if (res.data.data === null) {
         return this.showOrDis
       } else {
+        console.log('-----res-----')
+        console.log(res)
+        console.log('-----res-----')
         this.reply = res.data.data.comment.sort(api.time)
       }
     },

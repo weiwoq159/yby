@@ -80,7 +80,7 @@ export default {
     }
   },
   activated () {
-    this.input = localStorage.getItem('search')
+    this.input = localStorage.getItem('seach')
     let isSelect = localStorage.getItem('yjx')
     if (isSelect === 'false') {
       let name = this.options.filter(e => {

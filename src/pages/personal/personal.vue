@@ -67,8 +67,8 @@ export default {
     this.axios.post('/book/web/api/login/userMessage ', {pageNum: 1, pageSize: 20}).then(this.myPublish)
   },
   beforeRouteEnter (to, from, next) {
-    console.log(localStorage.getItem('XMDADMINTOKEN'))
-    let token = localStorage.getItem('XMDADMINTOKEN')
+    console.log(localStorage.getItem('token'))
+    let token = localStorage.getItem('token')
     if (!token) {
       location.href = 'http://10.8.13.74:8080/#/Login?goLogin=1'
     } else {

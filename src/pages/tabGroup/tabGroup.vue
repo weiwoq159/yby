@@ -73,7 +73,7 @@ export default {
   watch: {
     url (newVal, oldVal) {
       if (newVal === '/tabGroup/HR' || newVal === '/tabGroup/social' || newVal === '/tabGroup/taxation' || newVal === '/tabGroup/funed') {
-        this.axios.get('./static/address.json', {category: '1'})
+        this.axios.get('../static/address.json', {category: '1'})
           .then(this.changeAddress)
       } else {
         this.place = '请选择'

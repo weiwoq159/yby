@@ -99,7 +99,7 @@ Vue.filter('changeStatus', function (time) {
   if (time === 1) {
     return '已发布'
   } else if (time === 2) {
-    return '已审核'
+    return '审核中'
   } else if (time === 3) {
     return '审核未通过'
   }

@@ -21,7 +21,7 @@
         <p>{{item.bookTitle}}</p>
       </div>
     </div>
-    <div v-if='contentList.length===0'>
+    <div class='noReply' v-if='contentList.length===0'>
       <p>该用户暂无评论</p>
     </div>
   </div>
@@ -61,10 +61,19 @@ export default {
 </script>
 
 <style>
+  .noReply p {
+    text-align: center;
+    position: absolute;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   .myReply{
     padding:15px;
     background: #f8f8f8;
     height:100%;
+    position: relative;
   }
   .reply{
     background: #fff;

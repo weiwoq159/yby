@@ -62,11 +62,14 @@ export default {
       display: false,
       status: [
         {
+          name: '全部',
+          id: 0
+        }, {
           name: '已发布',
-          id: 2
+          id: 1
         }, {
           name: '审核中',
-          id: 3
+          id: 2
         }, {
           name: '审核未通过',
           id: 4
@@ -113,12 +116,16 @@ export default {
       console.log(this.publishList2)
     },
     statusChose (newVal, oldVal) {
-      if (this.statusChose !== '') {
-        this.publishList2 = this.publishList1.filter(val => {
-          if (val.status === newVal) {
-            return val
-          }
-        })
+      if (newVal === 0) {
+        this.publishList2 = this.publishList1
+      } else {
+        if (this.statusChose !== '') {
+          this.publishList2 = this.publishList1.filter(val => {
+            if (val.status === newVal) {
+              return val
+            }
+          })
+        }
       }
     }
   },

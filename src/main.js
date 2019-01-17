@@ -22,14 +22,29 @@ Vue.use(elementUi)
 /* eslint-disable no-new */
 
 // localStorage.setItem('XMDADMINTOKEN', 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NTM0MTEwNTQ2MTI4ODk2Iiwic3QiOiIyIiwibG4iOiI2MiIsInBoIjoiMTg5ODcwOTAwNzMiLCJybiI6IjE4OTg3MDkwMDczIiwiZXhwIjoxNTQ4MDcxNjkyfQ.acf_iVnSldU7gPs-fgDX99Ob8nYTmRd_TMBIjnMaoOA')
-console.log(localStorage.XMDADMINTOKEN)
+function getQueryString (name) {
+  var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+  var r = window.location.search.substr(1).match(reg)
+  if (r != null) {
+    return unescape(r[2])
+  }
+  return null
+}
+// 这样调用：
+let token = getQueryString('token')
+if (token === null) {
+  console.log(1)
+} else {
+  localStorage.setItem('token', getQueryString('token'))
+}
+localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NTM0MTEwNTQ2MTI4ODk2Iiwic3QiOiIyIiwibG4iOiI2MiIsInBoIjoiMTg5ODcwOTAwNzMiLCJybiI6IjE4OTg3MDkwMDczIiwiZXhwIjoxNTQ4MDcxNjkyfQ.acf_iVnSldU7gPs-fgDX99Ob8nYTmRd_TMBIjnMaoOA')
 axios.interceptors.request.use(config => {
   config.headers.common = {
     'Content-Type': 'application/x-www-form-urlencoded',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'X-Requested-With,Content-Type',
     'Access-Control-Allow-Methods': 'PUT,POST,GET,DELETE,OPTIONS',
-    'x-authentication-token': localStorage.XMDADMINTOKEN === undefined ? '' : localStorage.XMDADMINTOKEN
+    'x-authentication-token': localStorage.token === undefined ? '' : localStorage.token
   }
   // config.timeout = 3600*24*7;
   config.timeout = 10000

@@ -37,7 +37,6 @@
       @touchmove.prevent
       @click.stop='disReply'
       v-show='showOrDis'
-      :style='{height: height + "px"}'
     >
       <div class="inputt">
         <input type="text" v-model='replyContent' ref='content' @click.stop >

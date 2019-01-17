@@ -10,7 +10,7 @@
     <el-container>
       <el-aside width="40px">
         <div class="photoImg">
-          <img src="static/img/photo.png" alt="">
+          <img src="../../../static/img/photo.png" alt="">
         </div>
       </el-aside>
       <el-main>

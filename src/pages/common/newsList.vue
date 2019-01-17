@@ -60,10 +60,10 @@ export default {
       selectionList: '',
       standby: '',
       sort: [{
-        name: '时间正序',
+        name: '时间倒序',
         id: 0
       }, {
-        name: '时间倒序',
+        name: '时间正序',
         id: 1
       }, {
         name: '被赞最多',
@@ -138,6 +138,7 @@ export default {
   },
   // 获取新闻列表页面
   activated () {
+    this.highLight = 0
     this.source = this.$route.params.category || parseInt(localStorage.getItem('source'))
     this.classify = this.$route.params.classify || localStorage.getItem('classify')
     let _that = this
@@ -146,8 +147,11 @@ export default {
       total: 10
     }
     this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 10, category: this.source, classify: this.classify}).then(function (res) {
+      console.log(res)
       console.log(res.data)
       _that.selectionList = res.data
+      _that.selectionList.data.sort(api.selectTime)
+      console.log(_that.selectionList)
       _that.page.total = res.data.meta.total
       console.log(_that.page.total)
     })

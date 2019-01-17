@@ -11,7 +11,7 @@
       <i class='iconfont icon-home'></i>
       <router-link to='/'>首页</router-link>
     </div>
-    <img src="static/img/logo.png" alt="">
+    <img src="../../../static/img/logo.png" alt="">
     <div class="headerRight">
       <i class='iconfont icon-person'></i>
       <router-link to='/personal'>个人中心</router-link>
