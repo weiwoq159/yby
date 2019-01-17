@@ -31,7 +31,6 @@
     </div>
     <div class="upData">
       <button class='upButt' type="primary" @click='submit'>发布精选</button>
-
       <button class='upButt downButt' type="primary" @click='cancel'>取消发布</button>
     </div>
   </div>
@@ -44,7 +43,7 @@ export default {
     return {
       publish: {
         title: '',
-        kind: '人力资源：',
+        kind: '人力资源',
         content: '',
         category: ''
       },
@@ -114,8 +113,11 @@ export default {
       }, 1000)
     },
     cancel () {
-      this.$router.go(-1);
+      this.$router.back()
     }
+  },
+  mounted () {
+    this.publish.category = this.options[0].value
   }
 }
 </script>
@@ -185,7 +187,6 @@ export default {
     width 100%;
     display flex;
     margin-top 1vw;
-    /*border-bottom: 1px solid #eee*/
     .el-textarea__inner
       margin-top:2vw;
       margin-left:-2vw;
@@ -194,10 +195,9 @@ export default {
   .ReleaseTitle
     width 100%;
     display flex;
-    /*margin-top .15rem*/
-    border-bottom:1px solid #eee
+    border-bottom 1px solid #eee
     p
-      padding-left:12px
+      padding-left 12px
       width 60px;
       line-height .38rem
       font-size: .14rem;
@@ -213,7 +213,7 @@ export default {
         border-style none
         background-color: #fff!important;
         color: #333;
-        line-height: 8vw;
+        line-height 8vw;
   .dropList
     padding-top:10px;
     padding-left:40px;
