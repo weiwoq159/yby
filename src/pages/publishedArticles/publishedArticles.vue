@@ -8,42 +8,29 @@
 <template>
   <div class='release'>
     <div class="ReleaseTitle">
-      <el-input v-model="publish.title" placeholder="标题："></el-input>
+      <label class="leftTitle">标题：</label>
+      <el-input v-model="publish.title" ></el-input>
     </div>
     <div class="drowDown">
       <div class="ReleaseTitle" @click=DropDown()>
-        <el-input
-          v-model="publish.kind"
-          placeholder=""
-          :disabled="true"
-        ></el-input>
+        <label class="leftTitle leftTitle2">类型：</label>
+        <el-input v-model="publish.kind"  :disabled="true"></el-input>
         <span class="el-icon-arrow-right"></span>
       </div>
-      <transition name="fade">
+      <div name="fade" class="select">
         <ul class='dropList' v-if='isDrop'>
-          <li
-            v-for='item in options'
-            :key='item.id'
-            @click='changeInput(item)'
-          >
+          <li v-for='item in options' :key='item.id' @click='changeInput(item)' >
             <p>{{item.label}}</p>
           </li>
         </ul>
-      </transition>
+      </div>
     </div>
     <div class="ReleaseContent">
-      <el-input
-        type="textarea"
-        placeholder="内容"
-        v-model="publish.content">
-      </el-input>
+      <label class="leftTitle">内容：</label>
+      <el-input type="textarea" v-model="publish.content"></el-input>
     </div>
     <div class="upData">
-      <button
-        class='upButt'
-        type="primary"
-        @click='submit'
-      >发布精选</button>
+      <button class='upButt' type="primary" @click='submit'>发布精选</button>
     </div>
   </div>
 </template>
@@ -55,7 +42,7 @@ export default {
     return {
       publish: {
         title: '',
-        kind: '类型：',
+        kind: '人力资源：',
         content: '',
         category: ''
       },
@@ -129,9 +116,24 @@ export default {
 </script>
 
 <style lang='stylus'>
+  .leftTitle{
+    display:inline-block;
+    width:30vw;
+    margin-top:4vw;
+    text-align: center;
+    font-size:4vw;
+  }
+  .select{
+    position: absolute;
+    background: #fff;
+    left: 15vw;
+  }
+  .leftTitle.leftTitle2{
+    margin-left :1vw;
+  }
   .upData
     position relative
-    box-shadow 0px -5px 8px #aaa
+    box-shadow 0 25px 72px 0 #999;
     display flex
     position fixed
     bottom 0;
@@ -192,13 +194,13 @@ export default {
         height:12vw;
         border-style none
         background-color: #fff!important;
-        color: #606266
+        color: #606266!important;
         line-height: 8vw;
   .dropList
     padding-top:10px;
-    padding-left:40px
+    padding-left:40px;
     p
-      height:20px;
-      line-height 20px;
-      font-size: 4.3vw;
+     height: 7.5vw;
+     line-height: 20px;
+     font-size: 4vw;
 </style>
