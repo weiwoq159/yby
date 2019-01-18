@@ -76,13 +76,16 @@ export default {
         }
       ],
       choseName: '筛选',
-      statusChose: ''
+      statusChose: '',
+      status1: ''
     }
   },
   methods: {
     chooseName (item) {
+      console.log(item)
       this.statusChose = item.id
       this.choseName = item.name
+      this.status1 = item.status
       this.display = !this.display
     },
     choseNameList () {
@@ -137,7 +140,7 @@ export default {
     }
     console.log(this.yearArr)
     // this.axios.get('static/tsconfig.json').then(this.myPublish)
-    this.axios.post('/book/web/api/book/getRelease', {pageNum: 1, pageSize: 20}).then(this.myPublish)
+    this.axios.post('/book/web/api/book/getRelease', {pageNum: 1, pageSize: 200}).then(this.myPublish)
   }
 }
 </script>

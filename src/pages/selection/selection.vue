@@ -14,21 +14,14 @@
           @click="changeActive(item)"
       >{{item.name}}</li>
     </ul>
-    <pullScroll
-      :on-pull='onPull'
-      :scroll-state='scrollState'
-      :page='page'
-      ref='pullScroll'>
-      <div slot='scrollList' class='pull'>
-        <FunedList
-          v-for="(item, index) in selectionList.data"
-          :key="index"
-          :content='item'
-          :source='category'
-        >
-        </FunedList>
-      </div>
-    </pullScroll>
+    <FunedList
+      v-for="(item, index) in selectionList.data"
+      :key="index"
+      :content='item'
+      :source='category'
+    >
+    </FunedList>
+    <p @click='loading' class='loading'>{{text}}</p>
     <bottomTemp></bottomTemp>
   </div>
 </template>
@@ -70,7 +63,8 @@ export default {
         total: 10
       },
       classify: '',
-      scrollState: true
+      scrollState: true,
+      text: '点击加载更多'
     }
   },
   methods: {
@@ -88,7 +82,7 @@ export default {
           this.selectionList.data.sort(api.slectGoodUp)
           break
         case 3 :
-          this.selectionList.data.sort(api.selectReply)
+          this.selectionList.data.sort(api.reply)
           break
       }
     },
@@ -103,23 +97,22 @@ export default {
         }
       }
     },
-    onPull (mun) { // 加载回调
+    loading () { // 加载回调
       if (this.page.counter <= this.page.total) {
         this.page.total = Math.ceil(this.selectionList.meta.total / 10)
         console.log(this.page)
         this.axios.post('/book/web/api/book/search',
           {
             pageNum: this.page.counter + 1,
-            pageSize: this.page.total,
+            pageSize: 10,
             category: this.category
           }).then((res) => {
           this.selectionList.data = [...this.selectionList.data, ...res.data.data]
           console.log(this.selectionList)
           this.page.counter++
-          this.$refs.pullScroll.setState(5)
         })
       } else {
-        this.$refs.pullScroll.setState(7)
+        this.text = '没有更多'
       }
     },
     fundHomeDate (res) {
@@ -130,6 +123,7 @@ export default {
       // if (source === undefined) {
       this.selectionList = res.data
       this.selectionList.data.sort(api.selectTime)
+      console.log(this.selectionList.data.sort(api.selectTime))
       // } else {
       //   // this.standby = res.data
       //   // // this.$route.params.id
@@ -146,6 +140,7 @@ export default {
       counter: 1,
       total: 10
     }
+    this.text = '点击加载更多'
     this.axios.post('/book/web/api/book/search', {pageNum: 1, pageSize: 10, category: this.category}).then(this.fundHomeDate)
   }
 }
@@ -154,11 +149,14 @@ export default {
 <style lang='stylus'>
 .tabgroup {
   height: 100%;
-  overflow: hidden;
 }
-
+.loading{
+  text-align center
+  font-size: 16px;
+  color #ccc
+  padding 10px 0
+}
 .selection{
-  height:calc(100% - 130px)
   background: #f8f8f8;
   padding 0 3.5vw;
   border-top-left-radius 15px;

@@ -15,13 +15,14 @@
     <div class="funedList">
       <p class="newsTitle">精选推荐</p>
       <FunedList
-        v-for="(item, index) in fundedList.data"
+        v-for="(item, index) in selectionList.data"
         :key="index"
         :content='item'
         :url='url'
         :source='category'
       >
       </FunedList>
+      <p @click='loading' class='loading'>{{text}}</p>
     </div>
   </div>
 </template>
@@ -46,14 +47,14 @@ export default {
       url: '',
       name: '公积金',
       page: {
-        counter: 9,
-        pageStart: 1,
-        pageEnd: 1,
+        counter: 1,
         total: 10
       },
       scrollState: true,
       myScroll: '',
-      myScrollList: ''
+      myScrollList: '',
+      selectionList: '',
+      text: '点击加载更多'
     }
   },
   methods: {
@@ -63,40 +64,28 @@ export default {
     },
     fundHomeDate (res) {
       console.log(res)
-      this.fundedList = res.data
+      this.selectionList = res.data
     },
     onScroll (e) {
       console.log(e)
     },
-    onRefresh (mun) { // 刷新回调
-      setTimeout(() => {
-        let arr = []
-        for (let i = 1; i <= 30; i++) {
-          arr.push({
-            name: 'lilei',
-            id: 1
-          })
-        }
-        this.list = arr
-        this.page.counter = 1
-        this.$refs.pullScroll.setState(4)
-      }, 400)
-    },
-    onPull (mun) { // 加载回调
-      console.log(this.page.counter)
+    loading () { // 加载回调
       if (this.page.counter <= this.page.total) {
-        setTimeout(() => {
+        this.page.total = Math.ceil(this.selectionList.meta.total / 10)
+        console.log(this.page.total)
+        console.log(this.page)
+        this.axios.post('/book/web/api/book/search',
+          {
+            pageNum: this.page.counter + 1,
+            pageSize: this.page.total,
+            category: this.category
+          }).then((res) => {
+          this.selectionList.data = [...this.selectionList.data, ...res.data.data]
+          console.log(this.selectionList)
           this.page.counter++
-          for (let i = 1; i <= 10; i++) {
-            this.list.push({
-              name: 'lucy',
-              id: 1
-            })
-          }
-          this.$refs.pullScroll.setState(5)
-        }, 500)
+        })
       } else {
-        this.$refs.pullScroll.setState(7)
+        this.text = '没有更多'
       }
     }
   },
@@ -107,6 +96,11 @@ export default {
       .then(this.fundHomeDate)
   },
   activated () {
+    this.page = {
+      counter: 1,
+      total: 10
+
+    }
     this.$store.commit('SET_URL', this.$route.path)
     this.url = this.$store.state.url
   },
@@ -117,6 +111,12 @@ export default {
 </script>
 
 <style scoped lang='stylus'>
+  .loading{
+    text-align center
+    font-size: 16px;
+    color #ccc
+    padding:10px 0
+  }
   .funedList
     background: #f8f8f8;
     padding:15px 12px;

@@ -13,6 +13,13 @@
     </div>
     <HomePageSearch></HomePageSearch>
     <Navigation></Navigation>
+    <FunedList
+      v-for="(item, index) in selectionList.data"
+      :key="index"
+      :content='item'
+      v-show='torF'
+    >
+    </FunedList>
   </div>
 </template>
 
@@ -20,20 +27,33 @@
 import HomePageHeader from './components/homePageHeader'
 import HomePageSearch from './components/homePageSearch'
 import Navigation from './components/navigation'
+import FunedList from '../funed/components/funedList'
 export default {
   name: 'homePage',
   components: {
     HomePageHeader,
     HomePageSearch,
-    Navigation
+    Navigation,
+    FunedList
+  },
+  data () {
+    return {
+      selectionList: '',
+      torF: false
+    }
   },
   methods: {
     myPublish (res) {
       this.$store.commit('SET_USERINFO', res.data.data)
       console.log(this.$store.state.userInfo)
+    },
+    fundHomeDate (res) {
+      console.log(res)
+      this.selectionList = res.data
     }
   },
   mounted () {
+    this.axios.post('/book/web/api/book/search', {pageNum: 1, pageSize: 10, category: '1'}).then(this.fundHomeDate)
     this.axios.post('/book/web/api/login/userMessage ', {pageNum: 1, pageSize: 12}).then(this.myPublish)
     try {
       if (localStorage.token) {

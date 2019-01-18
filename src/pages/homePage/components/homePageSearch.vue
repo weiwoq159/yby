@@ -36,6 +36,7 @@ export default {
         return false
       } else {
         this.$router.push({name: 'SearchResults', params: {name: this.input5}})
+        localStorage.setItem('searchUrl', 1)
         localStorage.setItem('seach', this.input5)
         this.input5 = ''
       }

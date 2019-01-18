@@ -139,6 +139,7 @@ export default {
 }
 .text >>> div {
   width:100%!important
+  overflow-x:hidden;
 }
 .text >>> *{
   font-size: 3.5vw!important;
@@ -147,6 +148,7 @@ export default {
 .news >>> img{
   width:100%
 }
+
 .inputt{
   background: #f6f6f6;
   width: 100%;

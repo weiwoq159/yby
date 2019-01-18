@@ -80,7 +80,6 @@ export default {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
-      console.log(this.title)
       if (this.publish.title === '') {
         loading.text = '标题不能为空'
         loading.spinner = 'el-icon-error'
@@ -105,6 +104,12 @@ export default {
               category: ''
             }
             this.$router.push({name: 'Selection'})
+          } else if (res.data.code === 0) {
+            loading.text = '获取用户信息失败，请登录'
+            loading.spinner = 'el-icon-error'
+            setTimeout(() => {
+              location.href = 'http://tax.1boyun.com/login?goLogin=1'
+            }, 1000)
           }
         })
       }

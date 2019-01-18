@@ -83,14 +83,20 @@ export default {
       counter: 1,
       total: 10
     }
-    console.log(this.$route.path)
+    let status
+    if (this.$route.params.status) {
+      status = this.$route.params.status
+    } else {
+      status = null
+    }
     let url = this.$route.path
     let lastLink = url.substring(url.lastIndexOf('/') + 1, url.length)
     this.axios.post('/book/web/api/book/search',
       {
         pageNum: '1',
         pageSize: 20,
-        id: lastLink
+        id: lastLink,
+        status: status
       })
       .then(this.fundHomeDate)
     this.bookId = lastLink
@@ -104,12 +110,12 @@ export default {
     //   this.axios.post('/book/web/api/book/search', {pageNum: '1', pageSize: 20, id: this.bookId})
     //     .then(this.fundHomeDate)
     // }
-    // this.axios.post('/book/web/api/book/click', {id: this.bookId})
-    //   .then(res => {
-    //     console.log('-----res-----')
-    //     console.log(res)
-    //     console.log('-----res-----')
-    //   })
+    this.axios.post('/book/web/api/book/click', {id: this.bookId})
+      .then(res => {
+        console.log('-----res-----')
+        console.log(res)
+        console.log('-----res-----')
+      })
   }
 }
 </script>
