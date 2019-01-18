@@ -14,13 +14,16 @@
       <p class='resultText'>未搜索到相关内容</p>
       <p class='resultText'>试试从其他分类下进行搜索</p>
     </div>
-    <FunedList
-      v-for="(item, index) in searchList.data"
-      :key="index"
-      :content='item'
-      v-if='len !== 0'
-    >
-    </FunedList>
+    <div class="searchResult">
+      <FunedList
+        v-for="(item, index) in searchList.data"
+        :key="index"
+        :content='item'
+        v-if='len !== 0'
+        :keywords='name[0]'
+      >
+      </FunedList>
+    </div>
     <p @click='loading' class='loading' v-if='len !== 0'>{{text}}</p>
 
   </div>
@@ -75,7 +78,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
         keyword: this.name[0],
-        category: parseInt(this.name[1])
+        category: parseInt(this.name[0])
       }).then(this.mounted)
     },
     loading (mun) { // 加载回调
@@ -94,12 +97,14 @@ export default {
     }
   },
   activated () {
+    console.log('--------------')
     this.page = {
       counter: 1,
       total: 10
     }
     this.text = '点击加载更多'
     this.id = this.$route.params.id || parseInt(localStorage.searchUrl)
+    console.log(this.id)
     this.name = this.$route.params.name || localStorage.seach
     this.axios.post('/book/web/api/book/search', {
       pageNum: this.page.counter,
@@ -117,6 +122,9 @@ export default {
 </script>
 
 <style scoped>
+  .searchResult{
+    background: #f8f8f8;
+  }
 .loading{
   text-align:center;
   font-size: 16px;

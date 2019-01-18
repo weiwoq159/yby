@@ -8,14 +8,20 @@
 <template>
   <div class='myPublish'>
     <div class="select">
-      <el-select v-model="yearChose" placeholder="请选择" class='selected1'>
-        <el-option
-          v-for="(item, index) in yearArr"
-          :key="index"
-          :label="item"
-          :value="item">
-        </el-option>
-      </el-select>
+      <div class="year">
+        <div class='pullList' @click='choseYearList'>
+          <span class='choseName'>{{yearChose}}</span>
+        </div>
+        <ul v-if='display1' class='selectList1'>
+          <li
+            v-for='item in yearArr'
+            :key=item
+            @click='chooseYear(item)'
+          >
+            {{item}}
+          </li>
+        </ul>
+      </div>
       <div class="screen">
         <div class='pullList' @click='choseNameList'>
           <i class='icon-liebiao iconfont'></i>
@@ -58,7 +64,7 @@ export default {
       publishList1: '',
       publishList2: [],
       yearArr: [],
-      yearChose: '',
+      yearChose: '2019',
       display: false,
       status: [
         {
@@ -77,7 +83,8 @@ export default {
       ],
       choseName: '筛选',
       statusChose: '',
-      status1: ''
+      status1: '',
+      display1: ''
     }
   },
   methods: {
@@ -88,8 +95,18 @@ export default {
       this.status1 = item.status
       this.display = !this.display
     },
+    chooseYear (item) {
+      console.log(item)
+      this.yearChose = item
+      this.display1 = !this.display1
+    },
     choseNameList () {
       this.display = !this.display
+      this.display1 = false
+    },
+    choseYearList () {
+      this.display1 = !this.display1
+      this.display = false
     },
     myPublish (res) {
       // console.log('-----res-----')
@@ -146,12 +163,33 @@ export default {
 </script>
 
 <style>
+  .year li{
+    text-align: center;
+    padding:8px 0;
+    font-size: 12px;
+  }
+  .year ul {
+    width: 80px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 3px;
+  }
+  .choseName{
+    margin-left: 5px;
+    font-size:14px;
+  }
   .el-input__suffix{
     right:13px;
+  }
+  .selectList1 {
+    position: absolute;
+    left: 10px;
+    border:1px solid #666
   }
   .selectList {
     position: absolute;
     right: 0px;
+    border:1px solid #666
   }
   .screen{
     position: relative;

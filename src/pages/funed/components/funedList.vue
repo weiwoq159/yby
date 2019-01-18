@@ -50,7 +50,7 @@ export default {
       cat: ''
     }
   },
-  props: ['content', 'url', 'source'],
+  props: ['content', 'url', 'source', 'keywords'],
   activated () {
     this.cat = 'News' + localStorage.getItem('source')
     console.log(this.cat)
@@ -76,7 +76,7 @@ export default {
     gotoReply (content) {
       localStorage.setItem('id', content.id)
       this.cat = 'News' + content.category
-      this.$router.push({name: this.cat, params: {bookId: content.id, name: content, url: this.$store.state.url}})
+      this.$router.push({name: this.cat, params: {keywords: this.keywords, bookId: content.id, name: content, url: this.$store.state.url}})
     }
   }
 }

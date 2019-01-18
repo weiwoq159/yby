@@ -47,7 +47,8 @@ export default {
         total: 10
       },
       classify: '',
-      scrollState: true
+      scrollState: true,
+      keywords: ''
     }
   },
   methods: {
@@ -78,11 +79,21 @@ export default {
       }
     }
   },
+  beforeRouteEnter (to, from, next) {
+    if (from.fullPath === '/SearchResults') {
+      next(vm => {
+        vm.keywords = vm.$route.params.keywords
+      })
+    } else {
+      next()
+    }
+  },
   activated () {
     this.page = {
       counter: 1,
       total: 10
     }
+    console.log(this.keywords)
     let status
     if (this.$route.params.status) {
       status = this.$route.params.status
@@ -91,12 +102,14 @@ export default {
     }
     let url = this.$route.path
     let lastLink = url.substring(url.lastIndexOf('/') + 1, url.length)
+    console.log(this.$route.params.keywords)
     this.axios.post('/book/web/api/book/search',
       {
         pageNum: '1',
         pageSize: 20,
         id: lastLink,
-        status: status
+        status: status,
+        keyword: this.$route.params.keywords
       })
       .then(this.fundHomeDate)
     this.bookId = lastLink

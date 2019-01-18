@@ -9,7 +9,7 @@
   <div class='newsList'>
       <TagHeader></TagHeader>
       <Navigation></Navigation>
-      <SearchInput></SearchInput>
+      <SearchInput ref='searchInput'></SearchInput>
       <div class="newsL">
         <ul class='listSort'>
           <li v-for='item in sort'
@@ -144,6 +144,11 @@ export default {
       _that.selectionList.data.sort(api.unSelectTime)
       _that.page.total = res.data.meta.total
     })
+    this.$refs.searchInput.input = ''
+    this.$refs.searchInput.id = ''
+    localStorage.setItem('seach', '')
+    localStorage.setItem('search', '')
+    localStorage.setItem('yjx', '')
   }
 }
 </script>

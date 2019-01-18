@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     goToDetail (item) {
-      console.log(item)
+      localStorage.setItem('classify', item.classify)
       this.$router.push(
         {name: 'list4',
           params: {source: item.classify, url: this.name, classify: item.classify}

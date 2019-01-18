@@ -35,9 +35,10 @@ export default {
         }, 2000)
         return false
       } else {
-        this.$router.push({name: 'SearchResults', params: {name: this.input5}})
-        localStorage.setItem('searchUrl', 1)
+        this.$router.push({name: 'SearchResults', params: {name: this.input5, id: 1}})
+        localStorage.setItem('searchUrl', '/tabGroup/HR')
         localStorage.setItem('seach', this.input5)
+        localStorage.setItem('yjx', 'false')
         this.input5 = ''
       }
     }

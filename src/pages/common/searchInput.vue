@@ -66,10 +66,14 @@ export default {
           loading.close()
         }, 2000)
       } else {
-        if (this.$route.path === '/tabGroup/Selection') {
+        console.log('-----this.id-----')
+        console.log(this.id)
+        console.log('-----this.id-----')
+        if (this.$route.path === '/tabGroup/Selection' || this.$route.path.search(/list/i) !== -1) {
           localStorage.setItem('searchUrl', this.id)
           localStorage.setItem('yjx', 'true')
         } else {
+          console.log('---------------')
           localStorage.setItem('searchUrl', this.$route.path)
           localStorage.setItem('yjx', 'false')
         }

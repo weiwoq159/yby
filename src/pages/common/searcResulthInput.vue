@@ -71,7 +71,9 @@ export default {
         }, 2000)
       } else {
         localStorage.setItem('seach', this.input)
+        console.log(this.id)
         if (this.$route.fullPath === '/SearchResults') {
+          console.log(this.input, this.id)
           this.$emit('changeList', [this.input, this.id])
         } else {
           this.$router.push({name: 'SearchResults', params: {name: this.input, id: this.id}})
@@ -80,6 +82,7 @@ export default {
     }
   },
   activated () {
+    console.log(localStorage.getItem('searchUrl'))
     this.input = localStorage.getItem('seach')
     let isSelect = localStorage.getItem('yjx')
     if (isSelect === 'false') {
@@ -88,6 +91,9 @@ export default {
           return e
         }
       })
+      console.log('-----name-----')
+      console.log(name)
+      console.log('-----name-----')
       this.id = name[0].name
     } else {
       this.id = localStorage.getItem('searchUrl')
