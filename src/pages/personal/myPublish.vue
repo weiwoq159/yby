@@ -64,7 +64,7 @@ export default {
       publishList1: '',
       publishList2: [],
       yearArr: [],
-      yearChose: '2019',
+      yearChose: '',
       display: false,
       status: [
         {
