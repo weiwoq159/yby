@@ -14,24 +14,14 @@
       <p class='resultText'>未搜索到相关内容</p>
       <p class='resultText'>试试从其他分类下进行搜索</p>
     </div>
-    <pullScroll v-if="len!==0"
-      :on-pull='onPull'
-      :scroll-state='scrollState'
-      :page='page'
-      ref='pullScroll'>
-      <div slot='scrollList'>
-
-        <FunedList
-          v-for="(item, index) in searchList.data"
-          :key="index"
-          :content='item'
-          v-if='len !== 0'
-        >
-        </FunedList>
-      </div>
-    </pullScroll>
-
-    <p v-show='false'>{{name}}</p>
+    <FunedList
+      v-for="(item, index) in searchList.data"
+      :key="index"
+      :content='item'
+      v-if='len !== 0'
+    >
+    </FunedList>
+    <p @click='loading' class='loading' v-if='len !== 0'>{{text}}</p>
 
   </div>
 </template>
@@ -64,7 +54,8 @@ export default {
         total: 10
       },
       classify: '',
-      scrollState: true
+      scrollState: true,
+      text: '点击加载更多'
     }
   },
   methods: {
@@ -87,7 +78,7 @@ export default {
         category: parseInt(this.name[1])
       }).then(this.mounted)
     },
-    onPull (mun) { // 加载回调
+    loading (mun) { // 加载回调
       console.log(this.page.counter)
       if (this.page.counter <= this.page.total) {
         console.log('执行毁掉')
@@ -98,21 +89,24 @@ export default {
           category: this.id
         }).then(this.addResult)
       } else {
-        this.$refs.pullScroll.setState(7)
+        this.text = '没有更多'
       }
     }
   },
   activated () {
-    this.id = this.$route.params.id
-    if (this.$route.params.name) {
-      this.name = this.$route.params.name
-      this.axios.post('/book/web/api/book/search', {
-        pageNum: this.page.counter,
-        pageSize: this.page.total,
-        keyword: this.name,
-        category: this.id
-      }).then(this.mounted)
+    this.page = {
+      counter: 1,
+      total: 10
     }
+    this.text = '点击加载更多'
+    this.id = this.$route.params.id || parseInt(localStorage.searchUrl)
+    this.name = this.$route.params.name || localStorage.seach
+    this.axios.post('/book/web/api/book/search', {
+      pageNum: this.page.counter,
+      pageSize: this.page.total,
+      keyword: this.name,
+      category: this.id
+    }).then(this.mounted)
   },
   beforeRouteLeave (to, from, next) {
     this.searchList = ''
@@ -123,6 +117,12 @@ export default {
 </script>
 
 <style scoped>
+.loading{
+  text-align:center;
+  font-size: 16px;
+  color:#ccc;
+  padding:10px 0
+}
 .searchResults{
   height: 100%;
 }

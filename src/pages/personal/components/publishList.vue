@@ -37,7 +37,7 @@ export default {
     gotoD (publishList) {
       console.log(publishList)
       let str = 'News' + publishList.category
-      this.$router.push({name: str, params: {bookId: publishList.id, name: publishList, url: this.$store.state.url}})
+      this.$router.push({name: str, params: {status: publishList.status, bookId: publishList.id, name: publishList, url: this.$store.state.url}})
     }
   }
 }

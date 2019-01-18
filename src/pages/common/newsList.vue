@@ -115,7 +115,7 @@ export default {
         this.axios.post('/book/web/api/book/search',
           {
             pageNum: this.page.counter + 1,
-            pageSize: this.page.total,
+            pageSize: 10,
             category: this.source,
             classify: this.classify
           }).then((res) => {
@@ -134,6 +134,7 @@ export default {
       counter: 1,
       total: 10
     }
+    this.text = '点击加载更多'
     this.highLight = 1
     this.source = this.$route.params.category || parseInt(localStorage.getItem('source'))
     this.classify = this.$route.params.classify || localStorage.getItem('classify')
@@ -142,7 +143,6 @@ export default {
       _that.selectionList = res.data
       _that.selectionList.data.sort(api.unSelectTime)
       _that.page.total = res.data.meta.total
-      _that.$refs.pullScroll.setState(5)
     })
   }
 }

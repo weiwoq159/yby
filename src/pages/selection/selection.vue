@@ -22,6 +22,7 @@
     >
     </FunedList>
     <p @click='loading' class='loading'>{{text}}</p>
+    <bottomTemp></bottomTemp>
   </div>
 </template>
 
@@ -81,7 +82,7 @@ export default {
           this.selectionList.data.sort(api.slectGoodUp)
           break
         case 3 :
-          this.selectionList.data.sort(api.selectReply)
+          this.selectionList.data.sort(api.reply)
           break
       }
     },
@@ -103,7 +104,7 @@ export default {
         this.axios.post('/book/web/api/book/search',
           {
             pageNum: this.page.counter + 1,
-            pageSize: this.page.total,
+            pageSize: 10,
             category: this.category
           }).then((res) => {
           this.selectionList.data = [...this.selectionList.data, ...res.data.data]
@@ -122,6 +123,7 @@ export default {
       // if (source === undefined) {
       this.selectionList = res.data
       this.selectionList.data.sort(api.selectTime)
+      console.log(this.selectionList.data.sort(api.selectTime))
       // } else {
       //   // this.standby = res.data
       //   // // this.$route.params.id
@@ -138,6 +140,7 @@ export default {
       counter: 1,
       total: 10
     }
+    this.text = '点击加载更多'
     this.axios.post('/book/web/api/book/search', {pageNum: 1, pageSize: 10, category: this.category}).then(this.fundHomeDate)
   }
 }

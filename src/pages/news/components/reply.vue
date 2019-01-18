@@ -138,7 +138,7 @@ export default {
           this.reply.sort(api.goodUp)
           break
         case 3 :
-          this.reply.sort(api.reply)
+          this.reply.sort(api.selectReply)
           break
       }
     },

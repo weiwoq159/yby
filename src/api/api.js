@@ -7,6 +7,7 @@ export default {
     return a.createTimes - b.createTimes
   },
   reply (a, b) {
+    console.log(a)
     return b.commentNum - a.commentNum
   },
   goodUp (a, b) {
@@ -24,7 +25,7 @@ export default {
   },
   selectReply (a, b) {
     console.log(b.commentNum)
-    return b.commentNum - a.commentNum
+    return b.replyNum - a.replyNum
   },
   checkImg (that) {
     var listArr = that.map(function (value) {
