@@ -141,7 +141,7 @@ export default {
   width:100%!important
 }
 .text >>> *{
-  font-size: 16px!important;
+  font-size: 3.5vw!important;
   line-height 1.5!important;
 }
 .news >>> img{
@@ -183,7 +183,7 @@ export default {
   box-sizing: border-box;
   .title
     text-align center
-    font-size: .14rem;
+    font-size: 4vw
     color:#333;
     margin-bottom: .1rem
     line-height:6vw;

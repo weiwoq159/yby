@@ -119,8 +119,12 @@ export default {
     color: #666
     padding:0.6vw 3vw;
     border-radius 30px;
+    line-height:3.5vw;
   .star
     margin-right 11px;
+    font-size 12px;
+    .iconfont
+      font-size:12px;
   .starActive
     margin-right:11px;
     color:red!important;
@@ -188,4 +192,7 @@ main
   text-align right
   font-size: 12px;
   margin-top 15px!important;
+.message
+  .iconfont
+    font-size:12px;
 </style>

@@ -35,7 +35,7 @@
           <div class="bottom">
             <div class="newsBottom">
               <div class="message" @click='repeat(item)'>
-                <i class='iconfont icon-liuyan'></i>
+                <i class='iconfont icon-liuyan messageFont'></i>
                 <span>{{item.replyNum | replyNum}}</span>
               </div>
               <div
@@ -216,11 +216,11 @@ export default {
 
 <style scoped lang="stylus">
   .name .title{
-    font-weight : 900;
+    font-weight : 100;
   }
   .uName{
-    color:#333;
-    font-weight:900
+    color:#666;
+    font-weight:100
   }
   .noReply{
     font-size: 14px;
@@ -320,7 +320,7 @@ export default {
     margin-bottom:10px;
     li
       color: #aaa;
-      font-size: .11rem;
+      font-size: 3.2vw;
   .replyMes
     background: #ffffff;
     padding:15px;
@@ -334,14 +334,14 @@ export default {
     justify-content space-between;
     align-items center
   .title
-    font-size: 14px;
+    font-size: 4vw;
     color:#333;
   .date
     font-size: 10px;
     color:#aaa;
   .text
     word-wrap:break-word
-    font-size: 12px;
+    font-size: 3.5vw;
     color: #666;
     margin-top 9px;
   main
@@ -349,7 +349,7 @@ export default {
   .messageReply
     margin-top 10px;
     background: #f5f5f5
-    font-size: 14px;
+    font-size: 3.5vw;
   .messageReply ul
     padding:10px 15px;
   .messageReply ul li
@@ -358,4 +358,7 @@ export default {
     text-align right
     font-size: 12px;
     margin-top 15px!important;
+    a
+      color #aaa
+
 </style>
